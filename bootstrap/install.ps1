@@ -88,6 +88,6 @@ if (-Not (Get-Module brucificus-powershell-profile)) {
 
 	Install-ModuleFromGitHub -GitHubRepo brucificus/powershell-profile -DestinationPath $Env:PSModulePath.Split(';')[0] -moduleName 'brucificus-powershell-profile'
 
-	Out-File -FilePath $profile -Append -Force -InputObject "Import-Module brucificus-powershell-profile"
+	Out-File -FilePath $profile -Append -Force -InputObject "Import-Module brucificus-powershell-profile -DisableNameChecking"
 }
-Import-Module brucificus-powershell-profile
+Import-Module brucificus-powershell-profile -DisableNameChecking
