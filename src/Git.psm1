@@ -1,10 +1,6 @@
-Import-Module posh-git
+#Requires -Modules @{ ModuleName = "posh-git"; ModuleVersion = "0.7.3" }
+
 $GitPromptSettings.DefaultPromptPrefix = '[$(hostname)] '
 $GitPromptSettings.DefaultPromptAbbreviateHomeDirectory = $true
-
-function tgit([Parameter(Mandatory = $true)] [ValidateNotNullOrEmpty()] [string] $command) {
-	TortoiseGitProc.exe /command:$command
-}
-
 
 Export-ModuleMember -Function * -Cmdlet * -Variable * -Alias *
