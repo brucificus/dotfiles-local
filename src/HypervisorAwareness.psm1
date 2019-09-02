@@ -1,3 +1,8 @@
+Import-Module "$PSScriptRoot\Chocolatey.psm1" -DisableNameChecking
+
+Ensure-ChocolateyPackageInstallation "vagrant"
+Ensure-ChocolateyPackageInstallation "minikube"
+
 [string] $vagrantExecutable = (Get-Command vagrant).Source
 [string] $minikubeExecutable = (Get-Command minikube).Source
 

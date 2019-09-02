@@ -1,5 +1,5 @@
 function Ensure-FontInstallationsFromChocolatey {
-    Import-Module "$PSScriptRoot\Fonts.psm1"
+    Import-Module "$PSScriptRoot\Fonts.psm1" -DisableNameChecking
     
     [string[]] $chocoFonts = @()
 

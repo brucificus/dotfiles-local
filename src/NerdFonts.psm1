@@ -41,7 +41,7 @@ function Install-NerdFont {
             Get-ChildItem $pwd -Filter "${aFontName}.otf" -Recurse | Foreach-Object {$fontFiles.Add($_)}
         }
 
-        Import-Module "$PSScriptRoot\Fonts.psm1"
+        Import-Module "$PSScriptRoot\Fonts.psm1" -DisableNameChecking
         foreach ($fontFile in $fontFiles) {
             if ($PSCmdlet.ShouldProcess($fontFile.Name, "Install Font")) {
                 Install-Font $fontFile.FullName
