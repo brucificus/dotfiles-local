@@ -33,15 +33,15 @@ function Ensure-FontInstallationsFromNerdFonts {
     [string []] $nerdFonts = @()
 
     if (-not (Get-Font 'FuraCode NF')) {
-        $nerdFonts += @('Fura Code * Complete Windows Compatible')
+        $nerdFonts += @('Fura Code * Complete Mono Windows Compatible')
     }
 
     if (-not (Get-Font 'RobotoMono NF')) {
-        $nerdFonts += @('Roboto Mono * Complete Windows Compatible')
+        $nerdFonts += @('Roboto Mono * Complete Mono Windows Compatible')
     }
 
     if (-not (Get-Font 'SauceCodePro NF')) {
-        $nerdFonts += @('Sauce Code Pro * Complete Windows Compatible')
+        $nerdFonts += @('Sauce Code Pro * Complete Mono Windows Compatible')
     }
 
     if ($nerdFonts.Length) {
