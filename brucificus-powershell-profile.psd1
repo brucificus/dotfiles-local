@@ -4,7 +4,7 @@
     RootModule        = 'brucificus-powershell-profile.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '0.0.2'
+    ModuleVersion     = '0.0.3'
 
     # ID used to uniquely identify this module
     GUID              = '94afe13f-ccb0-4bd8-a620-2bc24f14347a'
