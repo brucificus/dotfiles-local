@@ -24,6 +24,34 @@ function Get-Font([string] $FontNameFilter = "*") {
 
     <#
     .Synopsis
+        Detertmines if fonts matching the given filter exist in the registry.
+    .Description
+        Uses shell automation to retrieve all of the fonts loaded by the system.
+    .Parameter FontNameFilter
+        A filter to use to search by font names
+    .Example
+        # Returns 'true' if a Lucida font is installed
+        Test-Font *Lucida*
+    #>
+function Test-Font([string] $FontNameFilter) {
+    [string[]] $keys = @(
+        "HKCU:\Software\Microsoft\Windows NT\CurrentVersion\Fonts",
+        "HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Fonts"
+    )
+
+    $found = $keys `
+        | ForEach-Object { Get-ItemProperty $_ | Get-Member -MemberType NoteProperty } `
+        | Where-Object { $_.Name -like ($FontNameFilter + " (TrueType)") }
+
+    if ($found) {
+        return $true
+    } else {
+        return $false
+    }
+}
+
+    <#
+    .Synopsis
         Installs a font
     .Description
         Uses shell automation to install a font
@@ -42,4 +70,4 @@ function Install-Font([string] $FontFile) {
 }
 
 
-Export-ModuleMember -Function "Get-Font","Install-Font"
+Export-ModuleMember -Function "Get-Font","Install-Font","Test-Font"

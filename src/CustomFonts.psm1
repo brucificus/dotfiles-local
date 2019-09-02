@@ -3,19 +3,19 @@ function Ensure-FontInstallationsFromChocolatey {
     
     [string[]] $chocoFonts = @()
 
-    if (-not (Get-Font 'Fira Code')) {
+    if (-not (Test-Font 'Fira Code')) {
         $chocoFonts += @('FiraCode')
     }
 
-    if (-not (Get-Font 'Roboto')) {
+    if (-not (Test-Font 'Roboto')) {
         $chocoFonts += @('RobotFonts')
     }
 
-    if (-not (Get-Font 'Source Code Pro')) {
+    if (-not (Test-Font 'Source Code Pro')) {
         $chocoFonts += @('sourcecodepro')
     }
 
-    if (-not (Get-Font 'Envy Code R')) {
+    if (-not (Test-Font 'Envy Code R')) {
         $chocoFonts += @('envycoder')
     }
 
@@ -32,15 +32,15 @@ function Ensure-FontInstallationsFromNerdFonts {
 
     [string []] $nerdFonts = @()
 
-    if (-not (Get-Font 'FuraCode NF')) {
+    if (-not (Test-Font 'Fura Code * Complete Mono Windows Compatible')) {
         $nerdFonts += @('Fura Code * Complete Mono Windows Compatible')
     }
 
-    if (-not (Get-Font 'RobotoMono NF')) {
+    if (-not (Test-Font 'Roboto Mono * Complete Mono Windows Compatible')) {
         $nerdFonts += @('Roboto Mono * Complete Mono Windows Compatible')
     }
 
-    if (-not (Get-Font 'SauceCodePro NF')) {
+    if (-not (Test-Font 'Sauce Code Pro * Complete Mono Windows Compatible')) {
         $nerdFonts += @('Sauce Code Pro * Complete Mono Windows Compatible')
     }
 
