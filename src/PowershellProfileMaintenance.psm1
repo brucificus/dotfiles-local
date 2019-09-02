@@ -1,7 +1,6 @@
 function Edit-Profile() {
     $profileDirectory = (Get-Item $PROFILE.CurrentUserAllHosts).DirectoryName
-    $profileModule = (Join-Path $profileDirectory ".\profile.psm1")
-    code --wait --new-window $profileDirectory $profileModule
+    code --wait --new-window $profileDirectory $($PROFILE.CurrentUserAllHosts)
     Write-Warning "Remember to close and reopen PowerShell sessions to enact changes to your profile."
 }
 
