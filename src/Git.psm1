@@ -2,5 +2,3 @@
 
 $GitPromptSettings.DefaultPromptPrefix = '[$(hostname)] '
 $GitPromptSettings.DefaultPromptAbbreviateHomeDirectory = $true
-
-Export-ModuleMember -Function * -Cmdlet * -Variable * -Alias *

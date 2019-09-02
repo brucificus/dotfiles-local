@@ -14,4 +14,4 @@ function Measure-EnvVarChanges([ScriptBlock] $inner) {
 }
 
 
-Export-ModuleMember -Function *
+Export-ModuleMember -Function "Measure-EnvVarChanges"
