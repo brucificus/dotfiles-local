@@ -1,10 +1,18 @@
-function Ensure-ModuleInstallation([string] $moduleName, [string] $MinimumVersion, [string] $MaximumVersion, [switch] $AllowPrerelease) {
+function Ensure-ModuleInstallation([string] $moduleName, [string] $MinimumVersion, [string] $MaximumVersion, [switch] $AllowPrerelease, [switch] $AllowClobber) {
     if (-not (Get-Module -ListAvailable -Name $moduleName)) {
-        if ($allowPrerelease) {
-            Install-Module -Name $moduleName -MinimumVersion $MinimumVersion -MaximumVersion $MaximumVersion -AllowPrerelease
-        } else {
-            Install-Module -Name $moduleName -MinimumVersion $MinimumVersion -MaximumVersion $MaximumVersion
+        [string[]] $parameters = @('-Name', $moduleName)
+        $parameters += @('-MinimumVersion', $MinimumVersion)
+        $parameters += @('-MaximumVersion', $MaximumVersion)
+
+        if ($AllowPrerelease) {
+            $parameters += @('-AllowPrerelease')
         }
+
+        if ($AllowClobber) {
+            $parameters += @('-AllowClobber')
+        }
+
+        Invoke-Expression "Install-Module $parameters"
     }
 }
 
