@@ -7,6 +7,7 @@ Import-Module -Name $PSScriptRoot\src\GitHub.psm1 -DisableNameChecking
 Import-Module -Name $PSScriptRoot\src\Windows.psm1 -DisableNameChecking
 Import-Module -Name $PSScriptRoot\src\Fonts.psm1 -DisableNameChecking
 Import-Module -Name $PSScriptRoot\src\NerdFonts.psm1 -DisableNameChecking
+Import-Module -Name $PSScriptRoot\src\Chocolatey.psm1 -DisableNameChecking
 Import-Module -Name $PSScriptRoot\src\AwsHelpers.psm1 -DisableNameChecking
 Import-Module -Name $PSScriptRoot\src\FusionLog.psm1 -DisableNameChecking
 Import-Module -Name $PSScriptRoot\src\HypervisorAwareness.psm1 -DisableNameChecking

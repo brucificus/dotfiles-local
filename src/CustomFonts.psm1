@@ -21,13 +21,9 @@ function Ensure-FontInstallationsFromChocolatey {
 
     if ($chocoFonts.Length) {
         Write-Verbose "Missing fonts: $chocoFonts"
-        Import-Module "$PSScriptRoot\Windows.psm1"
+        Import-Module "$PSScriptRoot\Chocolatey.psm1"
 
-        if (-not (Test-Elevation)) {
-            Write-Error "Fonts sourced from Chocolatey are missing, and an elevated shell is required to install them."
-        } else {
-            choco install $([string]::Join($chocoFonts, ',')) -y
-        }
+        $chocoFonts | Ensure-ChocolateyPackageInstallation
     }
 }
 
