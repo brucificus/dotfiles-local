@@ -16,24 +16,25 @@ function Write-Theme {
 
     #check the last command state and indicate if failed
     If ($lastCommandFailed) {
-        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.FailedCommandSymbol) " -ForegroundColor $sl.Colors.CommandFailedIconForegroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
+        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.FailedCommandSymbol)" -ForegroundColor $sl.Colors.CommandFailedIconForegroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
     }
 
     #check for elevated prompt
     If (Test-Administrator) {
-        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.ElevatedSymbol) " -ForegroundColor $sl.Colors.AdminIconForegroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
+        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.ElevatedSymbol)" -ForegroundColor $sl.Colors.AdminIconForegroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
     }
 
     if (Test-VirtualEnv) {
-        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.SegmentForwardSymbol) " -ForegroundColor $sl.Colors.SessionInfoBackgroundColor -BackgroundColor $sl.Colors.VirtualEnvBackgroundColor
+        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.FirstSegmentForwardSymbol)" -ForegroundColor $sl.Colors.SessionInfoForegroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
         $prompt += Write-Prompt -Object "$($sl.PromptSymbols.VirtualEnvSymbol) $(Get-VirtualEnvName) " -ForegroundColor $sl.Colors.VirtualEnvForegroundColor -BackgroundColor $sl.Colors.VirtualEnvBackgroundColor
         $prompt += Write-Prompt -Object "$($sl.PromptSymbols.SegmentForwardSymbol) " -ForegroundColor $sl.Colors.VirtualEnvBackgroundColor -BackgroundColor $sl.Colors.PromptBackgroundColor
     }
     else {
-        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.SegmentForwardSymbol) " -ForegroundColor $sl.Colors.SessionInfoBackgroundColor -BackgroundColor $sl.Colors.PromptBackgroundColor
+        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.FirstSegmentForwardSymbol)" -ForegroundColor $sl.Colors.SessionInfoForegroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
     }
 
     # Writes the drive portion
+    $prompt += Write-Prompt -Object ' ' -ForegroundColor $sl.Colors.PromptForegroundColor -BackgroundColor $sl.Colors.PromptBackgroundColor
     $prompt += Write-Prompt -Object (Get-ShortPath -dir $pwd) -ForegroundColor $sl.Colors.PromptForegroundColor -BackgroundColor $sl.Colors.PromptBackgroundColor
     $prompt += Write-Prompt -Object ' ' -ForegroundColor $sl.Colors.PromptForegroundColor -BackgroundColor $sl.Colors.PromptBackgroundColor
 
@@ -52,13 +53,17 @@ function Write-Theme {
     }
 
     # Writes the postfix to the prompt
-    $prompt += Write-Prompt -Object $sl.PromptSymbols.SegmentForwardSymbol -ForegroundColor $lastColor
+    $prompt += Write-Prompt -Object ([char]::ConvertFromUtf32(0xe0cc)) -ForegroundColor $lastColor
     $prompt += ' '
     $prompt
 }
 
 $sl = $global:ThemeSettings #local settings
-$sl.PromptSymbols.SegmentForwardSymbol = [char]::ConvertFromUtf32(0xE0B0)
+$sl.PromptSymbols.StartSymbol = ''
+$sl.PromptSymbols.FailedCommandSymbol = [char]::ConvertFromUtf32(0xf071)
+$sl.PromptSymbols.FirstSegmentForwardSymbol = [char]::ConvertFromUtf32(0xe0d4)
+$sl.PromptSymbols.SegmentForwardSymbol = [char]::ConvertFromUtf32(0xe0c0)
+$sl.PromptSymbols.ElevatedSymbol = [char]::ConvertFromUtf32(0xfc7e)
 $sl.Colors.PromptForegroundColor = [ConsoleColor]::White
 $sl.Colors.PromptSymbolColor = [ConsoleColor]::White
 $sl.Colors.PromptHighlightColor = [ConsoleColor]::DarkBlue
