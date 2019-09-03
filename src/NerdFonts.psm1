@@ -24,7 +24,7 @@ function Install-NerdFont {
         [Parameter(Position = 0, Mandatory = $true, ParameterSetName = "All")]
         [switch]  $All
     )
-    Import-Module "$PSScriptRoot\GitHub.psm1"
+    Import-Module "$PSScriptRoot\GitHub.psm1" -DisableNameChecking
 
     if ($All) {
         $FontNameFilter = @("*")

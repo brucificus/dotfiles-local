@@ -21,14 +21,14 @@ function Ensure-FontInstallationsFromChocolatey {
 
     if ($chocoFonts.Length) {
         Write-Verbose "Missing fonts: $chocoFonts"
-        Import-Module "$PSScriptRoot\Chocolatey.psm1"
+        Import-Module "$PSScriptRoot\Chocolatey.psm1" -DisableNameChecking
 
         $chocoFonts | Ensure-ChocolateyPackageInstallation
     }
 }
 
 function Ensure-FontInstallationsFromNerdFonts {
-    Import-Module "$PSScriptRoot\Fonts.psm1"
+    Import-Module "$PSScriptRoot\Fonts.psm1" -DisableNameChecking
 
     [string []] $nerdFonts = @()
 
@@ -46,7 +46,7 @@ function Ensure-FontInstallationsFromNerdFonts {
 
     if ($nerdFonts.Length) {
         Write-Verbose "Missing fonts: $nerdFonts"
-        Import-Module "$PSScriptRoot\NerdFonts.psm1"
+        Import-Module "$PSScriptRoot\NerdFonts.psm1" -DisableNameChecking
         Install-NerdFont -FontNameFilter $nerdFonts
     }
 }
