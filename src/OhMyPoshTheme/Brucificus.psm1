@@ -25,12 +25,12 @@ function Write-Theme {
     }
 
     if (Test-VirtualEnv) {
-        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.FirstSegmentForwardSymbol)" -ForegroundColor $sl.Colors.SessionInfoForegroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
+        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.SegmentForwardSymbol)" -ForegroundColor $sl.Colors.SessionInfoForegroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
         $prompt += Write-Prompt -Object "$($sl.PromptSymbols.VirtualEnvSymbol) $(Get-VirtualEnvName) " -ForegroundColor $sl.Colors.VirtualEnvForegroundColor -BackgroundColor $sl.Colors.VirtualEnvBackgroundColor
         $prompt += Write-Prompt -Object "$($sl.PromptSymbols.SegmentForwardSymbol) " -ForegroundColor $sl.Colors.VirtualEnvBackgroundColor -BackgroundColor $sl.Colors.PromptBackgroundColor
     }
     else {
-        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.FirstSegmentForwardSymbol)" -ForegroundColor $sl.Colors.SessionInfoForegroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
+        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.SegmentForwardSymbol)" -ForegroundColor $sl.Colors.SessionInfoForegroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
     }
 
     # Writes the drive portion
@@ -53,17 +53,19 @@ function Write-Theme {
     }
 
     # Writes the postfix to the prompt
-    $prompt += Write-Prompt -Object ([char]::ConvertFromUtf32(0xe0cc)) -ForegroundColor $lastColor
+    $prompt += Write-Prompt -Object $sl.PromptSymbols.EndSymbol -ForegroundColor $lastColor
     $prompt += ' '
     $prompt
 }
 
 $sl = $global:ThemeSettings #local settings
-$sl.PromptSymbols.StartSymbol = ''
+$sl.PromptSymbols.StartSymbol = [char]::ConvertFromUtf32(0xe0d4)
+$sl.PromptSymbols.TruncatedFolderSymbol = '…'
 $sl.PromptSymbols.FailedCommandSymbol = [char]::ConvertFromUtf32(0xf071)
-$sl.PromptSymbols.FirstSegmentForwardSymbol = [char]::ConvertFromUtf32(0xe0d4)
 $sl.PromptSymbols.SegmentForwardSymbol = [char]::ConvertFromUtf32(0xe0c0)
-$sl.PromptSymbols.ElevatedSymbol = [char]::ConvertFromUtf32(0xfc7e)
+$sl.PromptSymbols.ElevatedSymbol = [char]::ConvertFromUtf32(0xf982)
+$sl.PromptSymbols.HomeSymbol = [char]::ConvertFromUtf32(0xf7db)
+$sl.PromptSymbols.EndSymbol = [char]::ConvertFromUtf32(0xf054)
 $sl.Colors.PromptForegroundColor = [ConsoleColor]::White
 $sl.Colors.PromptSymbolColor = [ConsoleColor]::White
 $sl.Colors.PromptHighlightColor = [ConsoleColor]::DarkBlue

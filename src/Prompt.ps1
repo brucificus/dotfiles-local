@@ -9,7 +9,7 @@ if (-not (Get-Command 'Get-Gradient' -ErrorAction SilentlyContinue)) {
 }
 Import-Module PANSIES
 
-Ensure-ModuleInstallation oh-my-posh -MinimumVersion 2.0.311 -MaximumVersion 2.0.311 -AllowClobber
+Ensure-ModuleInstallation oh-my-posh -MinimumVersion 2.0.339 -MaximumVersion 2.0.332 -AllowClobber
 Import-Module oh-my-posh
 
 Set-Theme "$PSScriptRoot\OhMyPoshTheme\Brucificus.psm1"
