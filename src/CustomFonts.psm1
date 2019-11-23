@@ -19,6 +19,10 @@ function Ensure-FontInstallationsFromChocolatey {
         $chocoFonts += @('envycoder')
     }
 
+    if (-not (Test-Font 'Cascadia Code')) {
+        $chocoFonts += @('choco install cascadiacode')
+    }
+
     if ($chocoFonts.Length) {
         Write-Verbose "Missing fonts: $chocoFonts"
         Import-Module "$PSScriptRoot\Chocolatey.psm1" -DisableNameChecking
