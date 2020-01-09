@@ -1,6 +1,7 @@
 Import-Module -Name $PSScriptRoot\src\PowershellProfileMaintenance.psm1 -DisableNameChecking
 Import-Module -Name $PSScriptRoot\src\AwsHelpers.psm1 -DisableNameChecking
 Import-Module -Name $PSScriptRoot\src\FusionLog.psm1 -DisableNameChecking
+Import-Module -Name $PSScriptRoot\src\Git.psm1 -DisableNameChecking
 Import-Module -Name $PSScriptRoot\src\WebHelpers.psm1 -DisableNameChecking
 Import-Module -Name $PSScriptRoot\src\EnvHelper.psm1 -DisableNameChecking
 Import-Module -Name $PSScriptRoot\src\HypervisorAwareness.psm1 -DisableNameChecking
