@@ -1,5 +1,90 @@
 # Taken and modified from: https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/8d3d148aba5e18ad325d5a856e5a3fae55b5b2f0/Themes/Agnoster.psm1
 #requires -Version 2 -Modules posh-git
+#requires -Version 2 -Modules PANSIES
+
+function Write-Segment {
+    param(
+        $content,
+        $foregroundColor,
+        $backgroundColor = $null
+    )
+
+    $prompt += Write-Prompt -Object $sl.PromptSymbols.SegmentBackwardSymbol -ForegroundColor $sl.Colors.PromptSymbolColor
+    if ($backgroundColor) {
+        $prompt += Write-Prompt -Object $content -ForegroundColor $foregroundColor -BackgroundColor $backgroundColor
+    } else {
+        $prompt += Write-Prompt -Object $content -ForegroundColor $foregroundColor
+    }
+    
+    $prompt += Write-Prompt -Object "$($sl.PromptSymbols.SegmentForwardSymbol) " -ForegroundColor $sl.Colors.PromptSymbolColor
+    return $prompt
+}
+
+function Write-FirstLine {
+    param(
+        $lastCommandFailed
+    )
+
+    $boxDrawingsLightDownAndRight = [char]::ConvertFromUtf32(0x250C) # '┌'
+    $prompt = Write-Prompt -Object $boxDrawingsLightDownAndRight -ForegroundColor $sl.Colors.PromptSymbolColor
+
+    $user = $sl.CurrentUser
+    $prompt += Write-Segment -content $user -foregroundColor $sl.Colors.PromptForegroundColor
+
+    $status = Get-VCSStatus
+    if ($status) {
+        $vcsInfo = Get-VcsInfo -status ($status)
+        $info = $vcsInfo.VcInfo
+        $prompt += Write-Segment -content $info -foregroundColor $sl.Colors.GitForegroundColor -backgroundColor $vcsInfo.BackgroundColor
+    }
+
+    #python virtualenv
+    if (Test-VirtualEnv) {
+        $prompt += Write-Segment -content "$($sl.PromptSymbols.VirtualEnvSymbol) $(Get-VirtualEnvName) " -foregroundColor $sl.Colors.VirtualEnvForegroundColor
+    }
+
+    #check for elevated prompt
+    If (Test-Administrator) {
+        $prompt += Write-Segment -content $sl.PromptSymbols.ElevatedSymbol -foregroundColor $sl.Colors.AdminIconForegroundColor
+    }
+
+    #check the last command state and indicate if failed
+    If ($lastCommandFailed) {
+        $prompt += Write-Segment -content $sl.PromptSymbols.FailedCommandSymbol -foregroundColor $sl.Colors.CommandFailedIconForegroundColor
+    }
+
+    $prompt += ''
+
+    $prompt
+}
+
+function Write-SecondLine {
+    param(
+        $with
+    )
+
+    $boxDrawingsLightUpAndRight = [char]::ConvertFromUtf32(0x2514) # '└'
+    $prompt += Write-Prompt -Object $boxDrawingsLightUpAndRight -ForegroundColor $sl.Colors.PromptSymbolColor
+    
+    $path += Get-ShortPath -dir $pwd
+    $prompt += Write-Prompt -Object $sl.PromptSymbols.SegmentBackwardSymbol -ForegroundColor $sl.Colors.PromptSymbolColor
+    $prompt += Write-Prompt -Object $path -ForegroundColor $sl.Colors.PromptForegroundColor
+
+    #python virtualenv
+    if (Test-VirtualEnv) {
+        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.SegmentForwardSymbol) $($sl.PromptSymbols.SegmentBackwardSymbol)" -ForegroundColor $sl.Colors.PromptSymbolColor
+        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.VirtualEnvSymbol) $(Get-VirtualEnvName)" -ForegroundColor $sl.Colors.VirtualEnvForegroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
+    }
+
+    if ($with) {
+        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.SegmentForwardSymbol) $($sl.PromptSymbols.SegmentBackwardSymbol)" -ForegroundColor $sl.Colors.PromptSymbolColor
+        $prompt += Write-Prompt -Object "$($with.ToUpper())" -ForegroundColor $sl.Colors.WithForegroundColor -BackgroundColor 
+    }
+
+    $prompt += Write-Prompt -Object "$($sl.PromptSymbols.SegmentForwardSymbol)" -ForegroundColor $sl.Colors.PromptSymbolColor
+    
+    $prompt
+}
 
 function Write-Theme {
 
@@ -10,66 +95,25 @@ function Write-Theme {
         $with
     )
 
-    $lastColor = $sl.Colors.PromptBackgroundColor
-
-    $prompt = Write-Prompt -Object $sl.PromptSymbols.StartSymbol -ForegroundColor $sl.Colors.SessionInfoForegroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
-
-    #check the last command state and indicate if failed
-    If ($lastCommandFailed) {
-        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.FailedCommandSymbol)" -ForegroundColor $sl.Colors.CommandFailedIconForegroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
-    }
-
-    #check for elevated prompt
-    If (Test-Administrator) {
-        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.ElevatedSymbol)" -ForegroundColor $sl.Colors.AdminIconForegroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
-    }
-
-    if (Test-VirtualEnv) {
-        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.SegmentForwardSymbol)" -ForegroundColor $sl.Colors.SessionInfoForegroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
-        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.VirtualEnvSymbol) $(Get-VirtualEnvName) " -ForegroundColor $sl.Colors.VirtualEnvForegroundColor -BackgroundColor $sl.Colors.VirtualEnvBackgroundColor
-        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.SegmentForwardSymbol) " -ForegroundColor $sl.Colors.VirtualEnvBackgroundColor -BackgroundColor $sl.Colors.PromptBackgroundColor
-    }
-    else {
-        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.SegmentForwardSymbol)" -ForegroundColor $sl.Colors.SessionInfoForegroundColor -BackgroundColor $sl.Colors.SessionInfoBackgroundColor
-    }
-
-    # Writes the drive portion
-    $prompt += Write-Prompt -Object ' ' -ForegroundColor $sl.Colors.PromptForegroundColor -BackgroundColor $sl.Colors.PromptBackgroundColor
-    $prompt += Write-Prompt -Object (Get-ShortPath -dir $pwd) -ForegroundColor $sl.Colors.PromptForegroundColor -BackgroundColor $sl.Colors.PromptBackgroundColor
-    $prompt += Write-Prompt -Object ' ' -ForegroundColor $sl.Colors.PromptForegroundColor -BackgroundColor $sl.Colors.PromptBackgroundColor
-
-    $status = Get-VCSStatus
-    if ($status) {
-        $themeInfo = Get-VcsInfo -status ($status)
-        $lastColor = $themeInfo.BackgroundColor
-        $prompt += Write-Prompt -Object $sl.PromptSymbols.SegmentForwardSymbol -ForegroundColor $sl.Colors.PromptBackgroundColor -BackgroundColor $lastColor
-        $prompt += Write-Prompt -Object " $($themeInfo.VcInfo) " -BackgroundColor $lastColor -ForegroundColor $sl.Colors.GitForegroundColor
-    }
-
-    if ($with) {
-        $prompt += Write-Prompt -Object $sl.PromptSymbols.SegmentForwardSymbol -ForegroundColor $lastColor -BackgroundColor $sl.Colors.WithBackgroundColor
-        $prompt += Write-Prompt -Object " $($with.ToUpper()) " -BackgroundColor $sl.Colors.WithBackgroundColor -ForegroundColor $sl.Colors.WithForegroundColor
-        $lastColor = $sl.Colors.WithBackgroundColor
-    }
-
-    # Writes the postfix to the prompt
-    $prompt += Write-Prompt -Object $sl.PromptSymbols.EndSymbol -ForegroundColor $lastColor
-    $prompt += ' '
+    $prompt += Write-FirstLine $lastCommandFailed
+    $prompt += Set-Newline
+    $prompt += Write-SecondLine $with
+    $prompt += Write-Prompt -Object "$($sl.PromptSymbols.PromptIndicator) " -ForegroundColor $sl.Colors.PromptSymbolColor
     $prompt
 }
 
 $sl = $global:ThemeSettings #local settings
-$sl.PromptSymbols.StartSymbol = [char]::ConvertFromUtf32(0xe0d4)
 $sl.PromptSymbols.TruncatedFolderSymbol = '…'
-$sl.PromptSymbols.FailedCommandSymbol = [char]::ConvertFromUtf32(0xf071)
-$sl.PromptSymbols.SegmentForwardSymbol = [char]::ConvertFromUtf32(0xe0c0)
-$sl.PromptSymbols.ElevatedSymbol = [char]::ConvertFromUtf32(0xf982)
-$sl.PromptSymbols.HomeSymbol = [char]::ConvertFromUtf32(0xf7db)
-$sl.PromptSymbols.EndSymbol = [char]::ConvertFromUtf32(0xf054)
-$sl.Colors.PromptForegroundColor = [ConsoleColor]::White
-$sl.Colors.PromptSymbolColor = [ConsoleColor]::White
-$sl.Colors.PromptHighlightColor = [ConsoleColor]::DarkBlue
-$sl.Colors.GitForegroundColor = [ConsoleColor]::Black
+$sl.PromptSymbols.FailedCommandSymbol = [char]::ConvertFromUtf32(0xf071) # '' (nf-fa-exclamation_triangle)
+$sl.PromptSymbols.SegmentForwardSymbol = ']'
+$sl.PromptSymbols.SegmentBackwardSymbol = '['
+$sl.PromptSymbols.ElevatedSymbol = [char]::ConvertFromUtf32(0xf982) # '廬' (nf-mdi-security)
+$sl.PromptSymbols.HomeSymbol = [char]::ConvertFromUtf32(0xf7db) # '' (nf-mdi-home)
+$sl.PromptSymbols.PromptIndicator = [char]::ConvertFromUtf32(0xf054) # '' (nf-fa-chevron_right)
+$sl.Colors.PromptForegroundColor = [ConsoleColor]::DarkGreen
+$sl.Colors.PromptSymbolColor = [ConsoleColor]::DarkBlue
+$sl.Colors.PromptHighlightColor = [ConsoleColor]::Blue
+$sl.Colors.GitForegroundColor = [ConsoleColor]::DarkYellow
 $sl.Colors.WithForegroundColor = [ConsoleColor]::White
 $sl.Colors.WithBackgroundColor = [ConsoleColor]::DarkRed
 $sl.Colors.VirtualEnvBackgroundColor = [System.ConsoleColor]::Red
