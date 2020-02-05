@@ -17,6 +17,19 @@ function Write-Segment {
     }
     
     $prompt += Write-Prompt -Object "$($sl.PromptSymbols.SegmentForwardSymbol) " -ForegroundColor $sl.Colors.PromptSymbolColor
+    
+    return $prompt
+}
+
+function Write-GitSegment {
+    param(
+        $vcsInfo
+    )
+
+    $prompt += Write-Prompt -Object $sl.PromptSymbols.GitSegmentBackwardSymbol -ForegroundColor $vcsInfo.BackgroundColor
+    $prompt += Write-Prompt -Object $vcsInfo.VcInfo -ForegroundColor $sl.Colors.GitForegroundColor -BackgroundColor $vcsInfo.BackgroundColor
+    $prompt += Write-Prompt -Object "$($sl.PromptSymbols.GitSegmentForwardSymbol) " -ForegroundColor $vcsInfo.BackgroundColor
+
     return $prompt
 }
 
@@ -34,8 +47,7 @@ function Write-FirstLine {
     $status = Get-VCSStatus
     if ($status) {
         $vcsInfo = Get-VcsInfo -status ($status)
-        $info = $vcsInfo.VcInfo
-        $prompt += Write-Segment -content $info -foregroundColor $sl.Colors.GitForegroundColor -backgroundColor $vcsInfo.BackgroundColor
+        $prompt += Write-GitSegment $vcsInfo
     }
 
     #python virtualenv
@@ -55,7 +67,7 @@ function Write-FirstLine {
 
     $prompt += ''
 
-    $prompt
+    return $prompt
 }
 
 function Write-SecondLine {
@@ -83,7 +95,7 @@ function Write-SecondLine {
 
     $prompt += Write-Prompt -Object "$($sl.PromptSymbols.SegmentForwardSymbol)" -ForegroundColor $sl.Colors.PromptSymbolColor
     
-    $prompt
+    return $prompt
 }
 
 function Write-Theme {
@@ -99,7 +111,8 @@ function Write-Theme {
     $prompt += Set-Newline
     $prompt += Write-SecondLine $with
     $prompt += Write-Prompt -Object "$($sl.PromptSymbols.PromptIndicator) " -ForegroundColor $sl.Colors.PromptSymbolColor
-    $prompt
+    
+    return $prompt
 }
 
 $sl = $global:ThemeSettings #local settings
@@ -107,13 +120,15 @@ $sl.PromptSymbols.TruncatedFolderSymbol = '…'
 $sl.PromptSymbols.FailedCommandSymbol = [char]::ConvertFromUtf32(0xf071) # '' (nf-fa-exclamation_triangle)
 $sl.PromptSymbols.SegmentForwardSymbol = ']'
 $sl.PromptSymbols.SegmentBackwardSymbol = '['
+$sl.PromptSymbols.GitSegmentForwardSymbol = [char]::ConvertFromUtf32(0xe0b0) # '' (nf-pl-left_hard_divider)
+$sl.PromptSymbols.GitSegmentBackwardSymbol = [char]::ConvertFromUtf32(0xe0b2) # '' (nf-pl-right_hard_divider)
 $sl.PromptSymbols.ElevatedSymbol = [char]::ConvertFromUtf32(0xf982) # '廬' (nf-mdi-security)
 $sl.PromptSymbols.HomeSymbol = [char]::ConvertFromUtf32(0xf7db) # '' (nf-mdi-home)
 $sl.PromptSymbols.PromptIndicator = [char]::ConvertFromUtf32(0xf054) # '' (nf-fa-chevron_right)
 $sl.Colors.PromptForegroundColor = [ConsoleColor]::DarkGreen
 $sl.Colors.PromptSymbolColor = [ConsoleColor]::DarkBlue
 $sl.Colors.PromptHighlightColor = [ConsoleColor]::Blue
-$sl.Colors.GitForegroundColor = [ConsoleColor]::DarkYellow
+$sl.Colors.GitForegroundColor = [ConsoleColor]::Black
 $sl.Colors.WithForegroundColor = [ConsoleColor]::White
 $sl.Colors.WithBackgroundColor = [ConsoleColor]::DarkRed
 $sl.Colors.VirtualEnvBackgroundColor = [System.ConsoleColor]::Red
