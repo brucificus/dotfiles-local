@@ -1,4 +1,4 @@
-if (-Not (Get-Module brucificus-powershell-profile)) {
+if (-Not (Get-Command "Install-ModuleFromGitHub" -ErrorAction SilentlyContinue)) {
     # Taken and modified from: https://raw.githubusercontent.com/dfinke/InstallModuleFromGitHub/7c633865c575d4762b2e49f15620020245f36d46/InstallModuleFromGitHub.psm1
     # Copyright 2016 Doug Finke
     function Install-ModuleFromGitHub {
@@ -85,9 +85,14 @@ if (-Not (Get-Module brucificus-powershell-profile)) {
             }
         }
     }
+}
 
-    Install-ModuleFromGitHub -GitHubRepo brucificus/powershell-profile -DestinationPath $Env:PSModulePath.Split(';')[0] -moduleName 'brucificus-powershell-profile'
+$extant = Get-Module "brucificus-powershell-profile"
 
+Install-ModuleFromGitHub -GitHubRepo brucificus/powershell-profile -DestinationPath $Env:PSModulePath.Split(';')[0] -moduleName 'brucificus-powershell-profile'
+
+if (-not $extant) {
     Out-File -FilePath $profile -Append -Force -InputObject "Import-Module brucificus-powershell-profile -DisableNameChecking"
 }
+
 Import-Module brucificus-powershell-profile -DisableNameChecking
