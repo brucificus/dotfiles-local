@@ -4,7 +4,7 @@
     RootModule        = 'brucificus-powershell-profile.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '0.0.8'
+    ModuleVersion     = '0.0.9'
 
     # ID used to uniquely identify this module
     GUID              = '94afe13f-ccb0-4bd8-a620-2bc24f14347a'
@@ -16,7 +16,7 @@
     CompanyName       = 'Bruce Markham'
 
     # Copyright statement for this module
-    Copyright         = '© 2019 All rights reserved.'
+    Copyright         = '© 2020 All rights reserved.'
 
     # Description of the functionality provided by this module
     Description       = 'PowerShell module with all my personal customizations'
