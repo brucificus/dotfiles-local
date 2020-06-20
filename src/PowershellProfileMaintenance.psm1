@@ -2,7 +2,7 @@ function Edit-WindowsTerminalSettings {
     Import-Module "$PSScriptRoot\Chocolatey.psm1" -DisableNameChecking
     Ensure-ChocolateyPackageInstallation "vscode"
 
-    [string] $file = "$Env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json"
+    [string] $file = "$Env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
     code --wait --new-window $file
 }
 
