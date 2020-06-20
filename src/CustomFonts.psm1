@@ -20,7 +20,7 @@ function Ensure-FontInstallationsFromChocolatey {
     }
 
     if (-not (Test-Font 'Cascadia Code')) {
-        $chocoFonts += @('choco install cascadiacode')
+        $chocoFonts += @('cascadiacode')
     }
 
     if ($chocoFonts.Length) {
