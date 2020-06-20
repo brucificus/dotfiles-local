@@ -30,7 +30,7 @@ function Install-NerdFont {
         $FontNameFilter = @("*")
     }
 
-    Use-GitHubZipBall 'ryanoasis/nerd-fonts' '2.0.0' -action {
+    Use-GitHubZipBall 'ryanoasis/nerd-fonts' '2.1.0' -action {
         # Taken and modified from: https://github.com/ryanoasis/nerd-fonts/blob/b752a82fd2d778428075e2130947e951d98befd8/patched-fonts/install.ps1
 
         cd patched-fonts
