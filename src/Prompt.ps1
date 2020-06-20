@@ -12,4 +12,6 @@ Import-Module PANSIES
 Ensure-ModuleInstallation oh-my-posh -MinimumVersion 2.0.440 -MaximumVersion 2.0.440 -AllowClobber -Force
 Import-Module oh-my-posh
 
+Ensure-ModuleInstallation PSReadLine -MinimumVersion 2.0.2 -MaximumVersion 2.0.2 -Force
+
 Set-Theme "$PSScriptRoot\OhMyPoshTheme\Brucificus.psm1"
