@@ -14,4 +14,6 @@ Import-Module oh-my-posh
 
 Ensure-ModuleInstallation PSReadLine -MinimumVersion 2.0.2 -MaximumVersion 2.0.2 -Force
 
+Ensure-ModuleInstallation BurntToast -MinimumVersion 0.7.1 -MaximumVersion 0.7.1 -Force
+
 Set-Theme "$PSScriptRoot\OhMyPoshTheme\Brucificus.psm1"
