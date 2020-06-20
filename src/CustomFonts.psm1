@@ -48,6 +48,10 @@ function Ensure-FontInstallationsFromNerdFonts {
         $nerdFonts += @('Sauce Code Pro * Complete Mono Windows Compatible')
     }
 
+    if (-not (Test-Font 'Caskaydia Cove * Complete Mono Windows Compatible')) {
+        $nerdFonts += @('Caskaydia Cove * Complete Mono Windows Compatible')
+    }
+
     if ($nerdFonts.Length) {
         Write-Verbose "Missing fonts: $nerdFonts"
         Import-Module "$PSScriptRoot\NerdFonts.psm1" -DisableNameChecking
