@@ -40,7 +40,8 @@ function Test-Font([string] $FontNameFilter) {
     )
 
     $found = $keys `
-        | ForEach-Object { Get-ItemProperty $_ | Get-Member -MemberType NoteProperty } `
+        | ForEach-Object { Get-ItemProperty $_ } `
+        | Get-Member -MemberType NoteProperty `
         | Where-Object { $_.Name -like ($FontNameFilter + " (TrueType)") }
 
     if ($found) {
