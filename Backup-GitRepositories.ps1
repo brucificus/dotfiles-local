@@ -35,12 +35,19 @@ function Find-GitRepositories([string] $root) {
 
 function Execute-LoggedExpression([string] $expression, [switch] $suppressOutput) {
     Write-Information $expression
+
     if ($suppressOutput) {
         Invoke-Expression $expression | Out-Null
     } else {
         Invoke-Expression $expression
     }
-    
+}
+
+function Escape-RefName([string] $ref) {
+    [string] $result = $ref.Replace("(", "__")
+    $result = $result.Replace(")", "__")
+    $result = $result.Replace(":", "__")
+    return $result
 }
 
 function PushTo-Remote([string] $downstreamRepo, [string] $upstreamRepo, [string] $refPrefix) {
@@ -53,11 +60,10 @@ function PushTo-Remote([string] $downstreamRepo, [string] $upstreamRepo, [string
             [string[]] $sourceRefs = git show-ref | % { $_.Split(" ")[1] }
 
             foreach($sourceRef in $sourceRefs) {
-                $sourceRef = $sourceRef.Replace("(", "__")
-                $sourceRef = $sourceRef.Replace(")", "__")
-                $sourceRef = $sourceRef.Replace(":", "__")
+                $sourceRef = Escape-RefName -ref $sourceRef
+                [string] $targetRef = $refPrefix + $sourceRef
+                [string] $refspec = $sourceRef + ":" + $targetRef
 
-                [string] $refspec = $sourceRef + ":" + ($refPrefix + $sourceRef)
                 Execute-LoggedExpression "git push $temporaryGitRemoteName $refspec --porcelain --atomic --force" -suppressOutput
             }
 
@@ -70,23 +76,32 @@ function PushTo-Remote([string] $downstreamRepo, [string] $upstreamRepo, [string
     }
 }
 
+function Backup-RepositoryCollection([psobject] $repositoryCollection) {
+    [string] $backupTarget = Resolve-Path ([System.Environment]::ExpandEnvironmentVariables($repositoryCollection.backup.target))
+    [string] $baseRefPrefix = [System.Environment]::ExpandEnvironmentVariables($repositoryCollection.backup.refPrefix)
+    [string[]] $repositoryLocations = `
+        Find-GitRepositories -root $repositoryCollectionLocation `
+        | ForEach-Object { [System.IO.Path]::GetRelativePath($repositoryCollectionLocation, $_) } `
+        | ForEach-Object { $_.Replace("\`"", "/") }
+
+    pushd $repositoryCollectionLocation
+    try {
+        foreach ($repositoryLocation in $repositoryLocations) {
+            Write-Information "Repository: `"$repositoryLocation`""
+    
+            [string] $finalRefPrefix = "refs/" + $baseRefPrefix + $repositoryLocation + "/"
+            PushTo-Remote -downstreamRepo $repositoryLocation -upstreamRepo $backupTarget -refPrefix $finalRefPrefix
+        }
+    } finally {
+        popd
+    }
+}
+
 foreach ($repositoryCollection in $configuration.repositoryCollections) {
     [string] $repositoryCollectionLocation = Resolve-Path ([System.Environment]::ExpandEnvironmentVariables($repositoryCollection.location))
     Write-Information "Repository Collection: `"$repositoryCollectionLocation`""
 
-    [string] $backupTarget = Resolve-Path ([System.Environment]::ExpandEnvironmentVariables($repositoryCollection.backup.target))
-    [string] $baseRefPrefix = [System.Environment]::ExpandEnvironmentVariables($repositoryCollection.backup.refPrefix)
-    [string[]] $repositoryLocations = Find-GitRepositories -root $repositoryCollectionLocation
-
-    foreach ($repositoryLocation in $repositoryLocations) {
-        [string] $repositoryRelativePath = [System.IO.Path]::GetRelativePath($repositoryCollectionLocation, $repositoryLocation)
-        $repositoryRelativePath = $repositoryRelativePath.Replace("\", "/")
-        Write-Information "Repository: `"$repositoryRelativePath`""
-
-        [string] $finalRefPrefix = "refs/" + $baseRefPrefix + $repositoryRelativePath + "/"
-
-        PushTo-Remote -downstreamRepo $repositoryLocation -upstreamRepo $backupTarget -refPrefix $finalRefPrefix
-    }
+    Backup-RepositoryCollection -repositoryCollection $repositoryCollection
 
     Write-Information ""
     Write-Information ""
