@@ -1,0 +1,1 @@
+&"C:\Program Files (x86)\Microsoft OneDrive\onedrive.exe" /reset
