@@ -1,9 +1,9 @@
 {
   "repositoryCollections": [
     {
-      "location": "%HOME%/source/repos",
+      "location": "%USERPROFILE%/source/repos",
       "backup": {
-        "target": "%HOME%/OneDrive/Personal/GitBackup/Personal.git",
+        "target": "%USERPROFILE%/OneDrive/Personal/GitBackup/Personal.git",
         "refPrefix": "%COMPUTERNAME%/%USERNAME%/source/repos/"
       }
     },
