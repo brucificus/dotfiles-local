@@ -1,0 +1,18 @@
+{
+  "repositoryCollections": [
+    {
+      "location": "%HOME%/source/repos",
+      "backup": {
+        "target": "%HOME%/OneDrive/Personal/GitBackup/Personal.git",
+        "refPrefix": "%COMPUTERNAME%/%USERNAME%/source/repos/"
+      }
+    },
+    {
+      "location": "D:/Frontline",
+      "backup": {
+        "target": "%HOME%/OneDrive/Personal/GitBackup/Frontline.git",
+        "refPrefix": "%COMPUTERNAME%/D/"
+      }
+    },
+  ]
+}
