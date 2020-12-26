@@ -1,8 +1,8 @@
 $ErrorActionPreference = "Stop"
 $InformationPreference = "Continue"
-$DebugPreference = "Continue"
 
 [psobject] $configuration = Get-Content -Raw "$PSScriptRoot/GitRepositories.json" | ConvertFrom-Json
+[scriptblock[]] $cleanup = @()
 
 function Find-GitRepositories([string] $root) {
     [string[]] $interestingChildren = `
@@ -14,8 +14,8 @@ function Find-GitRepositories([string] $root) {
         return @()
     } else {
         [string[]] $leafChildren = `
-        $interestingChildren `
-        | Where-Object { Test-Path (Join-Path $_ ".git") -ErrorAction SilentlyContinue }
+            $interestingChildren `
+            | Where-Object { Test-Path (Join-Path $_ ".git") -ErrorAction SilentlyContinue }
 
         [string[]] $stemChildren = `
             $interestingChildren `
@@ -33,42 +33,104 @@ function Find-GitRepositories([string] $root) {
     }
 }
 
-function Execute-LoggedExpression([string] $expression, [switch] $suppressOutput) {
-    Write-Information $expression
+function Execute-InformationLoggedExpression([string] $expression, [switch] $suppressOutput) {
+    Write-Information "Executing: $expression"
 
     if ($suppressOutput) {
-        Invoke-Expression $expression | Out-Null
+        Invoke-Expression $expression 2>&1 | Out-Null
     } else {
-        Invoke-Expression $expression
+        Invoke-Expression $expression 2>&1 | Write-Information
     }
 }
 
-function Escape-RefName([string] $ref) {
-    [string] $result = $ref.Replace("(", "__")
-    $result = $result.Replace(")", "__")
-    $result = $result.Replace(":", "__")
-    return $result
+function Execute-DebugLoggedExpression([string] $expression, [switch] $suppressOutput) {
+    Write-Debug "Executing: $expression"
+
+    if ($suppressOutput) {
+        Invoke-Expression $expression 2>&1 | Out-Null
+    } else {
+        Invoke-Expression $expression 2>&1 | Write-Debug
+    }
+}
+
+function Create-TempFile() {
+    [string] $file = [System.IO.Path]::GetTempFileName()
+    $cleanup += @({ Remove-Item -Path $file -Force }.GetNewClosure())
+    return $file
+}
+
+function Create-TempDirectory() {
+    [string] $directory = [System.IO.Path]::GetTempFileName()
+    Remove-Item $directory | Out-Null
+    mkdir $directory | Out-Null
+    $cleanup += @({ Remove-Item -Path $directory -Recurse -Force }.GetNewClosure())
+    return $directory
+}
+
+
+function Get-TemporaryGitReferenceClone([string] $source) {
+    [string] $target = Create-TempDirectory
+
+    Execute-DebugLoggedExpression "Remove-Item -Path `"$target`" -Recurse -Force" -suppressOutput
+    git clone --mirror --reference `"$source`" `"$source`" `"$target`" | Write-Debug
+
+    return $target
 }
 
 function PushTo-Remote([string] $downstreamRepo, [string] $upstreamRepo, [string] $refPrefix) {
     pushd $downstreamRepo
     try {
-        [string] $temporaryGitRemoteName = "backup"
         
-        Execute-LoggedExpression "git remote add $temporaryGitRemoteName $upstreamRepo" -suppressOutput
+        [string] $directory = Get-TemporaryGitReferenceClone -source .
+
+        Write-Information "Using temporary clone in `"$directory`"."
+        pushd $directory
         try {
-            [string[]] $sourceRefs = git show-ref | % { $_.Split(" ")[1] }
+            [string[]] $sourceRefPairs = git show-ref
+            
+            [string] $temporaryGitRemoteName = "backup"
+            Execute-DebugLoggedExpression "git remote add `"$temporaryGitRemoteName`" `"$upstreamRepo`"" -suppressOutput
+            # git fetch "$temporaryGitRemoteName" "refs/heads/$refPrefix*:refs/heads/$refPrefix*" --no-auto-maintenance --no-auto-gc | Write-Information
 
-            foreach($sourceRef in $sourceRefs) {
-                $sourceRef = Escape-RefName -ref $sourceRef
-                [string] $targetRef = $refPrefix + $sourceRef
-                [string] $refspec = $sourceRef + ":" + $targetRef
+            Write-Information "Renaming refs to include prefixes."
+            foreach($sourceRefPair in $sourceRefPairs) {
+                [string] $sourceRefName = $sourceRefPair.Split(" ")[1]
+                [string] $sourceRefTarget = $sourceRefPair.Split(" ")[0]
+                
+                [string] $refType = (git cat-file -t $sourceRefTarget)
+                [string] $targetRefName = ""
+                switch ($refType) {
+                    "commit" {
+                        [string] $targetBranchName = $refPrefix + $sourceRefName.Substring("refs/".Length)
+                        $targetRefName = "refs/heads/" + $targetBranchName
 
-                Execute-LoggedExpression "git push $temporaryGitRemoteName $refspec --porcelain --atomic --force" -suppressOutput
+                        Execute-DebugLoggedExpression "git update-ref `"$targetRefName`" `"$sourceRefName`"" -suppressOutput
+                        # Execute-DebugLoggedExpression "git branch --set-upstream-to=`"$temporaryGitRemoteName/$targetBranchName`" `"$targetBranchName`"" -suppressOutput
+                    }
+                    "tag" {
+                        [string] $targetTagName = $refPrefix + $sourceRefName.Substring("refs/tags/".Length)
+                        $targetRefName = "refs/tags/" + $targetTagName
+
+                        Execute-DebugLoggedExpression "git update-ref `"$targetRefName`" `"$sourceRefName`"" -suppressOutput
+                    }
+                    default {
+                        Write-Error "Unexpected ref type: " + $refType
+                    }
+                }
             }
 
+            foreach($sourceRefPair in $sourceRefPairs) {
+                [string] $sourceRefName = $sourceRefPair.Split(" ")[1]
+                Execute-DebugLoggedExpression "git update-ref -d `"$sourceRefName`"" -suppressOutput
+            }
+
+            git fetch "$temporaryGitRemoteName" "refs/heads/$refPrefix*:refs/heads/$refPrefix*" --no-auto-maintenance --no-auto-gc | Write-Information
+
+            Write-Information "Pushing to `"$upstreamRepo`""
+            git push --all "$upstreamRepo" --atomic --force | Write-Information
+            git push --tags "$upstreamRepo" --atomic --force | Write-Information
         } finally {
-            Execute-LoggedExpression "git remote remove $temporaryGitRemoteName" -suppressOutput
+            popd
         }
     }
     finally {
@@ -89,20 +151,25 @@ function Backup-RepositoryCollection([psobject] $repositoryCollection) {
         foreach ($repositoryLocation in $repositoryLocations) {
             Write-Information "Repository: `"$repositoryLocation`""
     
-            [string] $finalRefPrefix = "refs/" + $baseRefPrefix + $repositoryLocation + "/"
+            [string] $finalRefPrefix = $baseRefPrefix + ($repositoryLocation.Replace("\", "/")) + "/"
             PushTo-Remote -downstreamRepo $repositoryLocation -upstreamRepo $backupTarget -refPrefix $finalRefPrefix
+
+            Write-Information ""
         }
     } finally {
         popd
     }
 }
 
-foreach ($repositoryCollection in $configuration.repositoryCollections) {
-    [string] $repositoryCollectionLocation = Resolve-Path ([System.Environment]::ExpandEnvironmentVariables($repositoryCollection.location))
-    Write-Information "Repository Collection: `"$repositoryCollectionLocation`""
+try {
+    foreach ($repositoryCollection in $configuration.repositoryCollections) {
+        [string] $repositoryCollectionLocation = Resolve-Path ([System.Environment]::ExpandEnvironmentVariables($repositoryCollection.location))
+        Write-Information "Repository Collection: `"$repositoryCollectionLocation`""
 
-    Backup-RepositoryCollection -repositoryCollection $repositoryCollection
+        Backup-RepositoryCollection -repositoryCollection $repositoryCollection
 
-    Write-Information ""
-    Write-Information ""
+        Write-Information ""
+    }
+} finally {
+    $cleanup | ForEach-Object % { &$_ }
 }
