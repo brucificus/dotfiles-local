@@ -10,7 +10,7 @@
     {
       "location": "D:/Frontline",
       "backup": {
-        "target": "%HOME%/OneDrive/Personal/Git Backup/Frontline.git",
+        "target": "%USERPROFILE%/OneDrive/Personal/Git Backup/Frontline.git",
         "refPrefix": "%COMPUTERNAME%/D/"
       }
     }
