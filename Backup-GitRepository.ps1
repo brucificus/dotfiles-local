@@ -17,7 +17,7 @@ try {
         [string[]] $sourceRefPairs = git show-ref
         
         [string] $temporaryGitRemoteName = "backup"
-        git remote add "$temporaryGitRemoteName" "$upstreamRepo"
+        git remote add "$temporaryGitRemoteName" "$upstreamRepo" | Out-NUll
 
         Write-Information "Renaming refs to include prefixes."
         foreach($sourceRefPair in $sourceRefPairs) {
@@ -31,13 +31,13 @@ try {
                     [string] $targetBranchName = $refPrefix + $sourceRefName.Substring("refs/".Length)
                     $targetRefName = "refs/heads/" + $targetBranchName
 
-                    git update-ref "$targetRefName" "$sourceRefName"
+                    git update-ref "$targetRefName" "$sourceRefName" | Out-Null
                 }
                 "tag" {
                     [string] $targetTagName = $refPrefix + $sourceRefName.Substring("refs/tags/".Length)
                     $targetRefName = "refs/tags/" + $targetTagName
 
-                    git update-ref "$targetRefName" "$sourceRefName"
+                    git update-ref "$targetRefName" "$sourceRefName" | Out-Null
                 }
                 default {
                     Write-Error "Unexpected ref type: " + $refType
@@ -47,14 +47,15 @@ try {
 
         foreach($sourceRefPair in $sourceRefPairs) {
             [string] $sourceRefName = $sourceRefPair.Split(" ")[1]
-            git update-ref -d "$sourceRefName"
+            git update-ref -d "$sourceRefName" | Out-Null
         }
 
-        git fetch "$temporaryGitRemoteName" "refs/heads/$refPrefix*:refs/heads/$refPrefix*" --no-auto-maintenance --no-auto-gc | Write-Information
+        Write-Information "Fetching from backup location."
+        git fetch "$temporaryGitRemoteName" "refs/heads/$refPrefix*:refs/heads/$refPrefix*" --no-auto-maintenance --no-auto-gc --quiet | Out-Null
 
-        Write-Information "Pushing to `"$upstreamRepo`""
-        git push --all "$upstreamRepo" --atomic --force | Write-Information
-        git push --tags "$upstreamRepo" --atomic --force | Write-Information
+        Write-Information "Pushing to backup location."
+        git push --all "$upstreamRepo" --atomic --force --quiet | Out-Null
+        git push --tags "$upstreamRepo" --atomic --force --quiet | Out-Null
     } finally {
         popd
     }

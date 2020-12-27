@@ -7,8 +7,8 @@ $InformationPreference = "Continue"
 try {
     foreach ($repositoryCollection in $configuration.repositoryCollections) {
         [string] $repositoryCollectionLocation = Resolve-Path ([System.Environment]::ExpandEnvironmentVariables($repositoryCollection.location))
-        Write-Information "Repository Collection: `"$repositoryCollectionLocation`""
 
+        Write-Information "Backing up repository collection `"$repositoryCollectionLocation`"."
         &"$PSScriptRoot/Backup-GitRepositoryCollection.ps1" -repositoryCollection $repositoryCollection
 
         Write-Information ""

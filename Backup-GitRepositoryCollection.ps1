@@ -2,6 +2,8 @@ Param(
     [psobject] $repositoryCollection
 )
 
+Write-Information "Searching for repositories."
+
 [string] $backupTarget = Resolve-Path ([System.Environment]::ExpandEnvironmentVariables($repositoryCollection.backup.target))
 [string] $baseRefPrefix = [System.Environment]::ExpandEnvironmentVariables($repositoryCollection.backup.refPrefix)
 [string[]] $repositoryLocations = `
@@ -9,16 +11,21 @@ Param(
     | ForEach-Object { [System.IO.Path]::GetRelativePath($repositoryCollectionLocation, $_) } `
     | ForEach-Object { $_.Replace("\`"", "/") }
 
+Write-Information "Discovered $($repositoryLocations.Length) repositories."
+Write-Information ""
+
 pushd $repositoryCollectionLocation
 try {
     foreach ($repositoryLocation in $repositoryLocations) {
-        Write-Information "Repository: `"$repositoryLocation`""
 
         [string] $finalRefPrefix = $baseRefPrefix + ($repositoryLocation.Replace("\", "/")) + "/"
-        &"$PSScriptRoot/Backup-GitRepository.ps1" -downstreamRepo $repositoryLocation -upstreamRepo $backupTarget -refPrefix $finalRefPrefix
+        Write-Information "Backup-GitRepository.ps1 -downstreamRepo `"$repositoryLocation`" -upstreamRepo `"$backupTarget`" -refPrefix `"$finalRefPrefix`""
+        &"$PSScriptRoot/Backup-GitRepository.ps1" -downstreamRepo "$repositoryLocation" -upstreamRepo "$backupTarget" -refPrefix "$finalRefPrefix"
 
         Write-Information ""
     }
 } finally {
     popd
 }
+
+Write-Information ""
