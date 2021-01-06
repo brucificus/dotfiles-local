@@ -1,7 +1,7 @@
-function Create-TempDirectory() {
+function Create-TempDirectory([TimeSpan] $deleteIn) {
     [string] $directory = [System.IO.Path]::GetTempFileName()
     Remove-Item $directory | Out-Null
     mkdir $directory | Out-Null
-    $cleanup += @({ Remove-Item -Path $directory -Recurse -Force | Out-Null }.GetNewClosure())
+    ."$PSScriptRoot/Schedule-FolderDeletion.ps1" -path $directory -in $deleteIn | Out-Null
     return $directory
 }

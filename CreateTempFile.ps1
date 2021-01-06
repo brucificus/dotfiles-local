@@ -1,5 +1,5 @@
-function Create-TempFile() {
+function Create-TempFile([TimeSpan] $deleteIn) {
     [string] $file = [System.IO.Path]::GetTempFileName()
-    $cleanup += @({ Remove-Item -Path $file -Force | Out-Null }.GetNewClosure())
+    ."$PSScriptRoot/Schedule-FolderDeletion.ps1" -path $file -in $deleteIn | Out-Null
     return $file
 }
