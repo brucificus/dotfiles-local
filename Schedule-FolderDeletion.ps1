@@ -14,4 +14,6 @@ $taskTrigger.EndBoundary = $at.AddMinutes(90).ToString('s')
 
 [Microsoft.Management.Infrastructure.CimInstance] $taskSettings = New-ScheduledTaskSettingsSet -DeleteExpiredTaskAfter "02:00:00"
 
-Register-ScheduledTask -TaskName "Delete Folder $(New-Guid)" -Action $taskAction -Trigger $taskTrigger -Settings $taskSettings
+[Microsoft.Management.Infrastructure.CimInstance] $taskPrincipal = New-ScheduledTaskPrincipal -UserId ([Environment]::UserName) -LogonType "S4U"
+
+Register-ScheduledTask -TaskName "Delete Folder $(New-Guid)" -Action $taskAction -Trigger $taskTrigger -Settings $taskSettings -Principal $taskPrincipal
