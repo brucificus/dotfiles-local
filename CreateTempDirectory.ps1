@@ -1,3 +1,5 @@
+#Requires -RunAsAdministrator
+
 function Create-TempDirectory([TimeSpan] $deleteIn) {
     [string] $directory = [System.IO.Path]::GetTempFileName()
     Remove-Item $directory | Out-Null
