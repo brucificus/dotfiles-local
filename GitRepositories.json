@@ -20,13 +20,6 @@
         "target": "%USERPROFILE%/OneDrive/Personal/Git Backup/Personal Projects.git",
         "refPrefix": "%COMPUTERNAME%/%USERNAME%/source/repos/_forks/"
       }
-    },
-   {
-      "location": "D:/Frontline",
-      "backup": {
-        "target": "%USERPROFILE%/OneDrive/Personal/Git Backup/Frontline.git",
-        "refPrefix": "%COMPUTERNAME%/D/"
-      }
     }
   ]
 }
