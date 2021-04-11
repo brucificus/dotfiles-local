@@ -12,6 +12,6 @@ jobs:
       - run: |
           mkdir -p ~/dotfiles-install-dir
           git clone https://github.com/brucificus/dotfiles
-          HOME=~/dotfiles-install-dir dotfiles/install --except shell
+          HOME=~/dotfiles-install-dir dotfiles/install.sh --except shell
       - run: |
-          HOME=~/dotfiles-install-dir ./install
+          HOME=~/dotfiles-install-dir ./install.sh
