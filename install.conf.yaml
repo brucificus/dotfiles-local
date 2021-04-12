@@ -8,6 +8,7 @@
 - link:
     ~/.dotfiles_local: ''
     ~/.gitconfig_local:
+    ~/Documents/PowerShell/Microsoft.PowerShell_profile.ps1: ~/.config/powershell/Microsoft.PowerShell_profile.ps1
 
 - shell:
   - git submodule sync --recursive
