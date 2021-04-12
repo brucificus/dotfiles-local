@@ -7,7 +7,7 @@ Write-Information "Searching for repositories."
 [string] $backupTarget = Resolve-Path ([System.Environment]::ExpandEnvironmentVariables($repositoryCollection.backup.target))
 [string] $baseRefPrefix = [System.Environment]::ExpandEnvironmentVariables($repositoryCollection.backup.refPrefix)
 [string[]] $repositoryLocations = `
-    &"$PSScriptRoot/Find-GitRepositories.ps1" -root $repositoryCollectionLocation `
+    &"~/bin/Find-GitRepositories.ps1" -root $repositoryCollectionLocation `
     | ForEach-Object { [System.IO.Path]::GetRelativePath($repositoryCollectionLocation, $_) } `
     | ForEach-Object { $_.Replace("\`"", "/") }
 
