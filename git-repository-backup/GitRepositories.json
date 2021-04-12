@@ -1,0 +1,25 @@
+{
+  "repositoryCollections": [
+    {
+      "location": "%USERPROFILE%/source/repos/_personal",
+      "backup": {
+        "target": "%USERPROFILE%/OneDrive/Personal/Git Backup/Personal Projects.git",
+        "refPrefix": "%COMPUTERNAME%/%USERNAME%/source/repos/_personal/"
+      }
+    },
+    {
+      "location": "%USERPROFILE%/source/repos/_misc",
+      "backup": {
+        "target": "%USERPROFILE%/OneDrive/Personal/Git Backup/Personal Projects.git",
+        "refPrefix": "%COMPUTERNAME%/%USERNAME%/source/repos/_misc/"
+      }
+    },
+    {
+      "location": "%USERPROFILE%/source/repos/_forks",
+      "backup": {
+        "target": "%USERPROFILE%/OneDrive/Personal/Git Backup/Personal Projects.git",
+        "refPrefix": "%COMPUTERNAME%/%USERNAME%/source/repos/_forks/"
+      }
+    }
+  ]
+}
