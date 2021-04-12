@@ -6,6 +6,9 @@
 - clean: ['~', '~/.config']
 
 - link:
+    ~/.config/powershell/:
+      glob: true
+      path: powershell/*
     ~/.dotfiles_local: ''
     ~/.gitconfig_local:
     ~/Documents/PowerShell/Microsoft.PowerShell_profile.ps1: ~/.config/powershell/Microsoft.PowerShell_profile.ps1
