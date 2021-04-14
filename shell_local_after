@@ -31,7 +31,7 @@ fi
 ## Autorun for SSH relay bridge
 export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
 SOCAT_SSH_PID_FILE=$HOME/.ssh/agent-socat.pid
-WIN_SSH_AUTH_PIPEP="/\/\./\pipe/\winssh-pageant"
+WIN_SSH_AUTH_PIPEP="/\/\./\pipe/\ssh-pageant"
 if [[ -f "$SOCAT_SSH_PID_FILE" ]] && kill -0 $(cat "$SOCAT_SSH_PID_FILE"); then
    : # already running
 else
