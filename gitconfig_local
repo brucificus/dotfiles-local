@@ -16,3 +16,5 @@
 	program = gpg2
 [commit]
 	gpgsign = false
+[credential]
+	helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-manager.exe
