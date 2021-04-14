@@ -1,6 +1,7 @@
 [user]
 	name = Bruce Markham
 	email = Bruce_Markham@carmax.com
+	signingkey = 6EB866BD7B61DA9FBC0BECC3C02DECAC1C3F514A
 [core]
 	editor = code --wait
 [merge]
@@ -11,3 +12,7 @@
     tool = vscode
 [difftool "vscode"]
     cmd = code --wait --diff $LOCAL $REMOTE
+[gpg]
+	program = gpg2
+[commit]
+	gpgsign = true
