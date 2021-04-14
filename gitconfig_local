@@ -13,8 +13,8 @@
 [difftool "vscode"]
     cmd = code --wait --diff $LOCAL $REMOTE
 [gpg]
-	program = gpg2
+	program = wingpg
 [commit]
-	gpgsign = false
+	gpgsign = true
 [credential]
 	helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-manager.exe
