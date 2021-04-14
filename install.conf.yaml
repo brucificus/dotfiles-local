@@ -9,6 +9,7 @@
     ~/.dotfiles_local: ''
     ~/.gitconfig_local:
     ~/.nvm:
+    ~/.shell_local_after:
     ~/.ssh:
       glob: true
       path: ssh/*
