@@ -36,6 +36,6 @@ if [[ -f "$SOCAT_SSH_PID_FILE" ]] && kill -0 $(cat "$SOCAT_SSH_PID_FILE"); then
    : # already running
 else
     rm -f "$SSH_AUTH_SOCK"
-    (trap "rm $SOCAT_SSH_PID_FILE" EXIT; socat UNIX-LISTEN:"$SSH_AUTH_SOCK,fork,unlink-close,unlink-early" EXEC:"$NPIPERELAY $WIN_SSH_AUTH_PIPEP",nofork </dev/null &>/dev/null) &
+    (trap "rm $SOCAT_SSH_PID_FILE" EXIT; socat UNIX-LISTEN:"$SSH_AUTH_SOCK,fork,unlink-close,unlink-early" EXEC:"$NPIPERELAY -ei -s $WIN_SSH_AUTH_PIPEP",nofork </dev/null &>/dev/null) &
     echo $! >"$SOCAT_SSH_PID_FILE"
 fi
