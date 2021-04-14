@@ -1,1 +1,1 @@
-~/.dotfiles_local/bin/wsl-ssh-pageant.exe --wsl "%HOMEDRIVE%%HOMEPATH%\SSH_AUTH_SOCK.wsl"
+"%HOMEDRIVE%%HOMEPATH%/.dotfiles_local/bin/wsl-ssh-pageant-amd64-gui.exe" --systray --wsl "%HOMEDRIVE%%HOMEPATH%\SSH_AUTH_SOCK.wsl"
