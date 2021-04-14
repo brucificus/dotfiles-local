@@ -10,6 +10,8 @@
     ~/.gitconfig_local:
     ~/.nvm:
     ~/.ssh:
+      glob: true
+      path: ssh/*
 
 - shell:
   - git submodule sync --recursive
