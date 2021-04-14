@@ -26,3 +26,14 @@ else
     (trap "rm $SOCAT_PID_FILE" EXIT; socat UNIX-LISTEN:"$HOME/.gnupg/S.gpg-agent,fork" EXEC:'/mnt/c/Users/256560/.dotfiles_local/bin/npiperelay.exe -ei -ep -s -a "C:/Users/256560/AppData/Roaming/gnupg/S.gpg-agent"',nofork </dev/null &>/dev/null) &
     echo $! >$SOCAT_PID_FILE
 fi
+
+## Autorun for SSH relay bridge
+SOCAT_SSH_PID_FILE=$HOME/.misc/socat-ssh.pid
+if [[ -f $SOCAT_SSH_PID_FILE ]] && kill -0 $(cat $SOCAT_SSH_PID_FILE); then
+   : # already running
+else
+    rm -f "$HOME/.gnupg/S.gpg-agent"
+    (trap "rm $SOCAT_SSH_PID_FILE" EXIT; socat UNIX-LISTEN:"$HOME/.misc/wsl2-ssh-agent.sock,fork,unlink-close,unlink-early" EXEC:"/mnt/c/Users/256560/.dotfiles_local/bin/npiperelay.exe /\/\./\pipe/\ssh-pageant",nofork </dev/null &>/dev/null) &
+    echo $! >$SOCAT_SSH_PID_FILE
+fi
+export SSH_AUTH_SOCK=$HOME/.misc/wsl2-ssh-agent.sock
