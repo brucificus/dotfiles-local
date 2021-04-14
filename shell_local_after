@@ -16,18 +16,6 @@ export WINHOME=/mnt/c/Users/256560/
 export WINHOMEP=C:/Users/256560/
 export NPIPERELAY=$WINHOME/.dotfiles_local/bin/npiperelay.exe
 
-## Autorun for the gpg-relay bridge
-SOCAT_GPG_PID_FILE=$HOME/.gnupg/agent-socat.pid
-GPG_SOCK=$HOME/.gnupg/S.gpg-agent
-WIN_GPG_SOCKP=$WINHOMEP/AppData/Roaming/gnupg/S.gpg-agent
-if [[ -f "$SOCAT_GPG_PID_FILE" ]] && kill -0 $(cat "$SOCAT_GPG_PID_FILE"); then
-   : # already running
-else
-    rm -f "$GPG_SOCK"
-    (trap "rm $SOCAT_GPG_PID_FILE" EXIT; socat UNIX-LISTEN:"$GPG_SOCK,fork" EXEC:"$NPIPERELAY -ei -ep -s -a \"$WIN_GPG_SOCKP\"",nofork </dev/null &>/dev/null) &
-    echo $! >"$SOCAT_GPG_PID_FILE"
-fi
-
 ## Autorun for SSH relay bridge
 export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
 SOCAT_SSH_PID_FILE=$HOME/.ssh/agent-socat.pid
