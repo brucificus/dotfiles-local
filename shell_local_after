@@ -11,29 +11,31 @@ ldfu() {
     )
 }
 
-# Setup SSH agent
-if [[ -f /mnt/c/Users/256560/SSH_AUTH_SOCK.wsl ]]
-then
-    export SSH_AUTH_SOCK=/mnt/c/Users/256560/SSH_AUTH_SOCK.wsl
-fi
+# Helpful variables
+export WINHOME=/mnt/c/Users/256560/
+export WINHOMEP=C:/Users/256560/
+export NPIPERELAY=$WINHOME/.dotfiles_local/bin/npiperelay.exe
 
 ## Autorun for the gpg-relay bridge
 SOCAT_PID_FILE=$HOME/.misc/socat-gpg.pid
-if [[ -f $SOCAT_PID_FILE ]] && kill -0 $(cat $SOCAT_PID_FILE); then
+GPG_SOCK=$HOME/.gnupg/S.gpg-agent
+WIN_GPG_SOCKP=$WINHOMEP/AppData/Roaming/gnupg/S.gpg-agent
+if [[ -f "$SOCAT_PID_FILE" ]] && kill -0 $(cat "$SOCAT_PID_FILE"); then
    : # already running
 else
-    rm -f "$HOME/.gnupg/S.gpg-agent"
-    (trap "rm $SOCAT_PID_FILE" EXIT; socat UNIX-LISTEN:"$HOME/.gnupg/S.gpg-agent,fork" EXEC:'/mnt/c/Users/256560/.dotfiles_local/bin/npiperelay.exe -ei -ep -s -a "C:/Users/256560/AppData/Roaming/gnupg/S.gpg-agent"',nofork </dev/null &>/dev/null) &
-    echo $! >$SOCAT_PID_FILE
+    rm -f "$GPG_SOCK"
+    (trap "rm $SOCAT_PID_FILE" EXIT; socat UNIX-LISTEN:"$GPG_SOCK,fork" EXEC:"$NPIPERELAY -ei -ep -s -a \"$WIN_GPG_SOCKP\"",nofork </dev/null &>/dev/null) &
+    echo $! >"$SOCAT_PID_FILE"
 fi
 
 ## Autorun for SSH relay bridge
-SOCAT_SSH_PID_FILE=$HOME/.misc/socat-ssh.pid
-if [[ -f $SOCAT_SSH_PID_FILE ]] && kill -0 $(cat $SOCAT_SSH_PID_FILE); then
+export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
+SOCAT_SSH_PID_FILE=$HOME/.ssh/agent-socat.pid
+WIN_SSH_AUTH_PIPEP="/\/\./\pipe/\ssh-pageant"
+if [[ -f "$SOCAT_SSH_PID_FILE" ]] && kill -0 $(cat "$SOCAT_SSH_PID_FILE"); then
    : # already running
 else
-    rm -f "$HOME/.gnupg/S.gpg-agent"
-    (trap "rm $SOCAT_SSH_PID_FILE" EXIT; socat UNIX-LISTEN:"$HOME/.misc/wsl2-ssh-agent.sock,fork,unlink-close,unlink-early" EXEC:"/mnt/c/Users/256560/.dotfiles_local/bin/npiperelay.exe /\/\./\pipe/\ssh-pageant",nofork </dev/null &>/dev/null) &
-    echo $! >$SOCAT_SSH_PID_FILE
+    rm -f "$SSH_AUTH_SOCK"
+    (trap "rm $SOCAT_SSH_PID_FILE" EXIT; socat UNIX-LISTEN:"$SSH_AUTH_SOCK,fork,unlink-close,unlink-early" EXEC:"$NPIPERELAY $WIN_SSH_AUTH_PIPEP",nofork </dev/null &>/dev/null) &
+    echo $! >"$SOCAT_SSH_PID_FILE"
 fi
-export SSH_AUTH_SOCK=$HOME/.misc/wsl2-ssh-agent.sock
