@@ -39,3 +39,8 @@ else
     (trap "rm $SOCAT_SSH_PID_FILE" EXIT; socat UNIX-LISTEN:"$SSH_AUTH_SOCK,fork,unlink-close,unlink-early" EXEC:"$NPIPERELAY -ei -s $WIN_SSH_AUTH_PIPEP",nofork </dev/null &>/dev/null) &
     echo $! >"$SOCAT_SSH_PID_FILE"
 fi
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

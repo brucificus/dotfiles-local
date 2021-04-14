@@ -8,6 +8,7 @@
 - link:
     ~/.dotfiles_local: ''
     ~/.gitconfig_local:
+    ~/.nvm:
     ~/.ssh:
 
 - shell:
