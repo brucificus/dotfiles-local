@@ -1,5 +1,6 @@
-# Add scripts to path
+#!/bin/env sh
 
+# Add scripts to path
 path_prepend "$HOME/.dotfiles_local/bin"
 
 # Update local dotfiles
@@ -9,3 +10,10 @@ ldfu() {
         cd ~/.dotfiles_local && git pull --ff-only && ./install -q
     )
 }
+
+
+# Setup SSH agent
+if [[ -f /mnt/c/Users/256560/SSH_AUTH_SOCK.wsl ]]
+then
+    export SSH_AUTH_SOCK=/mnt/c/Users/256560/SSH_AUTH_SOCK.wsl
+fi
