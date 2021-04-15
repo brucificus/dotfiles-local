@@ -1,6 +1,7 @@
 [user]
 	name = Bruce Markham
 	email = 219281+brucificus@users.noreply.github.com
+	signingkey = 08AE3AA1B4611E7B5C80AC3E8F86AA49BE1BA2F7
 [core]
 	editor = code --wait
 [merge]
@@ -11,3 +12,7 @@
     tool = vscode
 [difftool "vscode"]
     cmd = code --wait --diff $LOCAL $REMOTE
+[commit]
+	gpgsign = true
+[credential]
+	helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-manager.exe

@@ -1,5 +1,6 @@
-# Add scripts to path
+#!/usr/bin/env sh
 
+# Add scripts to path
 path_prepend "$HOME/.dotfiles_local/bin"
 
 # Update local dotfiles
@@ -9,3 +10,25 @@ ldfu() {
         cd ~/.dotfiles_local && git pull --ff-only && ./install -q
     )
 }
+
+# Helpful variables
+export WINHOME=/mnt/c/Users/Bruce/
+export WINHOMEP=C:/Users/Bruce/
+export NPIPERELAY=$WINHOME/.dotfiles_local/bin/npiperelay.exe
+
+## Autorun for SSH relay bridge
+export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
+SOCAT_SSH_PID_FILE=$HOME/.ssh/agent-socat.pid
+WIN_SSH_AUTH_PIPEP="/\/\./\pipe/\ssh-pageant"
+if [[ -f "$SOCAT_SSH_PID_FILE" ]] && kill -0 $(cat "$SOCAT_SSH_PID_FILE"); then
+   : # already running
+else
+    rm -f "$SSH_AUTH_SOCK"
+    (trap "rm $SOCAT_SSH_PID_FILE" EXIT; socat UNIX-LISTEN:"$SSH_AUTH_SOCK,fork,unlink-close,unlink-early" EXEC:"$NPIPERELAY -ei -s $WIN_SSH_AUTH_PIPEP",nofork </dev/null &>/dev/null) &
+    echo $! >"$SOCAT_SSH_PID_FILE"
+fi
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
