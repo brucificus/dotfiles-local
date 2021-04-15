@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 # Add scripts to path
 
 path_prepend "$HOME/.dotfiles_local/bin"

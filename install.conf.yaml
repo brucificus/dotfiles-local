@@ -11,10 +11,13 @@
       path: powershell/*
     ~/.dotfiles_local: ''
     ~/.gitconfig_local:
-    ~/Documents/PowerShell/Microsoft.PowerShell_profile.ps1: ~/.config/powershell/Microsoft.PowerShell_profile.ps1
+    "~/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup":
+      glob: true
+      path: explorer-startup/*
     ~/bin/:
       glob: true
       path: bin/*
+    ~/Documents/PowerShell/Microsoft.PowerShell_profile.ps1: ~/.config/powershell/Microsoft.PowerShell_profile.ps1
 
 - shell:
   - git submodule sync --recursive
