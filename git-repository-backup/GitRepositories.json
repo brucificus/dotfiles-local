@@ -20,6 +20,13 @@
         "target": "%USERPROFILE%/OneDrive/Personal/Git Backup/Personal Projects.git",
         "refPrefix": "%COMPUTERNAME%/%USERNAME%/source/repos/_forks/"
       }
+    },
+    {
+      "location": "%USERPROFILE%/source/repos/_code-workspace",
+      "backup": {
+        "target": "%USERPROFILE%/OneDrive/Personal/Git Backup/Personal Projects.git",
+        "refPrefix": "%COMPUTERNAME%/%USERNAME%/source/repos/_code-workspace/"
+      }
     }
   ]
 }
