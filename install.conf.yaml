@@ -21,6 +21,10 @@
     ~/Documents: ~/OneDrive/Workstations/LudicParacosm/Documents
     ~/Downloads: ~/OneDrive/Workstations/LudicParacosm/Downloads
     ~/Documents/PowerShell/Microsoft.PowerShell_profile.ps1: ~/.config/powershell/Microsoft.PowerShell_profile.ps1
+    ~/.config/:
+      glob: true
+      path: config/*
+    ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState: ~/.config/WindowsTerminal
 
 - shell:
   - git submodule sync --recursive
