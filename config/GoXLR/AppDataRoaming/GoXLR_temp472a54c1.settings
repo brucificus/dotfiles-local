@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PROPERTIES>
+  <VALUE name="developerMode" val=""/>
+  <VALUE name="doUpdateCheck" val="1"/>
+  <VALUE name="profilePath" val="C:\Users\Bruce\OneDrive\Personal\Roaming\Documents\GoXLR\Profiles"/>
+  <VALUE name="samplesPath" val="C:\Users\Bruce\OneDrive\Personal\Roaming\Documents\GoXLR\Samples"/>
+  <VALUE name="presetPath" val="C:\Users\Bruce\OneDrive\Personal\Roaming\Documents\GoXLR\Presets"/>
+  <VALUE name="MIC_GATE_ATTEN" val="40"/>
+  <VALUE name="MIC_GATE_THRESOLD" val="-45"/>
+  <VALUE name="iconPath" val="C:\Users\Bruce\OneDrive\Personal\Roaming\Documents\GoXLR\Icons"/>
+  <VALUE name="AnalyticsAsked" val="1"/>
+  <VALUE name="bleepLevel" val="-15"/>
+  <VALUE name="TutorialRan" val="1"/>
+  <VALUE name="mainWindowPos" val="1265 295 1409 971"/>
+  <VALUE name="connectedProdID" val="36832"/>
+  <VALUE name="lastConnectedProdID" val="36832"/>
+  <VALUE name="lastLoadedProfile" val="1 - Teal Test.goxlr"/>
+  <VALUE name="firstConnect" val="0"/>
+  <VALUE name="DYNAMIC_MIC_GAIN" val="0.00000000000000000000"/>
+  <VALUE name="compAdvanced" val="1"/>
+  <VALUE name="eqAdvanced" val="0"/>
+  <VALUE name="eqFineTuneEnabled" val="0"/>
+  <VALUE name="MIC_TYPE" val="1"/>
+  <VALUE name="CONDENSER_MIC_GAIN" val="0.00000000000000000000"/>
+  <VALUE name="TRS_MIC_GAIN" val="14.00000000000000000000"/>
+  <VALUE name="MIC_DEESS_AMOUNT" val="17.00000000000000000000"/>
+  <VALUE name="MIC_GATE_MACRO_AMOUNT" val="24.00000000000000000000"/>
+  <VALUE name="gateAdvanced" val="0"/>
+  <VALUE name="MIC_GATE_RELEASE" val="21.00000000000000000000"/>
+  <VALUE name="MIC_COMP_RATIO" val="4.00000000000000000000"/>
+  <VALUE name="MIC_COMP_THRESHOLD" val="-12"/>
+  <VALUE name="MIC_COMP_RELEASE" val="9.00000000000000000000"/>
+  <VALUE name="MIC_GATE_ATTACK" val="0.00000000000000000000"/>
+  <VALUE name="MIC_EQ_31.5HZ_GAIN" val="1"/>
+  <VALUE name="MIC_EQ_63HZ_GAIN" val="1"/>
+  <VALUE name="MIC_EQ_125HZ_GAIN" val="1"/>
+  <VALUE name="MIC_EQ_250HZ_GAIN" val="1"/>
+  <VALUE name="MIC_MINI_EQ_90HZ_GAIN" val="1"/>
+  <VALUE name="MIC_MINI_EQ_250HZ_GAIN" val="1"/>
+  <VALUE name="MIC_MINI_EQ_500HZ_GAIN" val="1"/>
+  <VALUE name="MIC_BASS_MACRO" val="1.00000000000000000000"/>
+  <VALUE name="MIC_EQ_4KHZ_GAIN" val="-1"/>
+  <VALUE name="MIC_EQ_8KHZ_GAIN" val="-1"/>
+  <VALUE name="MIC_EQ_16KHZ_GAIN" val="-1"/>
+  <VALUE name="MIC_MINI_EQ_8KHZ_GAIN" val="-1"/>
+  <VALUE name="MIC_TREBLE_MACRO" val="-1.00000000000000000000"/>
+  <VALUE name="MIC_EQ_500HZ_GAIN" val="2"/>
+  <VALUE name="MIC_EQ_1KHZ_GAIN" val="2"/>
+  <VALUE name="MIC_EQ_2KHZ_GAIN" val="2"/>
+  <VALUE name="MIC_MINI_EQ_1KHZ_GAIN" val="2"/>
+  <VALUE name="MIC_MINI_EQ_3KHZ_GAIN" val="2"/>
+  <VALUE name="MIC_MID_MACRO" val="2.00000000000000000000"/>
+  <VALUE name="MIC_COMP_MAKEUPGAIN" val="3"/>
+  <VALUE name="MIC_COMP_MACRO" val="30.00000000000000000000"/>
+</PROPERTIES>
