@@ -17,6 +17,9 @@
     ~/bin/:
       glob: true
       path: bin/*
+    ~/Desktop: ~/OneDrive/Workstations/LudicParacosm/Desktop
+    ~/Documents: ~/OneDrive/Workstations/LudicParacosm/Documents
+    ~/Downloads: ~/OneDrive/Workstations/LudicParacosm/Downloads
     ~/Documents/PowerShell/Microsoft.PowerShell_profile.ps1: ~/.config/powershell/Microsoft.PowerShell_profile.ps1
 
 - shell:
