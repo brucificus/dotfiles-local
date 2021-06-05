@@ -17,7 +17,17 @@
     ~/bin/:
       glob: true
       path: bin/*
+    ~/Desktop: ~/OneDrive/Workstations/ExuberantPrism/Desktop
+    ~/Documents: ~/OneDrive/Workstations/ExuberantPrism/Documents
+    ~/Downloads: ~/OneDrive/Workstations/ExuberantPrism/Downloads
     ~/Documents/PowerShell/Microsoft.PowerShell_profile.ps1: ~/.config/powershell/Microsoft.PowerShell_profile.ps1
+    ~/.config/:
+      glob: true
+      path: config/*
+    ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState: ~/.config/WindowsTerminal
+    ~/AppData/Roaming/TortoiseGit/:
+      glob: true
+      path: ~/.config/TortoiseGit/*
 
 - shell:
   - git submodule sync --recursive
