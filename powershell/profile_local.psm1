@@ -10,4 +10,14 @@ Import-Module -Name $PSScriptRoot\personal-modules\CustomFonts.psm1 -DisableName
 $env:HOME = $env:USERPROFILE
 $env:HOMEDRIVE =  [System.IO.Path]::GetPathRoot($env:USERPROFILE)
 
+# Update local dotfiles
+function ldfu() {
+    Push-Location (Get-Item ~/.dotfiles_local).Target
+    try {
+        git pull --ff-only && ./install.ps1 -q
+    } finally {
+        Pop-Location
+    }
+}
+
 Export-ModuleMember -Function * -Cmdlet * -Variable * -Alias *
