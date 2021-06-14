@@ -5,7 +5,7 @@
 [user]
 	name = Bruce Markham
 	email = 219281+brucificus@users.noreply.github.com
-	signingkey = DAA0C5E8162C5D523A6EDD650E4B6B21462AA809
+	signingkey = 911574C84F501C1272A974F78220FB6C0362C0F4
 [gpg]
 	program = C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe
 [core]
