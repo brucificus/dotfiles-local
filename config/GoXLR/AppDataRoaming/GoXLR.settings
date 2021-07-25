@@ -2,7 +2,7 @@
 
 <PROPERTIES>
   <VALUE name="developerMode" val=""/>
-  <VALUE name="doUpdateCheck" val="1"/>
+  <VALUE name="doUpdateCheck" val="0"/>
   <VALUE name="betaMode" val=""/>
   <VALUE name="profilePath" val="C:\Users\Bruce\OneDrive\Workstations\LudicParacosm\Documents\GoXLR\Profiles"/>
   <VALUE name="samplesPath" val="C:\Users\Bruce\OneDrive\Workstations\LudicParacosm\Documents\GoXLR\Samples"/>

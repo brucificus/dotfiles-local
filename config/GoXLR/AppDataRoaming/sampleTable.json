@@ -84,6 +84,14 @@
     "Windows Shutdown.wav": {
       "path": "C:\\Users\\Bruce\\OneDrive\\Workstations\\LudicParacosm\\Documents\\GoXLR\\Samples\\Windows Shutdown.wav",
       "gain": -1.00000000000000000000
+    },
+    "Recording_2021-07-05T103118.wav": {
+      "path": "C:\\Users\\Bruce\\OneDrive\\Workstations\\LudicParacosm\\Documents\\GoXLR\\Samples\\Recorded\\Recording_2021-07-05T103118.wav",
+      "gain": -1.00000000000000000000
+    },
+    "Recording_2021-07-09T061329.wav": {
+      "path": "C:\\Users\\Bruce\\OneDrive\\Workstations\\LudicParacosm\\Documents\\GoXLR\\Samples\\Recorded\\Recording_2021-07-09T061329.wav",
+      "gain": 1.00000000000000000000
     }
   }
 }
