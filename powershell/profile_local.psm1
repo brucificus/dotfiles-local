@@ -4,7 +4,6 @@ Import-Module -Name $PSScriptRoot\personal-modules\FusionLog.psm1 -DisableNameCh
 Import-Module -Name $PSScriptRoot\personal-modules\Git.psm1 -DisableNameChecking
 Import-Module -Name $PSScriptRoot\personal-modules\WebHelpers.psm1 -DisableNameChecking
 Import-Module -Name $PSScriptRoot\personal-modules\EnvHelper.psm1 -DisableNameChecking
-Import-Module -Name $PSScriptRoot\personal-modules\HypervisorAwareness.psm1 -DisableNameChecking
 Import-Module -Name $PSScriptRoot\personal-modules\CustomFonts.psm1 -DisableNameChecking
 
 $env:HOME = $env:USERPROFILE
