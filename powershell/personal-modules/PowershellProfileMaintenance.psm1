@@ -1,22 +1,28 @@
 function Edit-WindowsTerminalSettings {
-    Import-Module "$PSScriptRoot\Chocolatey.psm1" -DisableNameChecking
-    Ensure-ChocolateyPackageInstallation "vscode"
+    if (-not (Get-Command "code" -ErrorAction SilentlyContinue)) {
+        Import-Module "$PSScriptRoot\Chocolatey.psm1" -DisableNameChecking
+        Ensure-ChocolateyPackageInstallation "vscode"
+    }
 
     [string] $file = "$Env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
     code --wait --new-window $file
 }
 
 function Edit-ConEmuSettings {
-    Import-Module "$PSScriptRoot\Chocolatey.psm1" -DisableNameChecking
-    Ensure-ChocolateyPackageInstallation "vscode"
+    if (-not (Get-Command "code" -ErrorAction SilentlyContinue)) {
+        Import-Module "$PSScriptRoot\Chocolatey.psm1" -DisableNameChecking
+        Ensure-ChocolateyPackageInstallation "vscode"
+    }
 
     [string] $file = "$Env:APPDATA\ConEmu.xml"
     code --wait --new-window $file
 }
 
 function Edit-Profile() {
-    Import-Module "$PSScriptRoot\Chocolatey.psm1" -DisableNameChecking
-    Ensure-ChocolateyPackageInstallation "vscode"
+    if (-not (Get-Command "code" -ErrorAction SilentlyContinue)) {
+        Import-Module "$PSScriptRoot\Chocolatey.psm1" -DisableNameChecking
+        Ensure-ChocolateyPackageInstallation "vscode"
+    }
 
     $profileDirectory = (Get-Item $PROFILE.CurrentUserAllHosts).DirectoryName
     code --wait --new-window $profileDirectory $($PROFILE.CurrentUserAllHosts)
