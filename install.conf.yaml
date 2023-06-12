@@ -3,27 +3,27 @@
       create: true
       relink: true
 
-- clean: ['~', '~/.config']
+- clean: ['~', '~/AppData/Roaming/TortoiseGit', '~/.config/TortoiseGit', '~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState', '~/.config/WindowsTerminal', '~/AppData/Roaming/Microsoft/Windows/Start Menu']
 
 - link:
     ~/.dotfiles_local: ''
-    ~/.config/powershell/:
-      glob: true
-      path: powershell/*
-    ~/.gitconfig_local:
-    "~/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup":
-      glob: true
-      path: explorer-startup/*
     ~/bin/:
       glob: true
       path: bin/*
-    ~/Desktop: ~/OneDrive/Workstations/ArdentPeity/Desktop
-    ~/Documents: ~/OneDrive/Workstations/ArdentPeity/Documents
-    ~/Downloads: ~/OneDrive/Workstations/ArdentPeity/Downloads
+    ~/.config/powershell/:
+      glob: true
+      path: powershell/*
+    ~/.config/TortoiseGit: config/TortoiseGit
+    ~/.config/WindowsTerminal: config/WindowsTerminal
+    ~/.gitconfig_local:
+    '~/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup':
+      glob: true
+      path: explorer-startup/*
     ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState: ~/.config/WindowsTerminal
     ~/AppData/Roaming/TortoiseGit/:
       glob: true
       path: ~/.config/TortoiseGit/*
+    ~/Documents/PowerShell/Microsoft.PowerShell_profile.ps1: ~/.config/powershell/profile.ps1
 
 - shell:
   - git submodule sync --recursive
