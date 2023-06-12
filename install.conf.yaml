@@ -21,8 +21,6 @@
     ~/Documents: ~/OneDrive/Workstations/ArdentPeity/Documents
     ~/Downloads: ~/OneDrive/Workstations/ArdentPeity/Downloads
     ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState: ~/.config/WindowsTerminal
-    ~/AppData/Roaming/Elgato/StreamDeck/ProfilesV2: config/ElgatoStreamDeck/profiles
-    ~/AppData/Roaming/TC-Helicon/GOXLR: config/GoXLR/AppDataRoaming
     ~/AppData/Roaming/TortoiseGit/:
       glob: true
       path: ~/.config/TortoiseGit/*
