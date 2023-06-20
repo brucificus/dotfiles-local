@@ -3,29 +3,36 @@
     {
       "location": "%USERPROFILE%/source/repos/_personal",
       "backup": {
-        "target": "%USERPROFILE%/OneDrive/Personal/Git Backup/Personal Projects.git",
+        "target": "%USERPROFILE%/Documents/Git Backup/ServiceTitan.git",
         "refPrefix": "%COMPUTERNAME%/%USERNAME%/source/repos/_personal/"
-      }
-    },
-    {
-      "location": "%USERPROFILE%/source/repos/_misc",
-      "backup": {
-        "target": "%USERPROFILE%/OneDrive/Personal/Git Backup/Personal Projects.git",
-        "refPrefix": "%COMPUTERNAME%/%USERNAME%/source/repos/_misc/"
       }
     },
     {
       "location": "%USERPROFILE%/source/repos/_forks",
       "backup": {
-        "target": "%USERPROFILE%/OneDrive/Personal/Git Backup/Personal Projects.git",
+        "target": "%USERPROFILE%/Documents/Git Backup/ServiceTitan.git",
         "refPrefix": "%COMPUTERNAME%/%USERNAME%/source/repos/_forks/"
       }
     },
     {
-      "location": "%USERPROFILE%/source/repos/_code-workspace",
+      "location": "%USERPROFILE%/source/repos/_st",
       "backup": {
-        "target": "%USERPROFILE%/OneDrive/Personal/Git Backup/Personal Projects.git",
-        "refPrefix": "%COMPUTERNAME%/%USERNAME%/source/repos/_code-workspace/"
+        "target": "%USERPROFILE%/Documents/Git Backup/ServiceTitan.git",
+        "refPrefix": "%COMPUTERNAME%/%USERNAME%/source/repos/_st/"
+      }
+    },
+    {
+      "location": "%USERPROFILE%/source/repos/_st_misc",
+      "backup": {
+        "target": "%USERPROFILE%/Documents/Git Backup/ServiceTitan.git",
+        "refPrefix": "%COMPUTERNAME%/%USERNAME%/source/repos/_st_misc/"
+      }
+    },
+    {
+      "location": "%USERPROFILE%/source/repos/_vscode_workspaces",
+      "backup": {
+        "target": "%USERPROFILE%/Documents/Git Backup/ServiceTitan.git",
+        "refPrefix": "%COMPUTERNAME%/%USERNAME%/source/repos/_vscode_workspaces/"
       }
     }
   ]
