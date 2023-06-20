@@ -12,8 +12,8 @@ ldfu() {
 }
 
 # Helpful variables
-export WINHOME=/mnt/c/Users/Bruce/
-export WINHOMEP=C:/Users/Bruce/
+export WINHOME=/mnt/c/Users/bmarkham/
+export WINHOMEP=C:/Users/bmarkham/
 export NPIPERELAY=$WINHOME/.dotfiles_local/bin/npiperelay.exe
 
 # NVM
