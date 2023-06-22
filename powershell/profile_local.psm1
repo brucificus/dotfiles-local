@@ -4,9 +4,6 @@ Import-Module -Name $PSScriptRoot\personal-modules\FusionLog.psm1 -DisableNameCh
 Import-Module -Name $PSScriptRoot\personal-modules\WebHelpers.psm1 -DisableNameChecking
 Import-Module -Name $PSScriptRoot\personal-modules\CustomFonts.psm1 -DisableNameChecking
 
-$env:HOME = $env:USERPROFILE
-$env:HOMEDRIVE =  [System.IO.Path]::GetPathRoot($env:USERPROFILE)
-
 # Update local dotfiles
 function ldfu() {
     Push-Location (Get-Item ~/.dotfiles_local).Target
