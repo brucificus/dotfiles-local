@@ -1,4 +1,10 @@
 #!/usr/bin/env sh
 
-/mnt/c/Program\ Files\ \(x86\)/GnuPG/bin/gpg.exe "$@"
-exit $?
+if [ -n "$WSL_DISTRO_NAME" ]; then
+    /mnt/c/Program\ Files\ \(x86\)/GnuPG/bin/gpg.exe "$@"
+    return $?
+else
+    # Call the WSL distro's GPG executable instead of wrapping it with this script.
+    gpgagent_dir="$(dirname "$(which gpg-agent)")"
+    "$gpgagent_dir/gpg" "$@"
+fi
