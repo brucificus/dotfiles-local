@@ -3,12 +3,11 @@
       create: true
       relink: true
 
-- clean: ['~', '~/.config']
+- clean: ['~', '~/.config', '~/.nvm']
 
 - link:
     ~/.dotfiles_local: ''
     ~/.gitconfig_local:
-    ~/.nvm:
     ~/.shell_local_after:
 
 - shell:

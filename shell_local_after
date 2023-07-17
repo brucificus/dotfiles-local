@@ -5,7 +5,7 @@ path_prepend "$HOME/.dotfiles_local/bin"
 
 # Update local dotfiles
 ldfu() {
-    declare -f dfu > /dev/null && dfu &&
+    command_exists dfu && dfu &&
     (
         cd ~/.dotfiles_local && git pull --ff-only && ./install.sh -q
     )
@@ -15,8 +15,3 @@ ldfu() {
 export WINHOME=/mnt/c/Users/bmarkham/
 export WINHOMEP=C:/Users/bmarkham/
 export NPIPERELAY=$WINHOME/.dotfiles_local/bin/npiperelay.exe
-
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
