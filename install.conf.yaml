@@ -23,7 +23,6 @@
     ~/AppData/Roaming/TortoiseGit/:
       glob: true
       path: ~/.config/TortoiseGit/*
-    ~/Documents/PowerShell/Microsoft.PowerShell_profile.ps1: ~/.config/powershell/profile.ps1
 
 - shell:
   - git submodule sync --recursive
