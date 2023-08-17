@@ -72,6 +72,10 @@
                 "startingDirectory": "%USERPROFILE%"
             },
             {
+                "font": 
+                {
+                    "face": "UbuntuMono Nerd Font Mono"
+                },
                 "guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
                 "hidden": false,
                 "name": "Ubuntu",
@@ -86,29 +90,49 @@
             {
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
                 "experimental.retroTerminalEffect": true,
+                "font": 
+                {
+                    "face": "JetBrainsMono Nerd Font"
+                },
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "hidden": false,
                 "name": "Command Prompt"
             },
             {
+                "font": 
+                {
+                    "face": "RobotoMono Nerd Font Mono"
+                },
                 "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
                 "hidden": true,
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
             },
             {
+                "font": 
+                {
+                    "face": "UbuntuMono Nerd Font Mono"
+                },
                 "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
                 "hidden": true,
                 "name": "Ubuntu",
                 "source": "Windows.Terminal.Wsl"
             },
             {
+                "font": 
+                {
+                    "face": "JetBrainsMonoNL Nerd Font Mono"
+                },
                 "guid": "{d6226076-4d0b-5db0-a492-303cfd1c729d}",
                 "hidden": false,
                 "name": "Developer Command Prompt for VS 2022",
                 "source": "Windows.Terminal.VisualStudio"
             },
             {
+                "font": 
+                {
+                    "face": "JetBrainsMono Nerd Font Mono"
+                },
                 "guid": "{e41c6961-ac68-51e2-b62f-63134f9bca6a}",
                 "hidden": false,
                 "name": "Developer PowerShell for VS 2022",
