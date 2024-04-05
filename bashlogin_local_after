@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+
+if command_exists tmux; then
+    # Was originally in .bash_profile.
+    if [[ -z "$TMUX" ]]; then
+        exec tmux -u new -A -s homeassistant bash -l
+    fi
+fi
