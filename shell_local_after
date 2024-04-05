@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 
+
 # Add scripts to path
 path_prepend "$HOME/.dotfiles_local/bin"
 
@@ -10,13 +11,3 @@ ldfu() {
         cd ~/.dotfiles_local && git pull --ff-only && ./install.sh -q
     )
 }
-
-# Helpful variables
-export WINHOME=/mnt/c/Users/bmarkham/
-export WINHOMEP=C:/Users/bmarkham/
-export NPIPERELAY=$WINHOME/.dotfiles_local/bin/npiperelay.exe
-
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
