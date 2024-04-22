@@ -10,14 +10,34 @@
         {
             "command": 
             {
+                "action": "moveFocus",
+                "direction": "up"
+            },
+            "keys": "ctrl+alt+up"
+        },
+        {
+            "command": "unbound",
+            "keys": "alt+left"
+        },
+        {
+            "command": "unbound",
+            "keys": "alt+right"
+        },
+        {
+            "command": "unbound",
+            "keys": "alt+up"
+        },
+        {
+            "command": "unbound",
+            "keys": "alt+down"
+        },
+        {
+            "command": 
+            {
                 "action": "copy",
                 "singleLine": false
             },
             "keys": "ctrl+c"
-        },
-        {
-            "command": "find",
-            "keys": "ctrl+shift+f"
         },
         {
             "command": 
@@ -27,15 +47,53 @@
                 "splitMode": "duplicate"
             },
             "keys": "alt+shift+d"
+        },
+        {
+            "command": "find",
+            "keys": "ctrl+shift+f"
+        },
+        {
+            "command": 
+            {
+                "action": "moveFocus",
+                "direction": "left"
+            },
+            "keys": "ctrl+alt+left"
+        },
+        {
+            "command": 
+            {
+                "action": "moveFocus",
+                "direction": "right"
+            },
+            "keys": "ctrl+alt+right"
+        },
+        {
+            "command": 
+            {
+                "action": "moveFocus",
+                "direction": "down"
+            },
+            "keys": "ctrl+alt+down"
         }
     ],
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+    "initialCols": 170,
+    "initialRows": 35,
+    "newTabMenu": 
+    [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
     "profiles": 
     {
         "defaults": 
         {
+            "adjustIndistinguishableColors": "indexed",
+            "antialiasingMode": "cleartype",
             "bellStyle": 
             [
                 "audible",
@@ -47,11 +105,31 @@
             {
                 "face": "CaskaydiaCove NF"
             },
+            "historySize": 20000,
+            "intenseTextStyle": "all",
             "opacity": 70,
-            "useAcrylic": true
+            "useAcrylic": true,
+            "useAtlasEngine": true
         },
         "list": 
         [
+            {
+                "backgroundImage": "C:\\Users\\Bruce\\OneDrive\\Pictures\\Graphics\\Wallpaper\\Windows Terminal\\Windows\\Fluent Windows - Dark - 4k.jpg",
+                "backgroundImageAlignment": "bottomRight",
+                "backgroundImageOpacity": 0.03,
+                "backgroundImageStretchMode": "uniformToFill",
+                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+                "hidden": false,
+                "name": "PowerShell 7",
+                "opacity": 100,
+                "source": "Windows.Terminal.PowershellCore"
+            },
+            {
+                "guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
+                "hidden": false,
+                "name": "Ubuntu",
+                "source": "CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc"
+            },
             {
                 "experimental.retroTerminalEffect": true,
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
@@ -88,28 +166,95 @@
                 "source": "Windows.Terminal.VisualStudio"
             },
             {
-                "backgroundImage": "C:\\Users\\Bruce\\OneDrive\\Pictures\\Graphics\\Wallpaper\\Windows Terminal\\Windows\\Fluent Windows - Dark - 4k.jpg",
-                "backgroundImageAlignment": "bottomRight",
-                "backgroundImageStretchMode": "uniformToFill",
-                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-                "hidden": false,
-                "name": "PowerShell",
-                "source": "Windows.Terminal.PowershellCore"
-            },
-            {
-                "backgroundImage": "C:\\Users\\Bruce\\OneDrive\\Pictures\\Graphics\\Wallpaper\\Windows Terminal\\Ubuntu\\ubuntu-logo32.png",
-                "backgroundImageAlignment": "bottomRight",
-                "backgroundImageStretchMode": "uniform",
-                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
-                "hidden": false,
-                "name": "Ubuntu",
-                "source": "Windows.Terminal.Wsl"
-            },
-            {
                 "guid": "{16208362-94fc-5b1f-a491-5b2624d5ab56}",
                 "hidden": true,
                 "name": "Visual Studio Debug Console",
                 "source": "VSDebugConsole"
+            },
+            {
+                "backgroundImage": "C:\\Users\\Bruce\\OneDrive\\Pictures\\Graphics\\Wallpaper\\Windows Terminal\\Windows\\Fluent Windows - Dark - 4k.jpg",
+                "backgroundImageAlignment": "bottomRight",
+                "backgroundImageOpacity": 0.03,
+                "backgroundImageStretchMode": "uniformToFill",
+                "commandline": "\"C:\\Program Files\\PowerShell\\7\\pwsh.exe\"",
+                "elevate": true,
+                "guid": "{029cc787-79c6-4922-8ad4-ad0aedb29ea6}",
+                "hidden": false,
+                "icon": "ms-appx:///ProfileIcons/pwsh.png",
+                "name": "PowerShell 7 (Elevated)",
+                "opacity": 100,
+                "startingDirectory": "%USERPROFILE%"
+            },
+            {
+                "altGrAliasing": true,
+                "closeOnExit": "automatic",
+                "commandline": "%SystemRoot%\\System32\\cmd.exe",
+                "cursorShape": "bar",
+                "elevate": true,
+                "experimental.retroTerminalEffect": true,
+                "font": 
+                {
+                    "size": 12.0
+                },
+                "guid": "{bb23ad45-78ef-42d4-b7db-b4c9d4973387}",
+                "hidden": false,
+                "historySize": 9001,
+                "icon": "ms-appx:///ProfileIcons/{0caa0dad-35be-5f56-a8ff-afceeeaa6101}.png",
+                "name": "Command Prompt (Elevated)",
+                "padding": "8, 8, 8, 8",
+                "snapOnInput": true,
+                "startingDirectory": "%USERPROFILE%"
+            },
+            {
+                "adjustIndistinguishableColors": "indexed",
+                "commandline": "%SystemRoot%\\System32\\cmd.exe /C chcp 65001 && plink \"(local) COM3\"",
+                "guid": "{c4e027ed-1a2c-47d1-8180-5c028022d921}",
+                "hidden": false,
+                "icon": "\ud83d\udcf6",
+                "name": "COM3 (plink, local)",
+                "suppressApplicationTitle": true
+            },
+            {
+                "backgroundImage": "C:\\Users\\Bruce\\OneDrive\\Pictures\\Graphics\\Logos\\HomeAssistant.png",
+                "backgroundImageAlignment": "bottomRight",
+                "backgroundImageOpacity": 0.03,
+                "backgroundImageStretchMode": "none",
+                "commandline": "\"C:\\Program Files\\PowerShell\\7\\pwsh.exe\" -NoLogo -NoProfile -C \"ssh homeassistant\"",
+                "guid": "{e5a3506c-d552-416b-bb9c-f24e4d7482c8}",
+                "hidden": false,
+                "icon": "C:\\Users\\Bruce\\OneDrive\\Pictures\\Graphics\\Logos\\HomeAssistant.png",
+                "name": "SSH homeassistant",
+                "opacity": 100,
+                "startingDirectory": "%USERPROFILE%",
+                "tabTitle": "ssh://homeassistant.local"
+            },
+            {
+                "backgroundImage": "C:\\Users\\Bruce\\OneDrive\\Pictures\\Graphics\\Logos\\synology-6-bay-nas-diskstation-ds-1621-diskless-38749078 cropped.png",
+                "backgroundImageAlignment": "bottomRight",
+                "backgroundImageOpacity": 0.03,
+                "backgroundImageStretchMode": "none",
+                "commandline": "\"C:\\Program Files\\PowerShell\\7\\pwsh.exe\" -NoLogo -NoProfile -C \"ssh minerva\"",
+                "guid": "{28cb3f88-8e9f-49ca-a708-be186d64f071}",
+                "hidden": false,
+                "icon": "C:\\Users\\Bruce\\OneDrive\\Pictures\\Graphics\\Logos\\synology-6-bay-nas-diskstation-ds-1621-diskless-38749078 cropped.png",
+                "name": "SSH minerva",
+                "opacity": 100,
+                "startingDirectory": "%USERPROFILE%",
+                "tabTitle": "ssh://minerva"
+            },
+            {
+                "backgroundImage": "C:\\Users\\Bruce\\OneDrive\\Pictures\\Graphics\\Logos\\UniFi-Dream-Machine-Pro-lead cropped.png",
+                "backgroundImageAlignment": "bottomRight",
+                "backgroundImageOpacity": 0.03,
+                "backgroundImageStretchMode": "uniform",
+                "commandline": "\"C:\\Program Files\\PowerShell\\7\\pwsh.exe\" -NoLogo -NoProfile -C \"ssh udm\"",
+                "guid": "{fc8bf642-4b9d-47ad-a2d0-b4c381f49d15}",
+                "hidden": false,
+                "icon": "C:\\Users\\Bruce\\OneDrive\\Pictures\\Graphics\\Logos\\UniFi-Dream-Machine-Pro-lead cropped.png",
+                "name": "SSH udm",
+                "opacity": 100,
+                "startingDirectory": "%USERPROFILE%",
+                "tabTitle": "ssh://udm"
             }
         ]
     },
@@ -323,6 +468,29 @@
             "yellow": "#C4A000"
         },
         {
+            "background": "#300A24",
+            "black": "#171421",
+            "blue": "#0037DA",
+            "brightBlack": "#767676",
+            "brightBlue": "#08458F",
+            "brightCyan": "#2C9FB3",
+            "brightGreen": "#26A269",
+            "brightPurple": "#A347BA",
+            "brightRed": "#C01C28",
+            "brightWhite": "#F2F2F2",
+            "brightYellow": "#A2734C",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#3A96DD",
+            "foreground": "#FFFFFF",
+            "green": "#26A269",
+            "name": "Ubuntu-ColorScheme",
+            "purple": "#881798",
+            "red": "#C21A23",
+            "selectionBackground": "#FFFFFF",
+            "white": "#CCCCCC",
+            "yellow": "#A2734C"
+        },
+        {
             "background": "#000000",
             "black": "#000000",
             "blue": "#000080",
@@ -346,6 +514,7 @@
             "yellow": "#808000"
         }
     ],
+    "themes": [],
     "trimBlockSelection": true,
     "useAcrylicInTabRow": true
 }
