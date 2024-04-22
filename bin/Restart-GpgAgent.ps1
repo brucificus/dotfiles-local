@@ -32,7 +32,7 @@ trap {
 function Write-TerminatingError([string] $message, [object] $targetObject = $null) {
     $errorRecord = [System.Management.Automation.ErrorRecord]::new(
         [System.Exception]::new($message),
-        'WinSSH-PageantError',
+        'GpgAgentError',
         'OperationStopped',
         $targetObject
     )
