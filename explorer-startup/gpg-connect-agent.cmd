@@ -1,1 +1,0 @@
-pwsh -WindowStyle Hidden -NoLogo -NonInteractive -NoProfile -File "%HOMEDRIVE%%HOMEPATH%/.dotfiles_local/bin/Restart-GpgConnectAgent.ps1"
