@@ -298,6 +298,7 @@ if ($AttachTTY) {
     Start-Process -FilePath $winsshPageantExe -ArgumentList $arguments -NoNewWindow
     [System.Diagnostics.Process] $process = Get-Process -Name $winsshPageantProcessName -ErrorAction SilentlyContinue
     if ($process) {
+        $InformationPreference = 'Continue'
         Write-Information "✨ WinSSH-Pageant is running in the background with PID $($process.Id)."
         $exitDelaySeconds = 1
     } else {

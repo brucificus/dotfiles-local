@@ -70,6 +70,7 @@ if ($exitCode -ne 0) {
     Write-TerminatingError "💥 Failed to start a new GnuPG agent. gpg-connect-agent exited with code: $exitCode"
 }
 
+$InformationPreference = 'Continue'
 $exitDelaySeconds = 1
 Write-Information "✅ GnuPG agent has been restarted successfully."
 
