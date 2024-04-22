@@ -1,4 +1,5 @@
 config/GoXLR/AppDataRoaming/GoXLR_RecentColours.settings
 config/GoXLR/AppDataRoaming/GoXLR_temp*.settings
 config/WindowsTerminal/*.backup
-/config/GoXLR/AppDataRoaming/SDPluginLogs
+config/GoXLR/AppDataRoaming/SDPluginLogs
+config/ElgatoStreamDeck/profiles/**/*.bak
