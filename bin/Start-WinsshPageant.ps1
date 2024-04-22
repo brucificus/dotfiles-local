@@ -70,7 +70,7 @@ if (-not $IsWindows) {
 }
 
 [string] $winsshPageantProcessName = 'winssh-pageant'
-$winsshPageantProcess = Get-Process -Name $winsshPageantProcessName -ErrorAction SilentlyContinue
+[System.Diagnostics.Process] $winsshPageantProcess = Get-Process -Name $winsshPageantProcessName -ErrorAction SilentlyContinue
 if ($winsshPageantProcess) {
     Write-TerminatingError '🚸 WinSSH-Pageant is already running.' $winsshPageantProcess
 }
@@ -93,11 +93,11 @@ Write-Information "📋 Validating SSH pipe…"
 [bool] $defaultWindowsGpgOpenSshAgentPipeExists = Test-Path $defaultWindowsGpgOpenSshAgentPipePath -ErrorAction SilentlyContinue
 [string] $gpgAgentConfPath = "$Env:APPDATA\gnupg\gpg-agent.conf"
 [string] $gpgAgentProcessName = 'gpg-agent'
-[bool] $gpgAgentProcessExists = Get-Process -Name $gpgAgentProcessName -ErrorAction SilentlyContinue
+[System.Diagnostics.Process] $gpgAgentProcess = Get-Process -Name $gpgAgentProcessName -ErrorAction SilentlyContinue
 [bool] $gpgAgentConfExists = Test-Path $gpgAgentConfPath -ErrorAction SilentlyContinue
-[bool] $gpgAgentConfEnableWin32OpensshSupport = $null
-[bool] $gpgAgentConfEnablePuttySupport = $null
-[bool] $gpgAgentConfEnableSshSupport = $null
+[Nullable[bool]] $gpgAgentConfEnableWin32OpensshSupport = $null
+[Nullable[bool]] $gpgAgentConfEnablePuttySupport = $null
+[Nullable[bool]] $gpgAgentConfEnableSshSupport = $null
 if ($gpgAgentConfExists) {
     [string[]] $gpgAgentConf = @(Get-Content -LiteralPath $gpgAgentConfPath | Where-Object { $_ -notmatch '^\s*#' } | ForEach-Object { $_.Trim() })
     $gpgAgentConfEnableWin32OpensshSupport = 'enable-win32-openssh-support' -in $gpgAgentConf
@@ -105,11 +105,11 @@ if ($gpgAgentConfExists) {
     $gpgAgentConfEnableSshSupport = 'enable-ssh-support' -in $gpgAgentConf
 }
 
-if ($gpgAgentProcessExists -and $gpgAgentConfEnablePuttySupport -and (-not $DisablePageantPipe)) {
+if ($gpgAgentProcess -and $gpgAgentConfEnablePuttySupport -and (-not $DisablePageantPipe)) {
     Write-TerminatingError "😖 GPG agent is running and configured to support PuTTY, which will prevent WinSSH-Pageant from functioning. To use WinSSH-Pageant, remove 'enable-putty-support' from '$gpgAgentConfPath' and restart the GPG agent before trying again." (Get-Item $gpgAgentConfPath)
 }
 
-$pageantProcess = Get-Process -Name 'pageant' -ErrorAction SilentlyContinue
+[System.Diagnostics.Process] $pageantProcess = Get-Process -Name 'pageant' -ErrorAction SilentlyContinue
 if ($pageantProcess -and (-not $DisablePageantPipe)) {
     Write-TerminatingError  "😖 Pageant is running, which will prevent WinSSH-Pageant from functioning. To use WinSSH-Pageant, please close Pageant or use the `-DisablePageantPipe` parameter of this script." $pageantProcess
 }
@@ -117,7 +117,7 @@ if ($pageantProcess -and (-not $DisablePageantPipe)) {
 # TODO: Look for other Pageant-like processes that may conflict with WinSSH-Pageant.
 
 function Wait-ForGpgAgentProcess {
-    $gpgAgentProcess = Get-Process -Name $gpgAgentProcessName -ErrorAction SilentlyContinue
+    [System.Diagnostics.Process] $gpgAgentProcess = Get-Process -Name $gpgAgentProcessName -ErrorAction SilentlyContinue
     [DateTime] $startTime = Get-Date
     [bool] $first = $true
     while ((-not $gpgAgentProcess) -and ((Get-Date) - $startTime -lt $GpgAgentStartWait)) {
@@ -137,7 +137,7 @@ function Wait-ForGpgAgentProcess {
 }
 
 function Wait-ForGpgAgentPipeCreation([string] $pipePath) {
-    $gpgAgentProcess = Get-Process -Name $gpgAgentProcessName
+    [System.Diagnostics.Process] $gpgAgentProcess = Get-Process -Name $gpgAgentProcessName
 
     [TimeSpan] $gpgAgentProcessAge = ((Get-Date) - $gpgAgentProcess.StartTime)
     [bool] $targetExists = Test-Path $pipePath -ErrorAction SilentlyContinue
@@ -181,11 +181,11 @@ function Validate-OpenSshAgentPipeVariable([string] $pipePathVariableValue, [str
             } else {
                 Write-Debug "✔️ $pipePathVariableDescriptor implies GPG agent should be configured to support OpenSSH on Windows, confirmed by finding 'enable-win32-openssh-support' in '$gpgAgentConfPath'."
             }
-            if ($gpgAgentConfEnablePuttySupport -and $gpgAgentConfEnableWin32OpensshSupport -and (-not $gpgAgentProcessExists)) {
+            if ($gpgAgentConfEnablePuttySupport -and $gpgAgentConfEnableWin32OpensshSupport -and (-not $gpgAgentProcess)) {
                 # We only wait for GPG to start if we know it is configured correctly and that we definitely *expect* it to be running.
-                $gpgAgentProcessExists = Wait-ForGpgAgentProcess
+                $script:gpgAgentProcess = Wait-ForGpgAgentProcess
             }
-            if (-not $gpgAgentProcessExists) {
+            if (-not $gpgAgentProcess) {
                 Write-Warning "$pipePathVariableDescriptor implies GPG agent should be running, but no process matching '$gpgAgentProcessName' was found."
             } else {
                 Write-Debug "✔️ $pipePathVariableDescriptor implies GPG agent should be running, and a process matching '$gpgAgentProcessName' was found."
@@ -194,12 +194,12 @@ function Validate-OpenSshAgentPipeVariable([string] $pipePathVariableValue, [str
             Write-Warning "$pipePathVariableDescriptor implies GPG agent should be configured, but the configuration file could not be found: $gpgAgentConfPath"
         }
         if ($gpgAgentConfEnableSshSupport -and $gpgAgentConfEnableWin32OpensshSupport) {
-            if ($gpgAgentProcessExists) {
+            if ($gpgAgentProcess) {
                 # We only wait for GPG to create the pipe if we know it is running and we know it is configured correctly.
                 Wait-ForGpgAgentPipeCreation -pipePath $pipePathVariableValue
                 $targetExists = $true # We don't test the pipe "again" because sometimes it flickers into and out of existence.
                 Write-Information "✅ GPG agent is running and configured to support SSH/OpenSSH on Windows, and the pipe seems to exist."
-            } else { # (-not $gpgAgentProcessExists)
+            } else { # (-not $gpgAgentProcess)
                 if ($targetExists) {
                     Write-Warning "Although configured to support SSH/OpenSSH on Windows, the GPG agent is not currently running - despite its pipe existing. Manually confirm no other agent is running."
                 } else {
@@ -207,13 +207,13 @@ function Validate-OpenSshAgentPipeVariable([string] $pipePathVariableValue, [str
                 }
             }
         } else {
-            if ($gpgAgentProcessExists) {
+            if ($gpgAgentProcess) {
                 if ($targetExists) {
                     Write-Warning "GPG agent is not configured correctly, but the pipe exists. This may cause issues with SSH agent forwarding."
                 } else {
                     Write-Error "❌ GPG agent is not configured correctly, and the pipe does not exist. Check the GPG agent's configuration, then restart the GPG agent before trying again."
                 }
-            } else { # (-not $gpgAgentProcessExists)
+            } else { # (-not $gpgAgentProcess)
                 if ($targetExists) {
                     Write-Warning "GPG agent is not correctly configured and is not running, but the pipe exists. Manually confirm no other agent is running."
                 } else {
@@ -296,7 +296,7 @@ if ($AttachTTY) {
 } else {
     Write-Information "🚀 Starting WinSSH-Pageant with arguments: $arguments"
     Start-Process -FilePath $winsshPageantExe -ArgumentList $arguments -NoNewWindow
-    $process = Get-Process -Name $winsshPageantProcessName -ErrorAction SilentlyContinue
+    [System.Diagnostics.Process] $process = Get-Process -Name $winsshPageantProcessName -ErrorAction SilentlyContinue
     if ($process) {
         Write-Information "✨ WinSSH-Pageant is running in the background with PID $($process.Id)."
         $exitDelaySeconds = 1
