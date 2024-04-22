@@ -14,7 +14,7 @@
   <VALUE name="AnalyticsParticipate" val="0"/>
   <VALUE name="TutorialRan" val="1"/>
   <VALUE name="lastLoadedProfile" val="1 - Teal Test_copy.goxlr"/>
-  <VALUE name="mainWindowPos" val="703 193 1154 1007"/>
+  <VALUE name="mainWindowPos" val="5 527 1058 856"/>
   <VALUE name="connectedProdID" val="36832"/>
   <VALUE name="lastConnectedProdID" val="36832"/>
   <VALUE name="firstConnect" val="0"/>
@@ -22,4 +22,6 @@
   <VALUE name="defaultProfilesWritten" val="1"/>
   <VALUE name="LastLoadedMicProfileFullPath" val="C:\Users\Bruce\OneDrive\Workstations\ArdentPeity\Documents\GoXLR\MicProfiles\DEFAULT.goxlrMicProfile"/>
   <VALUE name="AutoCheckForUpdates" val="1"/>
+  <VALUE name="GoXLRColor" val="black"/>
+  <VALUE name="exitBehaviour" val="Show"/>
 </PROPERTIES>
