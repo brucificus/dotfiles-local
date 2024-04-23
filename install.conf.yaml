@@ -5,21 +5,30 @@
 
 - clean:
     - '~'
-    - '~/.config/TortoiseGit'
-    - '~/.config/WindowsTerminal'
-    - '~/.ssh'
-    - '~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState'
-    - '~/AppData/Roaming/Microsoft/Windows/Start Menu'
-    - '~/AppData/Roaming/TortoiseGit'
+    - '~/.config/TortoiseGit/**'
+    - '~/.config/WindowsTerminal/**'
+    - '~/.ssh/**'
+    - '~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/**'
+    - '~/AppData/Roaming/Microsoft/Windows/Start Menu/**'
+    - '~/AppData/Roaming/TortoiseGit/**'
+    - '~/AppData/Local/Microsoft/PowerToys/**'
 
 - link:
     ~/.dotfiles_local: ''
-    ~/bin/:
-      glob: true
-      path: bin/*
     ~/.config/powershell/:
       glob: true
       path: powershell/*
+    ~/AppData/Local/Microsoft/PowerToys:
+      glob: true
+      path: config/Microsoft/PowerToys/**/*settings.json
+    ~/AppData/Local/Microsoft/PowerToys/FancyZones/custom-layouts.json: config/Microsoft/PowerToys/FancyZones/custom-layouts.json
+    ~/AppData/Local/Microsoft/PowerToys/FancyZones/layout-hotkeys.json: config/Microsoft/PowerToys/FancyZones/layout-hotkeys.json
+    '~/AppData/Local/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Folder/FolderSettings.json': 'config/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Folder/FolderSettings.json'
+    '~/AppData/Local/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Indexer/IndexerSettings.json': 'config/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Indexer/IndexerSettings.json'
+    '~/AppData/Local/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Program/ProgramPluginSettings.json': 'config/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Program/ProgramPluginSettings.json'
+    '~/AppData/Local/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Shell/ShellPluginSettings.json': 'config/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Shell/ShellPluginSettings.json'
+    '~/AppData/Local/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Uri/UriSettings.json ': 'config/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Uri/UriSettings.json'
+    '~/AppData/Local/Microsoft/PowerToys/PowerToys Run/Settings/PowerToysRunSettings.json': 'config/Microsoft/PowerToys/PowerToys Run/Settings/PowerToysRunSettings.json'
     ~/.config/TortoiseGit: config/TortoiseGit
     ~/.config/WindowsTerminal: config/WindowsTerminal
     ~/AppData/Local/gh:
@@ -38,4 +47,7 @@
     ~/AppData/Roaming/TortoiseGit/:
       glob: true
       path: ~/.config/TortoiseGit/*
+    ~/bin/:
+      glob: true
+      path: bin/*
     ~/Documents/PowerShell/Microsoft.PowerShell_profile.ps1: ~/.config/powershell/profile.ps1

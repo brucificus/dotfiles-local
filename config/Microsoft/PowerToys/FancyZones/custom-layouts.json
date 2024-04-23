@@ -1,0 +1,114 @@
+{
+  "custom-layouts": [
+    {
+      "uuid": "{CCDA4001-286E-4E3A-8EE3-899B34999F46}",
+      "name": "2P w/ Wide Left",
+      "type": "grid",
+      "info": {
+        "rows": 1,
+        "columns": 2,
+        "rows-percentage": [
+          10000
+        ],
+        "columns-percentage": [
+          6666,
+          3334
+        ],
+        "cell-child-map": [
+          [
+            0,
+            1
+          ]
+        ],
+        "show-spacing": true,
+        "spacing": 5,
+        "sensitivity-radius": 20
+      }
+    },
+    {
+      "uuid": "{C0F02C88-EBF2-442C-BEAE-3ACA92E231C1}",
+      "name": "2P w/ Wide Right",
+      "type": "grid",
+      "info": {
+        "rows": 1,
+        "columns": 2,
+        "rows-percentage": [
+          10000
+        ],
+        "columns-percentage": [
+          3333,
+          6667
+        ],
+        "cell-child-map": [
+          [
+            0,
+            1
+          ]
+        ],
+        "show-spacing": true,
+        "spacing": 5,
+        "sensitivity-radius": 20
+      }
+    },
+    {
+      "uuid": "{E28631BB-B40C-4441-ADB9-3F52E8C184E1}",
+      "name": "4P w/ Wide Lefts",
+      "type": "grid",
+      "info": {
+        "rows": 2,
+        "columns": 2,
+        "rows-percentage": [
+          4978,
+          5022
+        ],
+        "columns-percentage": [
+          6666,
+          3334
+        ],
+        "cell-child-map": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "show-spacing": true,
+        "spacing": 5,
+        "sensitivity-radius": 20
+      }
+    },
+    {
+      "uuid": "{1668608C-BA8B-48C3-A8D3-04B3DEAD5BFE}",
+      "name": "4P w/ Wide Rights",
+      "type": "grid",
+      "info": {
+        "rows": 2,
+        "columns": 2,
+        "rows-percentage": [
+          4986,
+          5014
+        ],
+        "columns-percentage": [
+          3333,
+          6667
+        ],
+        "cell-child-map": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ]
+        ],
+        "show-spacing": true,
+        "spacing": 5,
+        "sensitivity-radius": 20
+      }
+    }
+  ]
+}
