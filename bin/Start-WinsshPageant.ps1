@@ -131,7 +131,7 @@ function Wait-ForGpgAgentProcess {
         $remainingWaitSeconds = [Math]::Max($GpgAgentStartWait.TotalSeconds - (((Get-Date) - $startTime)).TotalSeconds, 0)
     }
     if (-not $gpgAgentProcess) {
-        Write-Error "❓ GPG agent process '$gpgAgentProcessName' is not running, waited for $($GpgAgentStartWait.TotalSeconds) seconds."
+        Write-TerminatingError "❓ GPG agent process '$gpgAgentProcessName' is not running, waited for $($GpgAgentStartWait.TotalSeconds) seconds."
     } else {
         Write-Debug "✔️ GPG agent process '$gpgAgentProcessName' is running."
     }
@@ -156,7 +156,7 @@ function Wait-ForGpgAgentPipeCreation([string] $pipePath) {
         $targetExists = Test-Path $pipePath -ErrorAction SilentlyContinue
     }
     if (-not $targetExists) {
-        Write-Error "❓ GPG agent has been running for $gpgAgentProcessAge, but the SSH agent pipe ('$pipePath') does not exist."
+        Write-TerminatingError "❓ GPG agent has been running for $gpgAgentProcessAge, but the SSH agent pipe ('$pipePath') does not exist."
     } else {
         Write-Debug "✔️ GPG agent created the SSH agent pipe ('$pipePath')."
     }
@@ -205,7 +205,7 @@ function Validate-OpenSshAgentPipeVariable([string] $pipePathVariableValue, [str
                 if ($targetExists) {
                     Write-Warning "Although configured to support SSH/OpenSSH on Windows, the GPG agent is not currently running - despite its pipe existing. Manually confirm no other agent is running."
                 } else {
-                    Write-Error "❌ Although configured to support SSH/OpenSSH on Windows, the GPG agent is not currently running and its pipe is missing. Please ensure the agent is running and try again."
+                    Write-TerminatingError "❌ Although configured to support SSH/OpenSSH on Windows, the GPG agent is not currently running and its pipe is missing. Please ensure the agent is running and try again."
                 }
             }
         } else {
@@ -213,13 +213,13 @@ function Validate-OpenSshAgentPipeVariable([string] $pipePathVariableValue, [str
                 if ($targetExists) {
                     Write-Warning "GPG agent is not configured correctly, but the pipe exists. This may cause issues with SSH agent forwarding."
                 } else {
-                    Write-Error "❌ GPG agent is not configured correctly, and the pipe does not exist. Check the GPG agent's configuration, then restart the GPG agent before trying again."
+                    Write-TerminatingError "❌ GPG agent is not configured correctly, and the pipe does not exist. Check the GPG agent's configuration, then restart the GPG agent before trying again."
                 }
             } else { # (-not $gpgAgentProcess)
                 if ($targetExists) {
                     Write-Warning "GPG agent is not correctly configured and is not running, but the pipe exists. Manually confirm no other agent is running."
                 } else {
-                    Write-Error "❌ GPG agent's pipe is not available because the agent is not correctly configured and is not running. Check the GPG agent's configuration, then restart the GPG agent before trying again."
+                    Write-TerminatingError "❌ GPG agent's pipe is not available because the agent is not correctly configured and is not running. Check the GPG agent's configuration, then restart the GPG agent before trying again."
                 }
             }
         }
@@ -228,7 +228,7 @@ function Validate-OpenSshAgentPipeVariable([string] $pipePathVariableValue, [str
         Write-Information "🔎 $pipePathVariableDescriptor points to non-default path: $pipePathVariableValue"
     }
     if (-not $targetExists) {
-        Write-Error "❌ $pipePathVariableDescriptor points to a non-existent path. Please ensure the SSH agent is running, configured correctly, then restart the GPG agent before trying again."
+        Write-TerminatingError "❌ $pipePathVariableDescriptor points to a non-existent path. Please ensure the SSH agent is running, configured correctly, then restart the GPG agent before trying again."
     }
 }
 
