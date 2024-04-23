@@ -29,6 +29,7 @@
     '~/AppData/Local/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Shell/ShellPluginSettings.json': 'config/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Shell/ShellPluginSettings.json'
     '~/AppData/Local/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Uri/UriSettings.json ': 'config/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Uri/UriSettings.json'
     '~/AppData/Local/Microsoft/PowerToys/PowerToys Run/Settings/PowerToysRunSettings.json': 'config/Microsoft/PowerToys/PowerToys Run/Settings/PowerToysRunSettings.json'
+    ~/AppData/Local/Microsoft/VisualStudio/17.0_982ce974/Settings/CurrentSettings.vssettings: config/Microsoft/VisualStudio/v17/CurrentSettings.vssettings
     ~/.config/TortoiseGit: config/TortoiseGit
     ~/.config/WindowsTerminal: config/WindowsTerminal
     ~/AppData/Local/gh:
