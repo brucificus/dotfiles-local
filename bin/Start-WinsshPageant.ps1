@@ -183,7 +183,7 @@ function Validate-OpenSshAgentPipeVariable([string] $pipePathVariableValue, [str
             } else {
                 Write-Debug "✔️ $pipePathVariableDescriptor implies GPG agent should be configured to support OpenSSH on Windows, confirmed by finding 'enable-win32-openssh-support' in '$gpgAgentConfPath'."
             }
-            if ($gpgAgentConfEnablePuttySupport -and $gpgAgentConfEnableWin32OpensshSupport -and (-not $gpgAgentProcess)) {
+            if ($gpgAgentConfEnableSshSupport -and $gpgAgentConfEnableWin32OpensshSupport -and (-not $gpgAgentProcess)) {
                 # We only wait for GPG to start if we know it is configured correctly and that we definitely *expect* it to be running.
                 $script:gpgAgentProcess = Wait-ForGpgAgentProcess
             }
