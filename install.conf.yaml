@@ -5,11 +5,12 @@
 
 - clean:
     - '~'
-    - '~/AppData/Roaming/TortoiseGit'
     - '~/.config/TortoiseGit'
-    - '~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState'
     - '~/.config/WindowsTerminal'
+    - '~/.ssh'
+    - '~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState'
     - '~/AppData/Roaming/Microsoft/Windows/Start Menu'
+    - '~/AppData/Roaming/TortoiseGit'
 
 - link:
     ~/.dotfiles_local: ''
@@ -21,6 +22,9 @@
       path: powershell/*
     ~/.config/TortoiseGit: config/TortoiseGit
     ~/.config/WindowsTerminal: config/WindowsTerminal
+    ~/.ssh/:
+      glob: true
+      path: config/ssh/*
     ~/.gitconfig_local:
     '~/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup':
       glob: true

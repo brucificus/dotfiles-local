@@ -1,0 +1,38 @@
+Host github.com
+    HostName github.com
+    User git
+    PasswordAuthentication no
+    IdentitiesOnly yes
+    ForwardAgent no
+
+Host udm
+    HostName 192.168.1.1
+    User root
+    PasswordAuthentication no
+    IdentitiesOnly yes
+    ForwardAgent yes
+
+Host minerva
+    HostName minerva
+    Port 5022
+    User admin
+    PasswordAuthentication no
+    ForwardAgent yes
+
+Host homeassistant.local homeassistant assistant.r0b0tparade.net
+    HostName assistant.r0b0tparade.net
+    Port 8065
+    User root
+    PasswordAuthentication no
+    ForwardAgent yes
+    MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com
+
+Host *
+    AddKeysToAgent yes
+    Compression yes
+    ForwardAgent no
+    VisualHostKey yes
+    IdentityFile ~/.ssh/id_rsa_yubikey_openpgp0x60C73EAC.pub
+    IdentityFile ~/.ssh/id_rsa_yubikey_openpgp0x74FA17F0.pub
+    IdentityFile ~/.ssh/id_rsa_yubikey_openpgp0xE7ABEB3E.pub
+    PKCS11Provider "C:/Program Files/Yubico/Yubico PIV Tool/bin/libykcs11.dll"
