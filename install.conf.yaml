@@ -22,6 +22,9 @@
       path: powershell/*
     ~/.config/TortoiseGit: config/TortoiseGit
     ~/.config/WindowsTerminal: config/WindowsTerminal
+    ~/AppData/Local/gh:
+      glob: true
+      path: config/gh/*
     ~/.ssh/:
       glob: true
       path: config/ssh/*
