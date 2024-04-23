@@ -117,19 +117,21 @@ if ($pageantProcess -and (-not $DisablePageantPipe)) {
 # TODO: Look for other Pageant-like processes that may conflict with WinSSH-Pageant.
 
 function Wait-ForGpgAgentProcess {
-    [System.Diagnostics.Process] $gpgAgentProcess = Get-Process -Name $gpgAgentProcessName -ErrorAction SilentlyContinue
+    $script:gpgAgentProcess = Get-Process -Name $gpgAgentProcessName -ErrorAction SilentlyContinue
     [DateTime] $startTime = Get-Date
+    [float] $remainingWaitSeconds = [Math]::Max($GpgAgentStartWait.TotalSeconds - (((Get-Date) - $startTime)).TotalSeconds, 0)
     [bool] $first = $true
-    while ((-not $gpgAgentProcess) -and ((Get-Date) - $startTime -lt $GpgAgentStartWait)) {
+    while ((-not $gpgAgentProcess) -and ($remainingWaitSeconds -gt 0)) {
         if ($first) {
             Write-Information "⏳ Waiting for GPG agent process '$gpgAgentProcessName' to start…"
             $first = $false
         }
         Start-Sleep -Seconds 1
-        $gpgAgentProcess = Get-Process -Name $gpgAgentProcessName -ErrorAction SilentlyContinue
+        $script:gpgAgentProcess = Get-Process -Name $gpgAgentProcessName -ErrorAction SilentlyContinue
+        $remainingWaitSeconds = [Math]::Max($GpgAgentStartWait.TotalSeconds - (((Get-Date) - $startTime)).TotalSeconds, 0)
     }
     if (-not $gpgAgentProcess) {
-        Write-Error "❓ GPG agent process '$gpgAgentProcessName' is not running."
+        Write-Error "❓ GPG agent process '$gpgAgentProcessName' is not running, waited for $($GpgAgentStartWait.TotalSeconds) seconds."
     } else {
         Write-Debug "✔️ GPG agent process '$gpgAgentProcessName' is running."
     }
