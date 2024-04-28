@@ -1,5 +1,14 @@
 #!/usr/bin/env pwsh
 
+#
+# Start-WinsshPageant
+#
+# Starts the WinSSH-Pageant application after proactively validating the system configuration for compatibility.
+# WinSSH-Pageant implements a Pageant-style agent adapted on top of this Windows system's OpenSSH SSH agent.
+#
+# This script, in its current form, is not suitable for using at Windows startup because it unavoidably leaves a window open and visible.
+# (The PowerShell process cannot be exited at the end without an explicit `exit` which will also kill the child process started herein.)
+#
 param(
     [Parameter(HelpMessage = 'The path to the SSH pipe. Defaults to $Env:SSH_AUTH_SOCK.')]
     [ValidateScript({ (-not $_) -or (Test-Path $_ -PathType Leaf) })]
@@ -297,11 +306,12 @@ if ($AttachTTY) {
     }
 } else {
     Write-Information "🚀 Starting WinSSH-Pageant with arguments: $arguments"
-    Start-Process -FilePath $winsshPageantExe -ArgumentList $arguments -NoNewWindow
-    [System.Diagnostics.Process] $process = Get-Process -Name $winsshPageantProcessName -ErrorAction SilentlyContinue
+
+    [System.Diagnostics.Process] $process = Start-Process -FilePath $winsshPageantExe -ArgumentList $arguments -WindowStyle 'Hidden' -PassThru
     if ($process) {
         $InformationPreference = 'Continue'
         Write-Information "✨ WinSSH-Pageant is running in the background with PID $($process.Id)."
+        $process.Dispose() | Out-Null
         $exitDelaySeconds = 1
     } else {
         Write-TerminatingError "💥 Failed to start WinSSH-Pageant."
