@@ -4,22 +4,28 @@
 	gpgsign = true
 [user]
 	name = Bruce Markham
-	email = 219281+brucificus@users.noreply.github.com
+	email = bmarkham@servicetitan.com
 	signingkey = 08AE3AA1B4611E7B5C80AC3E8F86AA49BE1BA2F7
 [gpg]
 	program = C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe
 [core]
+	longPaths = true
 	sshCommand = tortoiseplink
 	editor = code --wait
 [merge]
     tool = vscode
 	prompt = true
-[mergetool "vscode"]
-    cmd = code --wait $MERGED
 [diff]
     tool = vscode
 	prompt = true
+[mergetool "vscode"]
+    cmd = code --wait $MERGED
 [difftool "vscode"]
     cmd = code --wait --diff $LOCAL $REMOTE
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
 [http]
 	sslbackend = schannel
