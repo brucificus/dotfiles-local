@@ -5,50 +5,19 @@
 
 - clean:
     - '~'
-    - '~/.config/TortoiseGit/**'
-    - '~/.config/WindowsTerminal/**'
     - '~/.ssh/**'
-    - '~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/**'
-    - '~/AppData/Roaming/Microsoft/Windows/Start Menu/**'
-    - '~/AppData/Roaming/TortoiseGit/**'
-    - '~/AppData/Local/Microsoft/PowerToys/**'
 
 - link:
     ~/.dotfiles_local: ''
     ~/.config/powershell/:
       glob: true
       path: powershell/*
-    ~/AppData/Local/Microsoft/PowerToys:
-      glob: true
-      path: config/Microsoft/PowerToys/**/*settings.json
-    ~/AppData/Local/Microsoft/PowerToys/FancyZones/custom-layouts.json: config/Microsoft/PowerToys/FancyZones/custom-layouts.json
-    ~/AppData/Local/Microsoft/PowerToys/FancyZones/layout-hotkeys.json: config/Microsoft/PowerToys/FancyZones/layout-hotkeys.json
-    '~/AppData/Local/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Folder/FolderSettings.json': 'config/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Folder/FolderSettings.json'
-    '~/AppData/Local/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Indexer/IndexerSettings.json': 'config/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Indexer/IndexerSettings.json'
-    '~/AppData/Local/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Program/ProgramPluginSettings.json': 'config/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Program/ProgramPluginSettings.json'
-    '~/AppData/Local/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Shell/ShellPluginSettings.json': 'config/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Shell/ShellPluginSettings.json'
-    '~/AppData/Local/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Uri/UriSettings.json ': 'config/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Uri/UriSettings.json'
-    '~/AppData/Local/Microsoft/PowerToys/PowerToys Run/Settings/PowerToysRunSettings.json': 'config/Microsoft/PowerToys/PowerToys Run/Settings/PowerToysRunSettings.json'
-    ~/AppData/Local/Microsoft/VisualStudio/17.0_982ce974/Settings/CurrentSettings.vssettings: config/Microsoft/VisualStudio/v17/CurrentSettings.vssettings
-    ~/.config/TortoiseGit: config/TortoiseGit
-    ~/.config/WindowsTerminal: config/WindowsTerminal
     ~/AppData/Local/gh:
       glob: true
       path: config/gh/*
     ~/.ssh/:
       glob: true
       path: config/ssh/*
-    ~/.gitconfig_local:
-    '~/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup':
-      glob: true
-      path: explorer-startup/*
-    ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState: ~/.config/WindowsTerminal
-    ~/AppData/Roaming/Elgato/StreamDeck/ProfilesV2: config/ElgatoStreamDeck/profiles
-    ~/AppData/Roaming/TC-Helicon/GOXLR: config/GoXLR/AppDataRoaming
-    ~/AppData/Roaming/TortoiseGit/:
-      glob: true
-      path: ~/.config/TortoiseGit/*
     ~/bin/:
       glob: true
       path: bin/*
-    ~/Documents/PowerShell/Microsoft.PowerShell_profile.ps1: ~/.config/powershell/profile.ps1
