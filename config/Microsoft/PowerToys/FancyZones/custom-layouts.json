@@ -109,6 +109,36 @@
         "spacing": 5,
         "sensitivity-radius": 20
       }
+    },
+    {
+      "uuid": "{BA856F8D-0FB2-4D59-8FAA-18ED077AF633}",
+      "name": "3P w/ Tall Left",
+      "type": "grid",
+      "info": {
+        "rows": 2,
+        "columns": 2,
+        "rows-percentage": [
+          4993,
+          5007
+        ],
+        "columns-percentage": [
+          5000,
+          5000
+        ],
+        "cell-child-map": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ]
+        ],
+        "show-spacing": true,
+        "spacing": 5,
+        "sensitivity-radius": 20
+      }
     }
   ]
 }
