@@ -104,10 +104,18 @@ if (-not $onedriveDir.Exists) {
         filenameEmbeddedTimestampRequired = $true
         includeOnly = 'Screenshot|SmartSelect'
     }
+
+    [PSCustomObject]@{
+        moniker = "Pictures-SamsungGallery-DCIM-Screenshots"
+        dirPath = "Pictures\Samsung Gallery\DCIM\Screenshots"
+        defaultDestinationDirPath = "Workstations\$($env:COMPUTERNAME)\Documents\Obsidian Vaults\Journal\Areas\Inbox\Screenshots"
+        filenameEmbeddedTimestampRequired = $true
+        includeOnly = 'Screenshot|SmartSelect'
+    }
 )
 
 # Add sources that are specific to photographs for particular years, to migrate to photos.
-for ($year = ((Get-Date).Year - 5); $year -le (Get-Date).Year; $year++) {
+for ([int] $year = ((Get-Date).Year - 5); $year -le (Get-Date).Year; $year++) {
     [bool] $decommissioned = $year -lt (Get-Date).AddDays(-1).Year
     $sources += @(
         [PSCustomObject]@{
@@ -132,6 +140,30 @@ for ($year = ((Get-Date).Year - 5); $year -le (Get-Date).Year; $year++) {
             decommissioned = $decommissioned
         }
     )
+
+    $sources += @(
+        [PSCustomObject]@{
+            moniker = "Pictures-SamsungGallery-Pictures-Messages(Photos#$year)"
+            dirPath = "Pictures\Samsung Gallery\Pictures\Messages"
+            defaultDestinationDirPath = "Pictures\Photos\$year"
+            filenameEmbeddedTimestampRequired = $true
+            skipFilenameNormalization = $true
+            includeOnly = "^(IMG_|VID_)?$year"
+            decommissioned = $decommissioned
+        }
+    )
+
+    $sources += @(
+        [PSCustomObject]@{
+            moniker = "Pictures-SamsungGallery-DCIM-Camera(#$year)"
+            dirPath = "Pictures\Samsung Gallery\DCIM\Camera"
+            defaultDestinationDirPath = "Pictures\Photos\$year"
+            filenameEmbeddedTimestampRequired = $true
+            skipFilenameNormalization = $true
+            includeOnly = "^$year"
+            decommissioned = $decommissioned
+        }
+    )
 }
 
 # Add the dir and defaultDestinationDir properties to each source object.
@@ -150,7 +182,7 @@ if (-not ($sources | Where-Object { $_.dir.Exists })) {
     # Warn about source directories and destination directories that do not exist.
     foreach ($source in $sources) {
         if (-not $source.dir.Exists) {
-            [bool] $sourceDecommissioned = $source | Select-Object -ExpandProperty decommissioned -ErrorAction 'SilentlyContinue'
+            [bool] $sourceDecommissioned = [bool]($source | Select-Object -ExpandProperty decommissioned -ErrorAction 'SilentlyContinue')
             if ($sourceDecommissioned) {
                 Write-Information "🔍 The source directory '$($source.dir.FullName)' for source '$($source.moniker)' (decommissioned) does not exist."
             } else {
@@ -506,7 +538,7 @@ foreach ($source in $sources) {
                 $sourceFileParentDirRelativePath = Resolve-Path $sourceFile.Directory.FullName -Relative
             }
 
-            [bool] $sourceSkipFilenameNormalization = $source | Select-Object -ExpandProperty skipFilenameNormalization -ErrorAction 'SilentlyContinue'
+            [bool] $sourceSkipFilenameNormalization = [bool]($source | Select-Object -ExpandProperty skipFilenameNormalization -ErrorAction 'SilentlyContinue')
             if (-not $sourceSkipFilenameNormalization) {
                 [string] $destinationFileName = (Format-FileBaseName -sourceRelativeLocation $sourceFileRelativePath -filename $sourceFile.Name) + $sourceFile.Extension
                 [bool] $nameChanged = $sourceFile.Name -ne $destinationFileName
