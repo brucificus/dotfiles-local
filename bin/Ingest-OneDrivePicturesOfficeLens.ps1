@@ -62,10 +62,12 @@ if (-not $onedriveDir.Exists) {
 
 [System.IO.DirectoryInfo] $sourceDir = Get-Item (Join-Path $onedriveDir.FullName "Pictures\Office Lens")
 if (-not $sourceDir.Exists) {
+    # Actually, this is expected now. I deleted this folder from OneDrive on 2024-11-21.
+    # New content is NOT expected to appear here, this is a legacy location.
     Write-TerminatingError "❓ The source directory '$($sourceDir.FullName)' does not exist." $sourceDir
 }
 
-[System.IO.DirectoryInfo] $destinationDirRoot = Get-Item (Join-Path $onedriveDir.FullName "Personal\Notes\Areas\Inbox\OfficeLens")
+[System.IO.DirectoryInfo] $destinationDirRoot = Get-Item (Join-Path $onedriveDir.FullName "Workstations\$($env:COMPUTERNAME)\Documents\Obsidian Vaults\Journal\Areas\Inbox\OfficeLens")
 if (-not $destinationDirRoot.Exists) {
     Write-TerminatingError "❓ The destination directory '$($destinationDirRoot.FullName)' does not exist." $destinationDirRoot
 }
@@ -348,39 +350,42 @@ try {
 # Remove ops that don't rename, b/c they didn't have timestamps we could use.
 $moveOperations = $moveOperations | Where-Object { $_.Item1.Name -ne $_.Item3 }
 
-# Execute the move operations from the common base folder of the source and destination.
-Write-Host "📂 Found $($moveOperations.Count) file(s) to ingest from the source directory."
-
 if ($moveOperations) {
-Push-Location $onedriveDir.FullName
-try {
-    foreach ($moveOperation in $moveOperations) {
-        [System.IO.FileInfo] $sourceFile = $moveOperation.Item1
-        [System.IO.DirectoryInfo] $destinationDir = $moveOperation.Item2
-        [string] $destinationFileName = $moveOperation.Item3
+    # Execute the move operations from the common base folder of the source and destination.
+    Write-Host "📂 Found $($moveOperations.Count) file(s) to ingest from the source directory."
 
-        if (-not $destinationDir.Exists) {
-            Write-Host "✨ Creating destination directory '$($destinationDir.FullName)'…"
-            $null = $destinationDir.Create()
+    Push-Location $onedriveDir.FullName
+    try {
+        foreach ($moveOperation in $moveOperations) {
+            [System.IO.FileInfo] $sourceFile = $moveOperation.Item1
+            [System.IO.DirectoryInfo] $destinationDir = $moveOperation.Item2
+            [string] $destinationFileName = $moveOperation.Item3
+
+            if (-not $destinationDir.Exists) {
+                Write-Host "✨ Creating destination directory '$($destinationDir.FullName)'…"
+                $null = $destinationDir.Create()
+            }
+
+            [string] $sourceFileRelativePath = Resolve-Path $sourceFile.FullName -Relative
+            [string] $destinationDirRelativePath = Resolve-Path $destinationDir.FullName -Relative
+            [string] $destinationFileRelativePath = Join-Path $destinationDirRelativePath $destinationFileName
+
+            [System.IO.FileInfo] $destinationFile = [System.IO.FileInfo]::new((Join-Path $destinationDir.FullName $destinationFileName))
+            if ($destinationFile.Exists) {
+                Write-Host "⚠️ Destination file '$($destinationFile.FullName)' already exists. Skipping…"
+                continue
+            }
+
+            Write-Information "🚚 Moving & renaming file '$($sourceFileRelativePath)' to '$($destinationFileRelativePath)'…"
+            Move-Item -LiteralPath $sourceFileRelativePath -Destination $destinationFileRelativePath
+            Write-Host "📄 Moved & renamed file '$($sourceFileRelativePath)' to '$($destinationFileRelativePath)'."
         }
-
-        [string] $sourceFileRelativePath = Resolve-Path $sourceFile.FullName -Relative
-        [string] $destinationDirRelativePath = Resolve-Path $destinationDir.FullName -Relative
-        [string] $destinationFileRelativePath = Join-Path $destinationDirRelativePath $destinationFileName
-
-        [System.IO.FileInfo] $destinationFile = [System.IO.FileInfo]::new((Join-Path $destinationDir.FullName $destinationFileName))
-        if ($destinationFile.Exists) {
-            Write-Host "⚠️ Destination file '$($destinationFile.FullName)' already exists. Skipping…"
-            continue
-        }
-
-        Write-Information "🚚 Moving & renaming file '$($sourceFileRelativePath)' to '$($destinationFileRelativePath)'…"
-        Move-Item -LiteralPath $sourceFileRelativePath -Destination $destinationFileRelativePath
-        Write-Host "📄 Moved & renamed file '$($sourceFileRelativePath)' to '$($destinationFileRelativePath)'."
+    } finally {
+        Pop-Location
     }
-} finally {
-    Pop-Location
-}
+} else {
+    # Nothing to do?
+    Write-Host "❌ Found no ingestible files in the source directory '$($sourceDir.FullName)'."
 }
 
 Start-ExitTimer -seconds $exitDelaySeconds
