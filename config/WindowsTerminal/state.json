@@ -1,7 +1,7 @@
 {
 	"dismissedMessages" : 
 	[
-		"setAsDefault",
+		"deprecated",
 		"closeOnExitInfo"
 	],
 	"generatedProfiles" : 
@@ -16,7 +16,9 @@
 		"{574e775e-4f2a-5b96-ac1e-a2962a402336}",
 		"{5fb123f1-af88-5b5c-8953-d14a8def1978}",
 		"{05158e10-34c3-53bb-bd58-64b499ae4139}",
-		"{73197388-3590-5b9e-94e3-7c0769adad0a}"
+		"{73197388-3590-5b9e-94e3-7c0769adad0a}",
+		"{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}"
 	],
-	"settingsHash" : "9f2e946c0230200e-01da0b870f63e914"
+	"persistedWindowLayouts" : [],
+	"settingsHash" : "387ecc7851f59156-01db40768e124a27"
 }
