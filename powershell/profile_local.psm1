@@ -4,16 +4,15 @@ Import-Module -Name $PSScriptRoot\personal-modules\FusionLog.psm1 -DisableNameCh
 Import-Module -Name $PSScriptRoot\personal-modules\WebHelpers.psm1 -DisableNameChecking
 Import-Module -Name $PSScriptRoot\personal-modules\CustomFonts.psm1 -DisableNameChecking
 
-$env:HOME = $env:USERPROFILE
-$env:HOMEDRIVE =  [System.IO.Path]::GetPathRoot($env:USERPROFILE)
-
 # Update local dotfiles
 function ldfu() {
-    Push-Location (Get-Item ~/.dotfiles_local).Target
+    Push-Location (Get-Item ~/.dotfiles_local).Target | Out-Null
     try {
-        git pull --ff-only && ./install.ps1 -q
+        git pull --ff-only
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+        ./install.ps1 -q
     } finally {
-        Pop-Location
+        Pop-Location | Out-Null
     }
 }
 
