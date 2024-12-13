@@ -1,0 +1,53 @@
+{
+  "TABLENAME": "sampleTable",
+  "ITEMS": {
+    "Recording_2021-08-29T033940.wav": {
+      "path": "C:\\Users\\Bruce\\OneDrive\\Workstations\\ArdentPeity\\Documents\\GoXLR\\Samples\\Recorded\\Recording_2021-08-29T033940.wav",
+      "gain": 1.0
+    },
+    "Recording_2021-08-29T033946.wav": {
+      "path": "C:\\Users\\Bruce\\OneDrive\\Workstations\\ArdentPeity\\Documents\\GoXLR\\Samples\\Recorded\\Recording_2021-08-29T033946.wav",
+      "gain": 1.0
+    },
+    "Recording_2021-08-29T033957.wav": {
+      "path": "C:\\Users\\Bruce\\OneDrive\\Workstations\\ArdentPeity\\Documents\\GoXLR\\Samples\\Recorded\\Recording_2021-08-29T033957.wav",
+      "gain": 1.0
+    },
+    "Recording_2021-08-29T034000.wav": {
+      "path": "C:\\Users\\Bruce\\OneDrive\\Workstations\\ArdentPeity\\Documents\\GoXLR\\Samples\\Recorded\\Recording_2021-08-29T034000.wav",
+      "gain": 1.0
+    },
+    "Recording_2021-08-29T034007.wav": {
+      "path": "C:\\Users\\Bruce\\OneDrive\\Workstations\\ArdentPeity\\Documents\\GoXLR\\Samples\\Recorded\\Recording_2021-08-29T034007.wav",
+      "gain": 1.0
+    },
+    "Recording_2021-08-29T034010.wav": {
+      "path": "C:\\Users\\Bruce\\OneDrive\\Workstations\\ArdentPeity\\Documents\\GoXLR\\Samples\\Recorded\\Recording_2021-08-29T034010.wav",
+      "gain": 1.0
+    },
+    "Recording_2021-08-29T034012.wav": {
+      "path": "C:\\Users\\Bruce\\OneDrive\\Workstations\\ArdentPeity\\Documents\\GoXLR\\Samples\\Recorded\\Recording_2021-08-29T034012.wav",
+      "gain": 1.0
+    },
+    "Recording_2021-08-29T034016.wav": {
+      "path": "C:\\Users\\Bruce\\OneDrive\\Workstations\\ArdentPeity\\Documents\\GoXLR\\Samples\\Recorded\\Recording_2021-08-29T034016.wav",
+      "gain": 1.0
+    },
+    "Recording_2021-08-29T034035.wav": {
+      "path": "C:\\Users\\Bruce\\OneDrive\\Workstations\\ArdentPeity\\Documents\\GoXLR\\Samples\\Recorded\\Recording_2021-08-29T034035.wav",
+      "gain": 1.0
+    },
+    "Recording_2021-08-29T034045.wav": {
+      "path": "C:\\Users\\Bruce\\OneDrive\\Workstations\\ArdentPeity\\Documents\\GoXLR\\Samples\\Recorded\\Recording_2021-08-29T034045.wav",
+      "gain": 1.0
+    },
+    "Recording_2021-08-29T034051.wav": {
+      "path": "C:\\Users\\Bruce\\OneDrive\\Workstations\\ArdentPeity\\Documents\\GoXLR\\Samples\\Recorded\\Recording_2021-08-29T034051.wav",
+      "gain": 1.0
+    },
+    "Windows Shutdown.wav": {
+      "path": "C:\\Users\\Bruce\\OneDrive\\Workstations\\ArdentPeity\\Documents\\GoXLR\\Samples\\Windows Shutdown.wav",
+      "gain": -1.0
+    }
+  }
+}
