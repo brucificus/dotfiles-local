@@ -5,7 +5,9 @@
 [commit]
 	gpgsign = true
 [gpg]
-	program = C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe
+	program = "C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe"
+[ssh]
+	variant = ssh
 [core]
 	sshCommand = "'C:\\Program Files\\OpenSSH\\ssh.exe'"
 	editor = code --wait
