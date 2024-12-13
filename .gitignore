@@ -40,3 +40,4 @@
 /config/JetBrains/PyCharm/options/window.layouts.xml
 /config/JetBrains/PyCharm/options/window.state.xml
 /config/WindowsTerminal/*.backup
+/config/WindowsTerminal/state.json
