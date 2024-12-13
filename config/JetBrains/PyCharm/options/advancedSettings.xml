@@ -1,0 +1,11 @@
+<application>
+  <component name="AdvancedSettings">
+    <option name="settings">
+      <map>
+        <entry key="documentation.components.enable.inline.code.highlighting" value="SEMANTIC_HIGHLIGHTING" />
+        <entry key="js.semantic.highlighting.accuracy" value="High" />
+        <entry key="se.endpoints.search" value="true" />
+      </map>
+    </option>
+  </component>
+</application>
