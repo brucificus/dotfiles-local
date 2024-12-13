@@ -1,11 +1,9 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions": 
-    [
+    "actions": [
         {
-            "command": 
-            {
+            "command": {
                 "action": "moveFocus",
                 "direction": "up"
             },
@@ -18,8 +16,7 @@
             "keys": "ctrl+v"
         },
         {
-            "command": 
-            {
+            "command": {
                 "action": "copy",
                 "singleLine": false
             },
@@ -43,8 +40,7 @@
             "keys": "alt+down"
         },
         {
-            "command": 
-            {
+            "command": {
                 "action": "splitPane",
                 "split": "auto",
                 "splitMode": "duplicate"
@@ -58,8 +54,7 @@
             "keys": "ctrl+shift+f"
         },
         {
-            "command": 
-            {
+            "command": {
                 "action": "moveFocus",
                 "direction": "right"
             },
@@ -67,8 +62,7 @@
             "keys": "ctrl+alt+right"
         },
         {
-            "command": 
-            {
+            "command": {
                 "action": "moveFocus",
                 "direction": "left"
             },
@@ -76,8 +70,7 @@
             "keys": "ctrl+alt+left"
         },
         {
-            "command": 
-            {
+            "command": {
                 "action": "moveFocus",
                 "direction": "down"
             },
@@ -92,27 +85,22 @@
     "initialCols": 170,
     "initialRows": 35,
     "launchMode": "default",
-    "newTabMenu": 
-    [
+    "newTabMenu": [
         {
             "type": "remainingProfiles"
         }
     ],
-    "profiles": 
-    {
-        "defaults": 
-        {
+    "profiles": {
+        "defaults": {
             "adjustIndistinguishableColors": "indexed",
             "antialiasingMode": "cleartype",
-            "bellStyle": 
-            [
+            "bellStyle": [
                 "audible",
                 "window",
                 "taskbar"
             ],
             "colorScheme": "Cobalt2",
-            "font": 
-            {
+            "font": {
                 "face": "CaskaydiaCove NF",
                 "features": {}
             },
@@ -121,8 +109,7 @@
             "opacity": 70,
             "useAcrylic": true
         },
-        "list": 
-        [
+        "list": [
             {
                 "backgroundImage": "C:\\Users\\Bruce\\OneDrive\\Pictures\\Graphics\\Wallpaper\\Windows Terminal\\Windows\\Fluent Windows - Dark - 4k.jpg",
                 "backgroundImageAlignment": "bottomRight",
@@ -202,8 +189,7 @@
                 "cursorShape": "bar",
                 "elevate": true,
                 "experimental.retroTerminalEffect": true,
-                "font": 
-                {
+                "font": {
                     "size": 12
                 },
                 "guid": "{bb23ad45-78ef-42d4-b7db-b4c9d4973387}",
@@ -271,11 +257,22 @@
                 "hidden": false,
                 "name": "Git Bash",
                 "source": "Git"
+            },
+            {
+                "commandline": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -ExecutionPolicy ByPass -NoExit -Command \"& 'C:\\Users\\Bruce\\miniconda3\\shell\\condabin\\conda-hook.ps1' ; conda activate 'C:\\Users\\Bruce\\miniconda3' \"",
+                "name": "Anaconda PowerShell Prompt (miniconda3)",
+                "icon": "C:\\Users\\Bruce\\miniconda3\\Menu\\anaconda_powershell_prompt.ico",
+                "startingDirectory": "C:\\Users\\Bruce"
+            },
+            {
+                "commandline": "%WINDIR%\\System32\\cmd.exe \"/K\" C:\\Users\\Bruce\\miniconda3\\Scripts\\activate.bat C:\\Users\\Bruce\\miniconda3",
+                "name": "Anaconda Prompt (miniconda3)",
+                "icon": "C:\\Users\\Bruce\\miniconda3\\Menu\\anaconda_prompt.ico",
+                "startingDirectory": "C:\\Users\\Bruce"
             }
         ]
     },
-    "schemes": 
-    [
+    "schemes": [
         {
             "background": "#132738",
             "black": "#000000",
