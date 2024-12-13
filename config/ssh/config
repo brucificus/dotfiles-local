@@ -5,6 +5,13 @@ Host github.com
     IdentitiesOnly yes
     ForwardAgent no
 
+Host gitlab.com
+    HostName gitlab.com
+    User git
+    PasswordAuthentication no
+    IdentitiesOnly yes
+    ForwardAgent no
+
 Host udm
     HostName 192.168.1.1
     User root
