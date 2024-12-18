@@ -2,17 +2,24 @@
 	name = Bruce Markham
 	email = 219281+brucificus@users.noreply.github.com
 	signingkey = 08AE3AA1B4611E7B5C80AC3E8F86AA49BE1BA2F7
+[commit]
+	gpgsign = true
+[gpg]
+	program = "/mnt/c/Program Files (x86)/GnuPG/bin/gpg.exe"
+[ssh]
+	variant = ssh
 [core]
+	sshCommand = "'/mnt/c/Program Files/OpenSSH/ssh.exe'"
 	editor = code --wait
 [merge]
     tool = vscode
+	prompt = true
 [mergetool "vscode"]
     cmd = code --wait $MERGED
 [diff]
     tool = vscode
+	prompt = true
 [difftool "vscode"]
     cmd = code --wait --diff $LOCAL $REMOTE
-[commit]
-	gpgsign = true
 [credential]
-        helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-manager.exe
+	helper = "/mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-manager.exe"
