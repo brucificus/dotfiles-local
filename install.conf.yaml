@@ -3,13 +3,25 @@
       create: true
       relink: true
 
-- clean: ['~', '~/.config']
+- shell:
+  - git submodule update --quiet --init --force --checkout --depth 1 --recursive nvm
+
+- clean:
+    - ~/.dotfiles_local/
+    - ~/bin/
+    - ~/.config/
+    - ~/.gitconfig_local
+    - ~/.nvm/
+    - ~/.shell_local_after
 
 - link:
     ~/.dotfiles_local: ''
-    ~/.gitconfig_local:
-    ~/.nvm:
-    ~/.shell_local_after:
-
-- shell:
-  - git submodule sync --recursive
+    ~/bin/:
+      glob: true
+      path: ~/.dotfiles_local/bin/*
+    ~/.config/:
+      glob: true
+      path: ~/.dotfiles_local/config/*
+    ~/.gitconfig_local: ~/.dotfiles_local/gitconfig_local
+    ~/.nvm: ~/.dotfiles_local/nvm
+    ~/.shell_local_after: ~/.dotfiles_local/shell_local_after

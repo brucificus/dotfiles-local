@@ -9,3 +9,6 @@ indent_size = 4
 
 [{*.,*.bash,*.sh,*.zsh}]
 end_of_line = lf
+
+[*.{yaml,yml}]
+indent_size = 2
