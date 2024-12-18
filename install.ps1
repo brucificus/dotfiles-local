@@ -28,7 +28,7 @@ trap {
     Pop-Location
 }
 
-# Make sure dotbot is and our other dependencies are available.
+# Make sure dotbot is up-to-date and our other dependencies are available.
 git submodule update --quiet --init --force --depth 1 --recursive
 
 # folders_to_relink = @()
