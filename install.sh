@@ -17,11 +17,11 @@ trap "
     return \$ret
 " EXIT INT QUIT
 
-# Make sure dotbot is up-to-date.
-DOTBOT_DIR="dotbot"
-git submodule update --quiet --init --force --checkout --depth 1 --recursive "${DOTBOT_DIR}"
+# Make sure dotbot is and our other dependencies are available.
+git submodule update --quiet --init --force --checkout --depth 1 --recursive
 
 # Execute dotbot.
+DOTBOT_DIR="dotbot"
 CONFIG="install.conf.yaml"
 CONFIG_WSL="install.wsl.conf.yaml"
 DOTBOT_BIN="bin/dotbot"
