@@ -1,4 +1,6 @@
 #!/usr/bin/env sh
 
+
+# TODO: Intercept arguments and convert paths using wslpath.
 /mnt/c/Program\ Files/GnuPG/bin/gpg.exe "$@"
 exit $?
