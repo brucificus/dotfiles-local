@@ -3,9 +3,6 @@
       create: true
       relink: true
 
-- shell:
-  - git submodule update --quiet --init --force --checkout --depth 1 --recursive nvm
-
 - clean:
     - ~/.dotfiles_local/
     - ~/bin/
