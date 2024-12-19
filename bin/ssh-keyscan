@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+
+# TODO: Intercept arguments and convert paths using wslpath (w.r.t. "-f file" option).
+/mnt/c/Program\ Files/OpenSSH/ssh-keyscan.exe "$@"
+exit $?

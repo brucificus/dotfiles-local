@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+
+# TODO: Intercept arguments and convert paths using wslpath (w.r.t. "-f input_file" options, and also "-M screen … output_file" invocation variant).
+/mnt/c/Program\ Files/OpenSSH/ssh-keygen.exe "$@"
+exit $?
