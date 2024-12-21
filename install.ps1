@@ -1,7 +1,7 @@
 #!/usr/bin/env pwsh
-#Requires -Modules @{ModuleName="poshy-lucidity";ModuleVersion="0.3.16"}
 $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
+#Requires -Modules @{ModuleName="poshy-lucidity";ModuleVersion="0.4.2"}
 
 
 function Write-TerminatingError([string] $message, [object] $targetObject = $null) {
@@ -29,7 +29,7 @@ trap {
 }
 
 # Make sure dotbot is and our other dependencies are available.
-git submodule update --quiet --init --force --checkout --depth 1 --recursive
+git submodule update --quiet --init --force --depth 1 --recursive
 
 # folders_to_relink = @()
 # folders_to_relink | Where-Object { -not (Test-ReparsePoint $_) } | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue | Out-Null

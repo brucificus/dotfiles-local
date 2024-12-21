@@ -3,7 +3,7 @@ set -e
 
 
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-pushd "${BASEDIR}"
+pushd "${BASEDIR}" &> /dev/null
 # `return $ret` is important for when trapping a SIGINT:
 #  The return status from the function is handled specially. If it is zero, the signal is
 #  assumed to have been handled, and execution continues normally. Otherwise, the shell
@@ -13,12 +13,12 @@ pushd "${BASEDIR}"
 trap "
     ret=\$?
     unset BASEDIR CONFIG CONFIG_WSL DOTBOT_DIR DOTBOT_BIN
-    popd
-    return \$ret
+    popd &> /dev/null
+    # return \$ret
 " EXIT INT QUIT
 
 # Make sure dotbot is and our other dependencies are available.
-git submodule update --quiet --init --force --checkout --depth 1 --recursive
+git submodule update --quiet --init --force --depth 1 --recursive
 
 # Execute dotbot.
 DOTBOT_DIR="dotbot"
