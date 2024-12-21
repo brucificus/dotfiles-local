@@ -4,21 +4,30 @@
       relink: true
 
 - clean:
-    - ~/.dotfiles_local/
-    - ~/bin/
-    - ~/.config/
-    - ~/.gitconfig_local
-    - ~/.nvm/
-    - ~/.shell_local_after
+    '~':
+        recursive: false
+        force: true
+    '~/.config/':
+        force: true
+    '~/.nvm':
+        recursive: false
+        force: true
+    '~/.local/bin':
+        recursive: false
+        force: true
+    '~/bin':  # Deprecated location. We're going to start preferring `~/.local/bin` for simplicity.
+        recursive: true
+        force: true
 
 - link:
-    ~/.dotfiles_local: ''
-    ~/bin/:
-      glob: true
-      path: ~/.dotfiles_local/bin/*
+    ~/.dotfiles_local: ""
     ~/.config/:
       glob: true
-      path: ~/.dotfiles_local/config/*
-    ~/.gitconfig_local: ~/.dotfiles_local/gitconfig_local
-    ~/.nvm: ~/.dotfiles_local/nvm
-    ~/.shell_local_after: ~/.dotfiles_local/shell_local_after
+      path: "config/*"
+    ~/.gitconfig_local:
+    ~/.nvm:
+    ~/.shell_local_after:
+    ~/.shell_local_after.ps1:
+    ~/.local/bin/:
+      glob: true
+      path: "bin/*"

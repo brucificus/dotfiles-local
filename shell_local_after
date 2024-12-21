@@ -1,20 +1,16 @@
 #!/usr/bin/env sh
 
-# Add scripts to path
-path_prepend "$HOME/.dotfiles_local/bin"
 
-# Update local dotfiles
-ldfu() {
-    declare -f dfu > /dev/null && dfu &&
-    (
-        cd ~/.dotfiles_local && git pull --ff-only && ./install.sh -q
+DOTFILES_LOCAL="${DOTFILES_LOCAL:-$HOME/.dotfiles_local}"; export DOTFILES_LOCAL;
+
+# Updates the `dotfiles_local` repo and re-runs its installer, after first doing the same for the `dotfiles` repo.
+local_dotfiles_update() {
+    declare -f dotfiles_update > /dev/null && (dotfiles_update "$@") && (
+        DOTFILES_LOCAL="${DOTFILES_LOCAL:-~/.dotfiles_local}"
+        DOTFILES="$DOTFILES_LOCAL" && dotfiles_update "$@"
     )
 }
-
-# Helpful variables
-export WINHOME=/mnt/c/Users/bmarkham/
-export WINHOMEP=C:/Users/bmarkham/
-export NPIPERELAY=$WINHOME/.dotfiles_local/bin/npiperelay.exe
+alias ldfu='local_dotfiles_update'
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
