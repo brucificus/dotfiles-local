@@ -2,6 +2,7 @@
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot.git
 	ignore = dirty
+	branch = v1.20.4
 [submodule "nvm"]
 	path = nvm
 	url = https://github.com/nvm-sh/nvm.git
