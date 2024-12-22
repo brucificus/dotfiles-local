@@ -139,6 +139,31 @@
         "spacing": 5,
         "sensitivity-radius": 20
       }
+    },
+    {
+      "uuid": "{4DEFCB4F-53CB-4FD6-8CA1-8E0CC454198E}",
+      "name": "2P Equal Vertical",
+      "type": "grid",
+      "info": {
+        "rows": 1,
+        "columns": 2,
+        "rows-percentage": [
+          10000
+        ],
+        "columns-percentage": [
+          5008,
+          4992
+        ],
+        "cell-child-map": [
+          [
+            0,
+            1
+          ]
+        ],
+        "show-spacing": true,
+        "spacing": 5,
+        "sensitivity-radius": 20
+      }
     }
   ]
 }

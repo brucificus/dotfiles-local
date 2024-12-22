@@ -4,20 +4,25 @@
       relink: true
 
 - clean:
-    - '~'
-    - '~/.ssh/**'
+    '~':
+        recursive: false
+    '~/.config':
+        recursive: true
+    '~/.nvm':
+        recursive: false
+    '~/.local/bin':
+        recursive: false
+    '~/bin':  # Deprecated location. We're going to start preferring `~/.local/bin` for simplicity.
+        recursive: true
 
 - link:
-    ~/.dotfiles_local: ''
-    ~/.config/powershell/:
+    ~/.dotfiles_local: ""
+    ~/.config/:
       glob: true
-      path: powershell/*
-    ~/AppData/Local/gh:
+      path: "config/*"
+    ~/.gitconfig_local:
+    ~/.shell_local_after:
+    ~/.shell_local_after.ps1:
+    ~/.local/bin/:
       glob: true
-      path: config/gh/*
-    ~/.ssh/:
-      glob: true
-      path: config/ssh/*
-    ~/bin/:
-      glob: true
-      path: bin/*
+      path: "bin/*"

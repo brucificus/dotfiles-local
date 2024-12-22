@@ -1,13 +1,18 @@
 #!/usr/bin/env sh
 
-# Add scripts to path
 
-path_prepend "$HOME/.dotfiles_local/bin"
+DOTFILES_LOCAL="${DOTFILES_LOCAL:-$HOME/.dotfiles_local}"; export DOTFILES_LOCAL;
 
-# Update local dotfiles
-ldfu() {
-    declare -f dfu > /dev/null && dfu &&
-    (
-        cd ~/.dotfiles_local && git pull --ff-only && ./install -q
+# Updates the `dotfiles_local` repo and re-runs its installer, after first doing the same for the `dotfiles` repo.
+local_dotfiles_update() {
+    declare -f dotfiles_update > /dev/null && (dotfiles_update "$@") && (
+        DOTFILES_LOCAL="${DOTFILES_LOCAL:-~/.dotfiles_local}"
+        DOTFILES="$DOTFILES_LOCAL" && dotfiles_update "$@"
     )
 }
+alias ldfu='local_dotfiles_update'
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
