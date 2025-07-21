@@ -1,4 +1,5 @@
 [submodule "dotbot"]
 	path = dotbot
-	url = https://github.com/anishathalye/dotbot
+	url = https://github.com/anishathalye/dotbot.git
 	ignore = dirty
+	branch = v1.20.4

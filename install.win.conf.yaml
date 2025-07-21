@@ -4,43 +4,48 @@
       relink: true
 
 - clean:
-    - "~/.config/TortoiseGit/**"
-    - "~/.config/WindowsTerminal/**"
-    - "~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/**"
-    - "~/AppData/Roaming/Microsoft/Windows/Start Menu/**"
-    - "~/AppData/Roaming/TortoiseGit/**"
-    - "~/AppData/Local/Microsoft/PowerToys/**"
-    - "~/.config/JetBrains/PyCharm/**"
+    '~/.config/TortoiseGit':
+      recursive: true
+    '~/.config/WindowsTerminal':
+      recursive: true
+    '~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState':
+      recursive: true
+    '~/AppData/Roaming/Microsoft/Windows/Start Menu':
+      recursive: true
+    '~/AppData/Roaming/TortoiseGit':
+      recursive: true
+    '~/AppData/Local/Microsoft/PowerToys':
+      recursive: true
+    '~/AppData/Local/Microsoft/VisualStudio/17.0_982ce974/Settings/':
+      recursive: true
+    '~/.config/JetBrains/PyCharm':
+      recursive: true
 
 - link:
-    ~/AppData/Local/Microsoft/PowerToys/FancyZones/custom-layouts.json: config/Microsoft/PowerToys/FancyZones/custom-layouts.json
-    ~/AppData/Local/Microsoft/PowerToys/FancyZones/layout-hotkeys.json: config/Microsoft/PowerToys/FancyZones/layout-hotkeys.json
-    "~/AppData/Local/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Folder/FolderSettings.json": "config/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Folder/FolderSettings.json"
-    "~/AppData/Local/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Indexer/IndexerSettings.json": "config/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Indexer/IndexerSettings.json"
-    "~/AppData/Local/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Program/ProgramPluginSettings.json": "config/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Program/ProgramPluginSettings.json"
-    "~/AppData/Local/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Shell/ShellPluginSettings.json": "config/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Shell/ShellPluginSettings.json"
-    "~/AppData/Local/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Uri/UriSettings.json ": "config/Microsoft/PowerToys/PowerToys Run/Settings/Plugins/Microsoft.Plugin.Uri/UriSettings.json"
-    "~/AppData/Local/Microsoft/PowerToys/PowerToys Run/Settings/PowerToysRunSettings.json": "config/Microsoft/PowerToys/PowerToys Run/Settings/PowerToysRunSettings.json"
-    ~/AppData/Local/Microsoft/VisualStudio/17.0_982ce974/Settings/CurrentSettings.vssettings: config/Microsoft/VisualStudio/v17/CurrentSettings.vssettings
-    ~/.config/TortoiseGit: config/TortoiseGit
-    ~/.config/WindowsTerminal: config/WindowsTerminal
+    ~/AppData/Local/Microsoft/PowerToys/FancyZones/:
+      glob: true
+      path: "config/Microsoft/PowerToys/FancyZones/*"
+    ~/AppData/Local/Microsoft/PowerToys/PowerToys Run/:
+      glob: true
+      path: "config/Microsoft/PowerToys/PowerToys Run/Settings/*"
+    ~/AppData/Local/Microsoft/VisualStudio/17.0_982ce974/Settings/CurrentSettings.vssettings:
+      path: "config/Microsoft/VisualStudio/v17/CurrentSettings.vssettings"
     ~/AppData/Local/gh:
       glob: true
-      path: config/gh/*
-    ~/.gitconfig_local:
-    "~/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup":
+      path: "config/gh/*"
+    ~/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup:
       glob: true
-      path: explorer-startup/*
-    ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState: ~/.config/WindowsTerminal
-    ~/AppData/Roaming/Elgato/StreamDeck/ProfilesV2: config/ElgatoStreamDeck/profiles
-    ~/AppData/Roaming/TC-Helicon/GOXLR: config/GoXLR/AppDataRoaming
+      path: "explorer-startup/*"
+    ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState:
+      path: "~/.config/WindowsTerminal"
+    ~/AppData/Roaming/Elgato/StreamDeck/ProfilesV2:
+      path: "config/ElgatoStreamDeck/profiles"
+    ~/AppData/Roaming/TC-Helicon/GOXLR:
+      path: "config/GoXLR/AppDataRoaming"
     ~/AppData/Roaming/TortoiseGit/:
       glob: true
-      path: ~/.config/TortoiseGit/*
-    ~/Documents/PowerShell/Microsoft.PowerShell_profile.ps1: ~/.config/powershell/profile.ps1
-    ~/.config/JetBrains/PyCharm:
-      glob: true
-      path: config/JetBrains/PyCharm/**
-    ~/AppData/Roaming/JetBrains/PyCharm2024.2/c.pwd: ~/.config/JetBrains/PyCharm/c.pwd
+      path: "config/TortoiseGit/*"
+    ~/AppData/Roaming/JetBrains/PyCharm2024.2/c.pwd:
+      path: "config/JetBrains/PyCharm/c.pwd"
     ~/AppData/Roaming/JetBrains/PyCharm2024.2/options:
-      path: ~/.config/JetBrains/PyCharm/options
+      path: "config/JetBrains/PyCharm/options"
