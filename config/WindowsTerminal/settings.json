@@ -31,7 +31,7 @@
     ],
     "copyFormatting": "none",
     "copyOnSelect": false,
-    "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+    "defaultProfile": "{02d23b5b-c0a7-4940-bc0e-f446fa87b1f4}",
     "keybindings": 
     [
         {
@@ -70,6 +70,7 @@
                 "taskbar"
             ],
             "colorScheme": "Cobalt2",
+            "compatibility.allowDECRQCRA": true,
             "font": 
             {
                 "face": "CaskaydiaCove NF"
@@ -81,40 +82,16 @@
         "list": 
         [
             {
-                "backgroundImage": "C:\\Users\\Bruce\\OneDrive\\Pictures\\Graphics\\Wallpaper\\Windows Terminal\\Ubuntu\\ubuntu-logo32.png",
+                "backgroundImage": "C:\\Users\\Bruce\\OneDrive\\Pictures\\Graphics\\Wallpaper\\Windows Terminal\\Windows\\Fluent Windows - Dark - 4k.jpg",
                 "backgroundImageAlignment": "bottomRight",
-                "backgroundImageOpacity": 0.19,
-                "backgroundImageStretchMode": "uniform",
-                "font": 
-                {
-                    "face": "UbuntuMono Nerd Font Mono"
-                },
-                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+                "backgroundImageOpacity": 0.39,
+                "backgroundImageStretchMode": "uniformToFill",
+                "commandline": "\"C:\\Program Files\\PowerShell\\7\\pwsh.exe\"",
+                "guid": "{02d23b5b-c0a7-4940-bc0e-f446fa87b1f4}",
                 "hidden": false,
-                "intenseTextStyle": "all",
-                "name": "Ubuntu",
-                "source": "Windows.Terminal.Wsl"
-            },
-            {
-                "experimental.retroTerminalEffect": true,
-                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
-                "hidden": false,
-                "name": "Command Prompt"
-            },
-            {
-                "experimental.retroTerminalEffect": true,
-                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
-                "hidden": false,
-                "name": "Windows PowerShell"
-            },
-            {
-                "backgroundImage": "C:\\Users\\Bruce\\OneDrive\\Pictures\\Graphics\\Wallpaper\\Windows Terminal\\Azure\\logo_azure.png",
-                "backgroundImageAlignment": "bottomRight",
-                "backgroundImageStretchMode": "uniform",
-                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
-                "hidden": false,
-                "name": "Azure Cloud Shell",
-                "source": "Windows.Terminal.Azure"
+                "icon": "ms-appx:///ProfileIcons/pwsh.png",
+                "name": "PowerShell",
+                "startingDirectory": "%USERPROFILE%"
             },
             {
                 "backgroundImage": "C:\\Users\\Bruce\\OneDrive\\Pictures\\Graphics\\Wallpaper\\Windows Terminal\\Windows\\Fluent Windows - Dark - 4k.jpg",
@@ -141,6 +118,27 @@
                 {
                     "size": 12
                 },
+                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                "hidden": false,
+                "historySize": 9001,
+                "icon": "ms-appx:///ProfileIcons/{0caa0dad-35be-5f56-a8ff-afceeeaa6101}.png",
+                "name": "Command Prompt",
+                "padding": "8, 8, 8, 8",
+                "snapOnInput": true,
+                "startingDirectory": "%USERPROFILE%"
+            },
+            {
+                "altGrAliasing": true,
+                "antialiasingMode": "grayscale",
+                "closeOnExit": "automatic",
+                "commandline": "%SystemRoot%\\System32\\cmd.exe",
+                "cursorShape": "bar",
+                "elevate": true,
+                "experimental.retroTerminalEffect": true,
+                "font": 
+                {
+                    "size": 12
+                },
                 "guid": "{f768123d-ccd0-4b4d-8674-ea228168ea21}",
                 "hidden": false,
                 "historySize": 9001,
@@ -149,6 +147,15 @@
                 "padding": "8, 8, 8, 8",
                 "snapOnInput": true,
                 "startingDirectory": "%USERPROFILE%"
+            },
+            {
+                "backgroundImage": "C:\\Users\\Bruce\\OneDrive\\Pictures\\Graphics\\Wallpaper\\Windows Terminal\\Azure\\logo_azure.png",
+                "backgroundImageAlignment": "bottomRight",
+                "backgroundImageStretchMode": "uniform",
+                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+                "hidden": false,
+                "name": "Azure Cloud Shell",
+                "source": "Windows.Terminal.Azure"
             },
             {
                 "commandline": "%SystemRoot%\\System32\\cmd.exe /C chcp 65001 && plink \"(local) Dream Machine SE\"",
@@ -167,12 +174,6 @@
                 "suppressApplicationTitle": true
             },
             {
-                "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
-                "hidden": false,
-                "name": "Git Bash",
-                "source": "Git"
-            },
-            {
                 "guid": "{0d80b376-6743-5e31-9d97-df4f1186c0fb}",
                 "hidden": false,
                 "name": "Developer Command Prompt for VS 2022",
@@ -183,6 +184,18 @@
                 "hidden": false,
                 "name": "Developer PowerShell for VS 2022",
                 "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
+                "hidden": false,
+                "name": "Git Bash",
+                "source": "Git"
+            },
+            {
+                "experimental.retroTerminalEffect": true,
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "hidden": false,
+                "name": "Windows PowerShell"
             }
         ]
     },
