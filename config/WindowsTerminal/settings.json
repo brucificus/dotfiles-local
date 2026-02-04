@@ -71,12 +71,16 @@
             ],
             "colorScheme": "Cobalt2",
             "compatibility.allowDECRQCRA": true,
+            "experimental.rainbowSuggestions": true,
             "font": 
             {
                 "face": "CaskaydiaCove NF"
             },
+            "historySize": 20001,
             "intenseTextStyle": "all",
             "opacity": 70,
+            "rightClickContextMenu": true,
+            "showMarksOnScrollbar": true,
             "useAcrylic": true
         },
         "list": 
@@ -90,7 +94,7 @@
                 "guid": "{02d23b5b-c0a7-4940-bc0e-f446fa87b1f4}",
                 "hidden": false,
                 "icon": "ms-appx:///ProfileIcons/pwsh.png",
-                "name": "PowerShell",
+                "name": "PowerShell 7",
                 "startingDirectory": "%USERPROFILE%"
             },
             {
@@ -112,7 +116,7 @@
                 "closeOnExit": "automatic",
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
                 "cursorShape": "bar",
-                "elevate": true,
+                "elevate": false,
                 "experimental.retroTerminalEffect": true,
                 "font": 
                 {
@@ -196,6 +200,24 @@
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
                 "name": "Windows PowerShell"
+            },
+            {
+                "guid": "{46ca431a-3a87-5fb3-83cd-11ececc031d2}",
+                "hidden": false,
+                "name": "kali-linux",
+                "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "guid": "{41b32569-190a-5615-8824-fcc1ac63e0c0}",
+                "hidden": false,
+                "name": "Developer Command Prompt for VS 18 [Preview]",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{9e200d94-bf4e-5efc-a44a-2fa470fdb3f6}",
+                "hidden": false,
+                "name": "Developer PowerShell for VS 18 [Preview]",
+                "source": "Windows.Terminal.VisualStudio"
             }
         ]
     },
