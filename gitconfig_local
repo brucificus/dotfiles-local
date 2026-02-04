@@ -5,12 +5,14 @@
 [commit]
 	gpgsign = true
 [gpg]
-	program = "C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe"
+	program = "C:\\Program Files\\GnuPG\\bin\\gpg.exe"
 [ssh]
-	variant = ssh
+	variant = plink
 [core]
-	sshCommand = "'C:\\Program Files\\OpenSSH\\ssh.exe'"
+	sshCommand = "'C:\\Program Files\\PuTTY\\plink.exe'"
 	editor = code --wait
+	autocrlf = false
+	symlinks = true
 [merge]
     tool = vscode
 	prompt = true
