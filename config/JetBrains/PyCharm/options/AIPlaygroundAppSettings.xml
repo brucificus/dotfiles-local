@@ -1,0 +1,14 @@
+<application>
+  <component name="com.intellij.aiplayground.settings.PlaygroundSettingsState">
+    <providers>
+      <provider id="3b52cda6-0af0-47b8-b21e-afdbce40c7a5" providerId="aiassistant" displayName="AI Assistant" />
+      <provider id="ac0185d5-b958-46e5-bc01-d7203914be43" providerId="ollama" displayName="Ollama">
+        <properties>
+          <property name="endpoint" value="http://localhost:11434" />
+        </properties>
+      </provider>
+      <provider id="bee16cec-f891-4f96-87e8-dbc4ff290ba3" providerId="anthropic" displayName="Anthropic" />
+      <provider id="b99acdb5-812f-4026-a91d-eed0907d5f6e" providerId="openai" displayName="OpenAI" />
+    </providers>
+  </component>
+</application>

@@ -2,6 +2,7 @@
   <component name="BlockTerminalOptions">
     <option name="promptStyle" value="SHELL" />
   </component>
+  <component name="ReworkedTerminalUsage"><![CDATA[{}]]></component>
   <component name="TerminalOptionsProvider">
     <option name="myShellPath" value="C:\Program Files\PowerShell\7\pwsh.exe" />
   </component>

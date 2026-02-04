@@ -1,5 +1,13 @@
 <application>
   <component name="LLMSettings">
-    <option name="inline_completion" value="false" />
+    <option name="chat_preferred_llm" value="openai-gpt-5" />
+    <option name="chat_preferred_llm_per_mode">
+      <map>
+        <entry key="chat" value="openai-gpt-5" />
+      </map>
+    </option>
+    <option name="codebase_enabled_in_chat_mode" value="true" />
+    <option name="custom_chat_instruction_was_shown" value="true" />
+    <option name="user_message_trimming_threshold" value="80%" />
   </component>
 </application>

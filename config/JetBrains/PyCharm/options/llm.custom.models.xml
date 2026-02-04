@@ -1,0 +1,7 @@
+<application>
+  <component name="LlmCustomModelsSettings">
+    <option name="smart_model_id" value="ollama/gemma3n:latest" />
+    <option name="editor_model_id" value="JetBrains/full-line-code-completion" />
+    <option name="quick_model_id" value="ollama/gemma3n:latest" />
+  </component>
+</application>
