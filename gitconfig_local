@@ -5,11 +5,11 @@
 [commit]
 	gpgsign = true
 [gpg]
-	program = "/mnt/c/Program Files (x86)/GnuPG/bin/gpg.exe"
+	program = "/mnt/c/Program Files/GnuPG/bin/gpg.exe"
 [ssh]
-	variant = ssh
+	variant = plink
 [core]
-	sshCommand = "'/mnt/c/Program Files/OpenSSH/ssh.exe'"
+	sshCommand = "/mnt/c/Program\\ Files/PuTTY/plink.exe"
 	editor = code --wait
 [merge]
     tool = vscode
@@ -22,4 +22,4 @@
 [difftool "vscode"]
     cmd = code --wait --diff $LOCAL $REMOTE
 [credential]
-	helper = "/mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-manager.exe"
+	helper = "/mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe"
