@@ -40,5 +40,8 @@
 /config/JetBrains/PyCharm/options/web-types-npm-loader.xml
 /config/JetBrains/PyCharm/options/window.layouts.xml
 /config/JetBrains/PyCharm/options/window.state.xml
+/config/Microsoft/PowerToys/FancyZones/app-zone-history.json
+/config/Microsoft/PowerToys/FancyZones/applied-layouts.json
+/config/Microsoft/PowerToys/FancyZones/last-used-virtual-desktop.json
 /config/WindowsTerminal/*.backup
 /config/WindowsTerminal/state.json
