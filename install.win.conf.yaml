@@ -8,10 +8,6 @@
       recursive: true
     '~/.config/WindowsTerminal':
       recursive: true
-    '~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState':
-      recursive: true
-    '~/AppData/Roaming/JetBrains/PyCharm2024.2/':
-      recursive: true
     '~/AppData/Roaming/Microsoft/Windows/Start Menu':
       recursive: true
     '~/AppData/Roaming/TortoiseGit':
@@ -38,14 +34,6 @@
     ~/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup:
       glob: true
       path: "explorer-startup/*"
-    ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState:
-      path: "~/.config/WindowsTerminal"
     ~/AppData/Roaming/TortoiseGit/:
       glob: true
       path: "config/TortoiseGit/*"
-    ~/AppData/Roaming/JetBrains/PyCharm2025.2/c.pwd:
-      path: "config/JetBrains/PyCharm/c.pwd"
-    ~/AppData/Roaming/JetBrains/PyCharm2025.2/c.kdbx:
-      path: "C:/Users/Bruce/OneDrive/Personal/JetBrains IDE Authentications.kdbx"
-    ~/AppData/Roaming/JetBrains/PyCharm2025.2/options:
-      path: "config/JetBrains/PyCharm/options"

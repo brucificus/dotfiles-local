@@ -1,6 +1,6 @@
 [user]
 	name = Bruce Markham
-	email = 219281+brucificus@users.noreply.github.com
+	email = bruce.markham@starz.com
 	signingkey = 08AE3AA1B4611E7B5C80AC3E8F86AA49BE1BA2F7
 [commit]
 	gpgsign = true
