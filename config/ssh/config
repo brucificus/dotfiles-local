@@ -12,6 +12,14 @@ Host gitlab.com
     IdentitiesOnly yes
     ForwardAgent no
 
+Host git.starz.com
+    HostName git.starz.com
+    Port 7999
+    User git
+    PasswordAuthentication no
+    IdentitiesOnly yes
+    ForwardAgent no
+
 Host udm
     HostName 192.168.1.1
     User root

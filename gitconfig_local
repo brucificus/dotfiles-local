@@ -1,7 +1,7 @@
 [user]
 	name = Bruce Markham
 	email = bruce.markham@starz.com
-	signingkey = 08AE3AA1B4611E7B5C80AC3E8F86AA49BE1BA2F7
+	signingkey = 2ED1FBA1562C18B5FC53B26C5B37B7BBE15B3542
 [commit]
 	gpgsign = true
 [gpg]
@@ -18,12 +18,23 @@
 	prompt = true
 [mergetool "vscode"]
     cmd = code --wait $MERGED
+[mergetool "sourcetree"]
+	cmd = "'' "
+	trustExitCode = false
+	keepBackup = false
 [diff]
     tool = vscode
 	prompt = true
 [difftool "vscode"]
     cmd = code --wait --diff $LOCAL $REMOTE
+[difftool "sourcetree"]
+	cmd = "'' "
+[difftool "vsdiffmerge"]
+	cmd = \"C:\\Program Files\\Microsoft Visual Studio\\18\\Enterprise\\Common7\\IDE\\CommonExtensions\\Microsoft\\TeamFoundation\\Team Explorer\\vsdiffmerge.exe\" \"$LOCAL\" \"$REMOTE\" //t
+	keepBackup = false
 [http]
 	sslbackend = schannel
 [credential]
 	helper = manager
+[credential "https://git.starz.com"]
+	provider = bitbucket
