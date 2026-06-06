@@ -1,6 +1,7 @@
 <application>
   <component name="RainbowSettings">
     <option name="applyColorsOfRoundForAllBrackets" value="true" />
+    <option name="bigFilesLinesThreshold" value="5000" />
     <option name="customIndentGuides" value="true" />
     <option name="enableRainbowVariables" value="true" />
     <option name="enableRainbowVariablesBySemanticHighlighting" value="true" />
@@ -20,6 +21,6 @@
     </option>
     <option name="useColorGenerator" value="true" />
     <option name="useColorGeneratorForRainbowVariables" value="true" />
-    <option name="version" value="2025.3.4" />
+    <option name="version" value="2024.2.9-241" />
   </component>
 </application>
