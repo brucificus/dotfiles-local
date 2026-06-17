@@ -23,17 +23,6 @@ if (-not (Test-LinkCapability)) {
     }
 }
 
-Push-Location $PSScriptRoot
-trap {
-    Pop-Location
-}
-
-# Make sure dotbot is and our other dependencies are available.
-git submodule update --quiet --init --force --depth 1 --recursive
-
-# folders_to_relink = @()
-# folders_to_relink | Where-Object { -not (Test-ReparsePoint $_) } | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue | Out-Null
-
 $dotbot_dir = "dotbot"
 function run_dotbot {
     param(
@@ -57,10 +46,21 @@ function run_dotbot {
     &$python $dotbot_bin -d $PSScriptRoot -c $config_file
 }
 
-# Execute dotbot.
-run_dotbot "install.conf.yaml"
-if ($IsWindows -and (Test-Path "install.win.conf.yaml" -ErrorAction SilentlyContinue)) {
-    run_dotbot "install.win.conf.yaml"
-} elseif ($IsLinux -and $Env:WSL_DISTRO_NAME -and (Test-Path "install.wsl.conf.yaml" -ErrorAction SilentlyContinue)) {
-    run_dotbot "install.wsl.conf.yaml"
+Push-Location $PSScriptRoot
+try {
+    # Make sure dotbot is and our other dependencies are available.
+    git submodule update --quiet --init --force --depth 1 --recursive
+
+    # folders_to_relink = @()
+    # folders_to_relink | Where-Object { -not (Test-ReparsePoint $_) } | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue | Out-Null
+
+    # Execute dotbot.
+    run_dotbot "install.conf.yaml"
+    if ($IsWindows -and (Test-Path "install.win.conf.yaml" -ErrorAction SilentlyContinue)) {
+        run_dotbot "install.win.conf.yaml"
+    } elseif ($IsLinux -and $Env:WSL_DISTRO_NAME -and (Test-Path "install.wsl.conf.yaml" -ErrorAction SilentlyContinue)) {
+        run_dotbot "install.wsl.conf.yaml"
+    }
+} finally {
+    Pop-Location
 }
