@@ -1,0 +1,2 @@
+- [Job Hunt Kanban conventions](project_job_hunt_kanban.md) — card note format, date-heading formula, board column meanings for Y2026Q3 Job Hunt
+- [Job hunt handoff conflict handling](feedback_job_hunt_handoff_conflicts.md) — never silently merge redundant leads, flag with `[!conflict]` callouts instead

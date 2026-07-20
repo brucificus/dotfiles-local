@@ -45,3 +45,5 @@
 /config/Microsoft/PowerToys/FancyZones/last-used-virtual-desktop.json
 /config/WindowsTerminal/*.backup
 /config/WindowsTerminal/state.json
+/agentic-genai/agent-memory
+!/agentic-genai/agent-memory/.gitkeep

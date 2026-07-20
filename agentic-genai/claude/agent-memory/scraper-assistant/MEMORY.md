@@ -1,0 +1,4 @@
+- [Edge CDP attach requires remote debugging enabled](edge-attach-remote-debugging.md) — `attach --cdp=msedge` fails unless flag is on in that Edge instance first.
+- [Indeed results reshuffle across reloads](indeed-results-reshuffle.md) — same search URL/start= returns different postings each load; capture all fields (incl. HREF) in one pass, don't backfill later.
+- [Indeed viewjob scrape extraction](indeed-scrape-extraction.md) — #jobDescriptionText for body, apply link is a button not <a> (parse outerHTML for href), Posted age via "Original Posting: date" or HTML blob near "postedToday".
+- [Parallel batch session collisions](parallel-batch-session-collision.md) — always use a unique `-s=<name>` playwright-cli session when multiple batches share one CDP endpoint; never use default session name.

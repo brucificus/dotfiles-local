@@ -1,0 +1,27 @@
+{
+  "skillListingBudgetFraction": 0.2,
+  "autoUpdatesChannel": "latest",
+  "tui": "fullscreen",
+  "theme": "dark",
+  "agentPushNotifEnabled": true,
+  "permissions": {
+    "allow": [
+      "Skill(playwright-cli)",
+      "PowerShell(Get-Process *)",
+      "Bash(playwright-cli goto *)",
+      "Bash(playwright-cli reload)",
+      "Bash(playwright-cli tab-list)",
+      "Bash(playwright-cli tab-new)",
+      "Bash(playwright-cli tab-new *)",
+      "Bash(playwright-cli tab-close)",
+      "Bash(playwright-cli tab-close *)",
+      "Bash(playwright-cli tab-select *)",
+      "Bash(playwright-cli highlight *)",
+      "Bash(playwright-cli attach --cdp=msedge)",
+      "Bash(playwright-cli attach --cdp=http://localhost:9222)",
+      "Bash(playwright-cli detach *)",
+      "Bash(playwright-cli list)",
+      "Bash(playwright-cli snapshot *)"
+    ]
+  }
+}
