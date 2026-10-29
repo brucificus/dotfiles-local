@@ -48,3 +48,4 @@
 /agentic-genai/agent-memory
 !/agentic-genai/agent-memory/.gitkeep
 /agentic-genai/claude/skills/synced/
+/config/Microsoft/PowerToys/FancyZones/editor-parameters.json
