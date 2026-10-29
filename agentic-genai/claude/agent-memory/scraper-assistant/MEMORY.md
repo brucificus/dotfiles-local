@@ -1,4 +1,117 @@
-- [Edge CDP attach requires remote debugging enabled](edge-attach-remote-debugging.md) — `attach --cdp=msedge` fails unless flag is on in that Edge instance first.
-- [Indeed results reshuffle across reloads](indeed-results-reshuffle.md) — same search URL/start= returns different postings each load; capture all fields (incl. HREF) in one pass, don't backfill later.
-- [Indeed viewjob scrape extraction](indeed-scrape-extraction.md) — #jobDescriptionText for body, apply link is a button not <a> (parse outerHTML for href), Posted age via "Original Posting: date" or HTML blob near "postedToday".
-- [Parallel batch session collisions](parallel-batch-session-collision.md) — always use a unique `-s=<name>` playwright-cli session when multiple batches share one CDP endpoint; never use default session name.
+- [Edge CDP attach requires remote debugging enabled](edge-attach-remote-debugging.md) — `attach --cdp=msedge` fails unless flag on in that Edge first.
+- [Indeed results reshuffle across reloads](indeed-results-reshuffle.md) — same URL returns different postings each load; capture all fields incl HREF in one pass.
+- [Indeed viewjob scrape extraction](indeed-scrape-extraction.md) — #jobDescriptionText body; apply link is button not <a>; Posted age via "Original Posting: date".
+- [LinkedIn jobview scrape extraction](linkedin-jobview-extraction.md) — eval #JobDetails_AboutTheJob_<id> after expandable-text-button; "no longer accepting" = closed.
+- [Brave CDP port 9222 attach](brave-cdp-9222-attach.md) — operator's browser may be Brave; `attach --cdp=http://localhost:9222`; main.innerText grabs full LinkedIn job.
+- [Parallel batch session collisions](parallel-batch-session-collision.md) — unique `-s=<name>` per batch when sharing one CDP endpoint.
+- [Job-hunt kanban routing rubric](jobhunt-routing-rubric.md) — per-company note files get dated Log entries; never edit master board.
+- [Public Trust != security clearance trigger](public-trust-not-clearance-trigger.md) — Public Trust alone not disqualifying; only Secret/TS-SCI/Top Secret/Polygraph.
+- [WebFetch vs browser for listing re-checks](webfetch-vs-browser-for-listings.md) — WebFetch OK for Indeed open/closed+stack+pay; LinkedIn via WebFetch unreliable, use browser.
+- [Workday listing scrape](workday-listing-scrape.md) — WebFetch useless on Workday SPA; attached Brave can silently block bootstrap — use unattached browser.
+- [Attached-session CSP blocking (general)](attached-session-csp-blocking.md) — operator's attached Edge/Brave extension injects CSP blocking first-party JS; use unattached browser.
+- [playwright close vs detach on attached session](playwright-close-vs-detach-attached-session.md) — always `detach` an attached CDP session, never `close`.
+- [playwright-cli tab-close/tab-select syntax](playwright-cli-tab-close-syntax.md) — positional index arg, not --index=N; re-list before every close, close highest-first.
+- [playwright-cli URLs with & on Windows](playwright-cli-urls-with-ampersand.md) — use Bash tool + single-quoted URL; never PowerShell `--%` (can kill CDP session).
+- [Gmail multi-account thread lookup](gmail-multi-account-thread-lookup.md) — URL authuser=/u/N may not match account holding thread; 404 = try other u/N.
+- [Gmail hash-search needs reload](gmail-hash-search-needs-reload.md) — Gmail SPA search often won't filter until `reload`; legacy hex permalinks may not resolve, use text search.
+- [Google Messages web archive mechanism](google-messages-web-archive.md) — per-row hover menu `data-e2e-conversation-menu-archive`; Archived dialog renders only ~25 newest.
+- [LinkedIn job-alert digest link decoding](linkedin-jobalert-digest-link-decoding.md) — one tracked /comm/jobs/view/ID link per card; match by title+company text.
+- [LinkedIn digest originToLandingJobPostings ordering](linkedin-digest-origintolanding-ordering.md) — comma-list of job IDs is in card display order; zip against body company lines.
+- [LinkedIn digest weekly repost = new job ID](linkedin-digest-weekly-repost-new-id.md) — same alert re-lists role under fresh ID; old LinkedIn copy CLOSED while employer ATS OPEN.
+- [LinkedIn career-insights vs job-alert digest](linkedin-career-insights-vs-job-alert-digest.md) — "X hired roles near you" emails have no real postings.
+- [LinkedIn full description no expand needed](linkedin-full-description-no-expand-needed.md) — body.innerText on jobs/view returns full "About the job"; skip show-more.
+- [LinkedIn logged-out full JD](linkedin-loggedout-full-jd.md) — fresh unauth session on jobs/view/<id> still shows full JD, applicants, pay, age; CSP-block fallback.
+- [LinkedIn guest jobPosting API](linkedin-guest-jobposting-api.md) — /jobs-guest/jobs/api/jobPosting/<id> gives full JD + pay + closed-banner even for EXPIRED, no auth/CSP.
+- [Indeed status verification](indeed-status-verification.md) — check `"expired":true/false` JSON flag in outerHTML, not visible button/date; cts.indeed.com 403s automation.
+- [Indeed cts link stale redirect](indeed-cts-link-stale-redirect.md) — old cts.indeed.com link can silently redirect to unrelated job; verify landing title/company.
+- [Indeed pagead redirect links](indeed-pagead-redirect-links.md) — indeed.com/pagead/clk/dl resolves cleanly via goto; same-role diff-location can share JD text.
+- [Indeed pagead stale jrtk 404s](indeed-pagead-jrtk-stale-404.md) — stale jrtk token 404s as Whitelabel Error Page, no redirect; report as dead link.
+- [Indeed company jobs-tab stale count](indeed-company-jobs-tab-stale-count.md) — cmp/<Co>/jobs can falsely say "no open jobs"; corroborate with q=<Company> search.
+- [Indeed mass-poster templated listings](indeed-mass-poster-templated-listings.md) — gig mills post identical JD under many titles/cities; re-search q=<Co>+<Title>&l=<City>.
+- [Indeed company page JS cards](indeed-company-page-js-cards.md) — cmp/<Co>/jobs cards are href="#" JS panels, click+eval often fails; corroborate with q= search.
+- [Indeed company-name search vs title search](indeed-company-search-vs-title-search.md) — bare q=<Company> can omit a live role; verify via viewjob?jk= apply-button disabled flag.
+- [Indeed (the company) careers is self-hosted](indeed-company-careers-selfhosted.md) — cmp/Indeed/jobs data-jk -> viewjob?jk= for isJobExpired+datePosted+"Reference ID".
+- [Rippling ATS jobs API](rippling-ats-jobs-api.md) — api.rippling.com/platform/api/ats/v1/board/<slug>/jobs returns open reqs as JSON or []; try <slug>-llc variant.
+- [Workday CXS jobs API](workday-cxs-jobs-api.md) — POST /wday/cxs/<tenant>/<site>/jobs + GET /job/<path> return JSON; WebFetch & attached 403, use unattached browser.
+- [Ashby posting-API job board](ashby-posting-api.md) — api.ashbyhq.com/posting-api/job-board/<slug> gives descriptionPlain + publishedAt + isListed + comp.
+- [Lever postings API](lever-postings-api.md) — api.lever.co/v0/postings/<slug>?mode=json lists open reqs w/ descriptionPlain + allLocations + createdAt; WebFetch-friendly.
+- [ClearCompany ATS jobs API](clearcompany-ats-jobs-api.md) — careers-api.clearcompany.com/v1/<siteId> list + /<siteId>/<jobId> detail JSON; siteId from career-site.js. Ad Hoc LLC.
+- [UKG Pro / UltiPro Recruiting jobs API](ukg-ultipro-recruiting-jobs-api.md) — recruiting2.ultipro.com/<TENANT>; POST JobBoardView/LoadSearchResults for listing+ReqNumber; detail SPA needs clean browser. Baylor Genetics = BAY1006BML.
+- [Gem careers board GraphQL API](gem-jobs-graphql-board.md) — jobs.gem.com/<slug>; POST /api/public/graphql oatsExternalJobPostings list + detail; no auth. Function Health slug = `function-health`.
+- [USAJOBS federal announcement liveness](usajobs-liveness-check.md) — search API 401s w/o key; parse job/<id> HTML for "DateDisplay: Open..to.." + "Accepting applications" badge; SSA agency code SZ00; SPA search needs clean browser.
+- [NSA IC Candidate Portal API](nsa-ic-careers-portal-api.md) — SPA blank; use /job-listings/job-description?jobNumber=<id> JSON + X-Requested-With; NSA reposts under new IDs.
+- [Serco NA careers (Phenom) liveness](serco-careers-phenom-site.md) — filled req = HTTP 410 on /job/SUPSUAUS<reqID>EXTERNALENUS/<slug>; find URL via Google.
+- [BNSF careers (Phenom) weekly repost](bnsf-careers-phenom-repost.md) — reposts same remote role under fresh Job Id ~weekly; old id 410s; JD only in ld+json.
+- [Arch Insurance / Arch Capital Workday board](arch-insurance-workday-board.md) — tenant archgroup/wd1 site Careers; CXS API; ReqID R26_###; internal code is bare number in JD HTML.
+- [LINQ (K-12 EdTech) Greenhouse board](linq-k12-greenhouse-board.md) — slug `emslinqinc`; NOT linqapp/Ashby. Payments Staff SWE = GH 5373410008.
+- [SmarterDx is on Greenhouse not Ashby](smarterdx-greenhouse-not-ashby.md) — slug `smarterdx`; boards-api JSON; jobs.ashbyhq.com/smarterdx 404s.
+- [Strike (Bitcoin co / Zap Solutions) Greenhouse board](strike-greenhouse-board.md) — slug `strike`; Backend SWE C#/.NET = GH 4003945004 (evergreen); no LinkedIn.
+- [KLDiscovery Oracle Recruiting Cloud board](kldiscovery-oracle-orc-board.md) — ekug.fa.us6.oraclecloud.com site CX_2001; hcmRestApi recruitingCEJobRequisitions list+detail; SPA blank.
+- [iHerb Workday wd5 Careers board](iherb-workday-wd5-careers.md) — wd5 tenant `iherb` site `Careers` (NOT wd1/iHerbCareers, NOT GH `iherb`); CXS gives R-number + startDate
+- [Marathon TS careers = JobDiva SPA](marathonts-jobdiva-board.md) — www1.jobdiva.com/portal/; CSP-blocked, use unattached browser + keyword box; reposts under sibling 26-00### reqs.
+- [Fragomen careers = Workday wd115](fragomen-careers-workday-wd115.md) — tenant `fragomen` site `FragomenCareers`; old icims dead
+- [Icertis careers = Oracle Recruiting Cloud](icertis-oracle-orc-board.md) — iaaviz.fa.ocs.oraclecloud.com site CX_1; SPA blank, use hcmRestApi JSON; "Lead Software Engineer" = Id 7234.
+- [Synapse Health careers = Greenhouse board `synapsehealth`](synapse-health-greenhouse-board.md) — boards-api JSON; legacy Paylocity board dead; careers page renders blank.
+- [Shamrock Foods careers = Phenom People board](shamrock-foods-phenom-board.md) — jobs.shamrockfoods.com/us/en/job/<REQID>/<slug>; ld+json JD + Apply Now = liveness
+- [Kobie Marketing careers = Lever board `kobie`](kobie-lever-board.md) — embedded on kobie.com/jobs/; WebFetch truncates the postings list, fetch raw JSON.
+- [Paylocity (the company) self-hosted Paylocity Recruiting ATS](paylocity-recruiting-ats.md) — SPA filters via `?t=`; reqs at 2000recruiting.paylocity.com/recruiting/jobs/Details/<id>/
+- [Included Health careers = Lever board `includedhealth`](included-health-lever-board.md) — mode=json; "Senior SWE, Fullstack" rebranded to "Senior SWE, Web".
+- [Prometric careers = Dayforce board](prometric-dayforce-board.md) — jobs.dayforcehcm.com/prometric/prometriccareersite; tiny SPA, CSP-blocked; omits promoted LinkedIn eng roles.
+- [Seismic careers = self-hosted Sitecore+Next.js SPA](seismic-careers-sitecore-nextjs.md) — /careers/job-detail/?jid=&pid= (pid=17 US-Remote, 206 India); click "See more"
+- [Dutchie careers = Greenhouse board `thedutchie`](dutchie-greenhouse-board.md) — NOT `dutchie`; careers page /business/careers; LinkedIn reposts under fresh IDs w/ no matching GH req.
+- [Gogo Business Aviation Workday tenant migration](gogo-workday-tenant-migration.md) — moved gogoair.wd1 -> gogo.wd503 site `careers`; old req IDs 404; match by title.
+- [Allied Benefit Systems careers = Paycom ATS](allied-benefit-paycom-ats.md) — live board paycomonline.net clientkey 518A90CE...
+- [ApplicantPool / ApplicantPro career board](applicantpool-ats-board.md) — Vue SPA at <sub>.applicantpool.com/jobs/; attached CSP-blocks, clean browser renders list + /jobs/<id>.
+- [Agilent Technologies careers = Workday wd5 tenant `agilent`](agilent-workday-wd5-careers.md) — site Agilent_Careers; CXS API; careers.agilent.com search-results URL 404s.
+- [Northramp LLC careers = Workable embed acct 731558](northramp-workable-board.md) — widget feed apply.workable.com/api/v1/widget/accounts/731558 = liveness
+- [Workiva careers = Workday wd503 tenant `workiva` site `careers`](workiva-workday-wd503-careers.md) — CXS API works through attached session; req IDs R#####, canApply flag = liveness.
+- [Tuff Shed careers = Dayforce board `tuffshed`](tuffshed-dayforce-board.md) — jobs.dayforcehcm.com/en-US/tuffshed/CANDIDATEPORTAL; default listing hides tech role, use ?searchText=
+- [Boom Supersonic careers = Rippling board `boom-supersonic`](boom-supersonic-rippling-board.md) — list+detail API; LinkedIn says Englewood CO but ATS says Centennial CO
+- [Kavaliro job board = Haley Marketing .smpl](kavaliro-haley-smpl-job-board.md) — jobs.kavaliro.com; "0 Results" counter is a bug (cards still render); use clean browser.
+- [TechBiz Global GmbH board = Recruitee jobs.techbiz.global](techbiz-global-recruitee-board.md) — techbizglobal.com parked
+- [Ardent MC careers = Greenhouse board `ardentmc`](ardentmc-greenhouse-board.md) — /cmp/Ardent on Indeed = Ardent Management Consulting; boards-api JSON
+- [Dayforce (the HCM company) careers = own Dayforce ATS](dayforce-company-dayforcehcm-board.md) — jobs.dayforcehcm.com/en-US/mydayforce/alljobs; ?searchText=
+- [Symetra careers = Eightfold ATS `symetra.eightfold.ai`](symetra-eightfold-ats-board.md) — apply/v2/jobs/<id>?domain=symetra.com JSON = liveness + full JD + short req #
+- [PTP (People Technology and Processes LLC) careers = Paycom ATS](ptp-llc-paycom-board.md) — site ptp-llc.com (NOT peopletech.com); Paycom clientkey F22E33...
+- [CyberCoders / Everforth CyberCoders board](cybercoders-everforth-board.md) — self-hosted React SPA, CSP-blocked; resolve req via /job-detail/<numeric chunk of JobID>
+- [Emergent Software careers = Recruitee board `emergentsoftware`](emergent-software-recruitee-board.md) — jobs.emergentsoftware.net/o/<slug>; 404 once closed
+- [Solace Health careers = Ashby board `solace`](solace-health-ashby-board.md) — slug `solace` (not solace-health); posting-api JSON = liveness/UUID/publishedAt; no salary.
+- [One Call Care Management careers = Avature board](onecall-avature-board.md) — onecall.avature.net; SearchJobs paginate by jobOffset of 6
+- [Northwest Partners has no public ATS](northwest-partners-no-ats.md) — staffing firm; careers page marketing + lead form only; reqs live only on LinkedIn company jobs tab.
+- [Cross River Bank careers = Greenhouse board `crossriverbank`](crossriver-greenhouse-board.md) — not `crossriver`; boards-api JSON; crossriver.com/greenhouse embed CSP-blocked
+- [Transcard Payments careers = Paylocity Recruiting board](transcard-paylocity-board.md) — company GUID acf634cc-bb17-43ff-950e-ad7dfb8b47de; SPA CSP-blocked, use clean browser
+- [The Trade Desk careers = Craft CMS + htmx over Greenhouse `thetradedesk`](tradedesk-careers-craft-greenhouse.md) — ?q= title-only; apply iframe greenhouse, URL id == GH id
+- [UCHealth careers = Radancy TalentBrew + Jobvite apply](uchealth-careers-radancy-jobvite.md) — careers.uchealth.org/search/jobs?q= (not ?keyword=); jobs.uchealth.org dead
+- [Skillable careers = Rippling board `skillable-careers`](skillable-rippling-board.md) — list+detail JSON; payRangeDetails empty (no salary)
+- [OrthoFi careers = Rippling board `orthofi-open-roles`](orthofi-rippling-board.md) — list+detail API; description is {company,role} HTML
+- [Concorde, Inc has no public ATS — LinkedIn Easy Apply only](concorde-inc-no-ats-linkedin-only.md) — screening/DOT-compliance co; site concorde2000.com
+- [Karmak Inc careers = ApplicantPro board slug `karmak`](karmak-applicantpro-board.md) — karmak.applicantpro.com/jobs/; Vue SPA (WebFetch empty); /jobs/<numeric id> = only req id
+- [eBay Inc / TCGplayer / Roca careers = Phenom People `jobs.ebayinc.com`](ebay-careers-phenom-board.md) — CSP-blocked in attached; no JSON API (500), scrape rendered a[href*="/job/"]
+- [Dimensional Fund Advisors careers = Workday wd5 tenant `dimensional` site `DFA_Careers`](dimensional-fund-advisors-workday-board.md) — CXS API; reqID `YYYY-NNNN`; salary rare
+- [General Motors careers = Happydance/Cielo, NOT Workday](gm-careers-happydance-board.md) — search-careers.gm.com/en/jobs/jr-<id>/<slug>/; ?search= relevance-ranked
+- [Newton Software / Recruiting by Paycor board](newton-paycor-recruiting-board.md) — `?gnk=apply&gni=` apply link + newton.newtonsoftware.com clientId
+- [Advantage Pro (advantagepro.us) Wix careers](advantagepro-us-wix-careers.md) — real domain .us not .com; self-hosted Wix /jobs-1, no ATS, apply by email
+- [PAR Technology Corp careers = Ashby board slug `PAR Technology`](par-technology-ashby-board.md) — URL-encode space as %20; posting-api JSON; UUID ids only
+- [Karbon (karbonhq.com) careers = Greenhouse board slug `karbon`](karbon-greenhouse-board.md) — boards-api JSON; US roles pin named metros not "Remote, US"
+- [Medpace careers = Jibe/iCIMS JSON API](medpace-careers-jibeapply-api.md) — careers.medpace.com/api/jobs?keywords=&limit= via curl; salary in description
+- [Canvass Labs careers = self-hosted canvasslabs.com/careers](canvass-labs-careers-selfhosted.md) — no ATS, apply by email; LinkedIn jobs tab often empty while page role open
+- [Crestron Electronics careers = Dayforce candidate portal](crestron-careers-dayforce-board.md) — jobs.dayforcehcm.com/en-US/crestron/candidateportal
+- [Mostest (AI events startup) careers = Ashby board slug `mostest`](mostest-events-ashby-board.md) — company site mostest.ai NOT mostest.com; LinkedIn slug joinmostest
+- [DAT Freight & Analytics careers = Greenhouse `datsolutions`](dat-freight-greenhouse-board.md) — not dat/datfreight; content double-entity-encoded; CO/WA pay in JD
+- [Empyrean Benefit Solutions careers = Dayforce board `empyrean`](empyrean-dayforce-board.md) — CANDIDATEPORTAL, CSP-blocked so use clean browser; ?searchText= on portal root
+- [Reliable Robotics careers = Ashby board `reliable-robotics`](reliable-robotics-ashby-board.md) — slug has hyphen; every req US export-control/U.S.-person gated; no C#/.NET
+- [eClinical Solutions careers = Greenhouse board `eclinicalsolutions`](eclinical-solutions-greenhouse-board.md) — boards-api JSON
+- [Harris Computer careers = Workday tenant `harriscomputer` wd3, site "1"](harris-computer-workday-board.md) — CXS list+detail; R00##### reqs; all BUs post here
+- [USI Insurance Services careers = Avature `jobs.usi.com`](usi-insurance-avature-board.md) — JobDetail?jobId=; closed req redirects to /Jobs/Error
+- [Pearson careers = pearson.jobs (Radancy TalentBrew SPA)](pearson-jobs-radancy-board.md) — WebFetch empty, use clean browser; URL hex GUID != Req ID; ?q= loose
+- [Yes Energy careers = Greenhouse board `yesenergy`](yes-energy-greenhouse-board.md) — boards-api JSON; salary in content HTML; C#/.NET/SQL Server
+- [Hone Health careers = Greenhouse board `honehealth`](hone-health-greenhouse-board.md) — boards-api JSON; honehealth.com/careers just links out; pay in content HTML
+- [High Country Search Group board = WordPress WP Job Manager](highcountrysearch-wp-job-manager-board.md) — Denver staffing agency; /job/<slug>/ + bare /?feed=job_feed; attached CSP blocks AJAX filters, use clean browser; no req IDs
+- [Global Payments + Worldpay = two Workday tenants](globalpayments-worldpay-workday-boards.md) — Worldpay `worldpay.wd5`/`Worldpay_External_Careers_Site` (Express/Launchpad teams); CXS limit<=20; Global Payments `globalpay.wd1`
+- [Cortex (cortex.io IDP) careers = Greenhouse board `cortex`](cortex-io-greenhouse-board.md) — NOT Palo Alto's Cortex; boards-api JSON; Lead SWE Backend id 5131543008 $215-245k language-agnostic
+- [Marketing.com (ex-Color Art print/mail rollup) careers = Recruiting by Paycor/Newton](marketing-com-colorart-paycor-board.md) — clientId 8a7883d07acff70f017b324086af22f8; CareerHome.action server-renders rows; careers.marketing.com whole site 503s
+- [Wells Fargo account activity scrape](wellsfargo-account-activity-scrape.md) — tr[class*="transaction-row"]; ~300/page, wait for stable row count before Next; expand-row read-only; View receipt leaves site
+- [DocuSign rasterizer cache extraction](docusign-rasterizer-cache-extraction.md) — read signer-view pages behind ERSD modal via Page.enable + getResourceContent on RasterizerImage.aspx p=N GIFs
+- [GCP console 2SV block + automation tips](gcp-console-2sv-block.md) — 2SV required; chip inputs need type+Enter; scope table paging; redact GOCSPX from snapshots.
+- [Indeed blocked: attached-browser fallback](indeed-blocked-clean-browser-attach-fallback.md) — curl/unattached 403; attach 9222 tab-new works; non-ASCII mangling workaround.
+- [Indeed Not Found dead listing](indeed-notfound-dead-listing.md) — cts link landing on "Not Found | Indeed" = removed; confirm via bare viewjob?jk=.
