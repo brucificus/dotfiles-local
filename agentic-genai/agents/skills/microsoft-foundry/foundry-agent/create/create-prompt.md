@@ -1,6 +1,8 @@
 # Create Prompt Agent
 
-Create and manage prompt agents in Azure Foundry Agent Service using MCP tools or Python SDK. For hosted agents (container-based), see [create-hosted.md](create-hosted.md).
+Create and manage ordinary prompt agents in Azure Foundry Agent Service using MCP tools or Python SDK. For hosted agents, see [create-hosted.md](create-hosted.md). For a Prompt Agent explicitly using the Foundry-managed Copilot harness, use [create-managed-harness.md](create-managed-harness.md).
+
+> **Scope:** For Prompt Voice Agents, use [create-voice.md](create-voice.md). Do not use this workflow for `harness.type: microsoft_copilot_preview`, legacy `harness.type: github_copilot_preview`, "Managed Harness Agent", or "Copilot harness agent" requests; those use azd and `azure.yaml`.
 
 ## Quick Reference
 
@@ -82,6 +84,7 @@ If MCP tools are unavailable, use the `azure-ai-projects` SDK:
 |-------|-------|------------|
 | Agent creation fails | Missing model deployment | Deploy a model first via `foundry_models_deploy` or portal |
 | MCP tool not found | MCP server not running | Fall back to SDK — see [SDK Operations](references/sdk-operations.md) |
+| MCP agent operation returns `403 Forbidden` | Insufficient RBAC | Need `Foundry User` role on the project |
 | Permission denied | Insufficient RBAC | Need `Foundry User` role on the project |
 | Agent name conflict | Name already exists | Use a unique name or update the existing agent |
 | Tool not available | Tool not configured for project | Verify tool prerequisites (e.g., Bing resource for grounding) |

@@ -47,3 +47,4 @@
 /config/WindowsTerminal/state.json
 /agentic-genai/agent-memory
 !/agentic-genai/agent-memory/.gitkeep
+/agentic-genai/claude/skills/synced/

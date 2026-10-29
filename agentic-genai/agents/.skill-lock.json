@@ -6,9 +6,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/microsoft/azure-skills.git",
       "skillPath": ".github/plugins/azure-skills/skills/microsoft-foundry/SKILL.md",
-      "skillFolderHash": "a9bc641ebd8a5352673382200ad7e130baab70a1",
+      "skillFolderHash": "15b425217b643229a34baf34eb1def65bb637308",
       "installedAt": "2026-06-28T22:50:27.812Z",
-      "updatedAt": "2026-07-20T19:34:07.603Z"
+      "updatedAt": "2026-10-29T00:31:27.413Z"
     },
     "codebase-design": {
       "source": "mattpocock/skills",
